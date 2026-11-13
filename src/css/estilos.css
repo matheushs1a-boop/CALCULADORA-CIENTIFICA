@@ -983,12 +983,18 @@ input[type="range"].math-slider::-webkit-slider-thumb {
     min-height: 280px;
 }
 
-.canvas-wrapper {
+.canvas-wrapper,
+.grafico-caixa {
     flex: 1;
     position: relative;
+    min-height: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+canvas {
+    display: block;
 }
 
 #main-graph-canvas {

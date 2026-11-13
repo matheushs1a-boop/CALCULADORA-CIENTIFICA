@@ -21,6 +21,39 @@ const MathLabGraph = {
     listenersRegistrados: false,
 
     /**
+     * Dimensiona o canvas pelo tamanho REAL do contêiner e redesenha ao mudar.
+     */
+    prepararCanvas(canvas, aoRedimensionar) {
+        const caixa = canvas?.parentElement;
+        if (!caixa) return null;
+        const atualizar = () => {
+            const r = caixa.getBoundingClientRect();
+            if (r.width < 10 || r.height < 10) return; // aba oculta: não desenhar ainda
+            const dpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+            const w = Math.round(r.width);
+            const h = Math.round(r.height);
+            canvas.width = Math.round(w * dpr);
+            canvas.height = Math.round(h * dpr);
+            if (canvas.style) {
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+            }
+            const ctx = canvas.getContext('2d');
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // desenhar em pixels lógicos
+            aoRedimensionar({ ctx, w, h });
+        };
+        atualizar();
+        if (typeof ResizeObserver !== 'undefined') {
+            this.observadorTamanho?.disconnect();
+            const ro = new ResizeObserver(atualizar);
+            ro.observe(caixa);
+            this.observadorTamanho = ro;
+            return ro;
+        }
+        return null;
+    },
+
+    /**
      * Inicializa e vincula o motor ao elemento <canvas> ativo na tela.
      */
     conectarCanvas(canvasEl, config) {
@@ -38,31 +71,31 @@ const MathLabGraph = {
             this.janelaPadrao = { ...this.janela };
         }
 
-        // O observador acompanha inclusive mudanças de aba e do painel lateral.
-        if (typeof ResizeObserver !== 'undefined') {
-            this.observadorTamanho?.disconnect();
-            this.observadorTamanho = new ResizeObserver(() => {
-                this.ajustarResolucao();
-                this.desenhar();
-            });
-            this.observadorTamanho.observe(this.canvas.parentElement);
-        }
-        this.ajustarResolucao();
+        this.prepararCanvas(this.canvas, ({ ctx, w, h }) => {
+            this.ctx = ctx;
+            this.largura = w;
+            this.altura = h;
+            this.desenhar();
+        });
         this.registrarEventos();
-        this.desenhar();
     },
 
     /**
      * Garante nitidez em telas Retina / Full HD (devicePixelRatio).
      */
     ajustarResolucao() {
-        if (!this.canvas) return;
+        if (!this.canvas || !this.canvas.parentElement) return;
         const rect = this.canvas.parentElement.getBoundingClientRect();
-        const dpr = window.devicePixelRatio || 1;
-        const w = Math.max(1, Math.floor(rect.width));
-        const h = Math.max(1, Math.floor(rect.height));
-        this.canvas.width = w * dpr;
-        this.canvas.height = h * dpr;
+        if (rect.width < 10 || rect.height < 10) return;
+        const dpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+        const w = Math.max(1, Math.round(rect.width));
+        const h = Math.max(1, Math.round(rect.height));
+        this.canvas.width = Math.round(w * dpr);
+        this.canvas.height = Math.round(h * dpr);
+        if (this.canvas.style) {
+            this.canvas.style.width = w + 'px';
+            this.canvas.style.height = h + 'px';
+        }
         this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         this.largura = w;
         this.altura = h;
@@ -129,7 +162,10 @@ const MathLabGraph = {
             return;
         }
         const { xMin, xMax, yMin, yMax } = this.janela;
-        const passoX = this.calcularPassoGrade(xMax - xMin);
+        const amplitudeX = xMax - xMin;
+        const passoX = this.config.eixoXPi
+            ? (amplitudeX <= 6.5 * Math.PI ? Math.PI / 2 : amplitudeX <= 14 * Math.PI ? Math.PI : 2 * Math.PI)
+            : this.calcularPassoGrade(amplitudeX);
         const passoY = this.calcularPassoGrade(yMax - yMin);
 
         // 1. Grade cartesiana discreta
@@ -138,14 +174,14 @@ const MathLabGraph = {
         ctx.beginPath();
 
         const primeiroX = Math.ceil(xMin / passoX) * passoX;
-        for (let xv = primeiroX; xv <= xMax; xv += passoX) {
+        for (let xv = primeiroX; xv <= xMax + 1e-9; xv += passoX) {
             const px = this.xParaPx(xv);
             ctx.moveTo(px, 0);
             ctx.lineTo(px, h);
         }
 
         const primeiroY = Math.ceil(yMin / passoY) * passoY;
-        for (let yv = primeiroY; yv <= yMax; yv += passoY) {
+        for (let yv = primeiroY; yv <= yMax + 1e-9; yv += passoY) {
             const py = this.yParaPy(yv);
             ctx.moveTo(0, py);
             ctx.lineTo(w, py);
@@ -176,10 +212,10 @@ const MathLabGraph = {
         ctx.textBaseline = 'top';
 
         const posRotuloX = Math.min(Math.max(eixoX_py + 5, 6), h - 18);
-        for (let xv = primeiroX; xv <= xMax; xv += passoX) {
-            if (Math.abs(xv) < 1e-9) continue;
+        for (let xv = primeiroX; xv <= xMax + 1e-9; xv += passoX) {
+            if (Math.abs(xv) < 1e-7) continue;
             const px = this.xParaPx(xv);
-            if (px < 22 || px > w - 22) continue;
+            if (px < 18 || px > w - 18) continue;
             const txt = this.config.eixoXPi ? this.formatarMultiploPi(xv) : this.formatarCurto(xv);
             ctx.fillText(txt, px, posRotuloX);
         }
@@ -331,6 +367,10 @@ const MathLabGraph = {
         ctx.beginPath();
         let canetaAbaixada = false;
         let pyAnterior = null;
+        let xvAnterior = null;
+        const polosAssintotas = Array.isArray(this.config?.assintotas)
+            ? this.config.assintotas.filter(a => a.tipo === 'vertical').map(a => a.valor)
+            : [];
 
         const passos = Math.max(500, w);
         for (let i = 0; i <= passos; i++) {
@@ -341,7 +381,14 @@ const MathLabGraph = {
             if (curva.xMinDominio !== undefined && xv <= curva.xMinDominio) {
                 canetaAbaixada = false;
                 pyAnterior = null;
+                xvAnterior = xv;
                 continue;
+            }
+
+            // Interrompe o traço se cruzar qualquer assíntota vertical
+            if (xvAnterior !== null && polosAssintotas.some(p => (xvAnterior < p && xv >= p) || (xvAnterior > p && xv <= p))) {
+                canetaAbaixada = false;
+                pyAnterior = null;
             }
 
             let yv;
@@ -354,6 +401,7 @@ const MathLabGraph = {
             if (yv === null || yv === undefined || Number.isNaN(yv) || !Number.isFinite(yv)) {
                 canetaAbaixada = false;
                 pyAnterior = null;
+                xvAnterior = xv;
                 continue;
             }
 
@@ -367,6 +415,7 @@ const MathLabGraph = {
             if (py < -h * 2 || py > h * 3) {
                 canetaAbaixada = false;
                 pyAnterior = py;
+                xvAnterior = xv;
                 continue;
             }
 
@@ -377,6 +426,7 @@ const MathLabGraph = {
                 ctx.lineTo(px, py);
             }
             pyAnterior = py;
+            xvAnterior = xv;
         }
         ctx.stroke();
         ctx.restore();
@@ -556,20 +606,21 @@ const MathLabGraph = {
     },
 
     formatarMultiploPi(xv) {
-        const razao = xv / Math.PI;
-        if (Math.abs(razao - Math.round(razao)) < 0.08) {
-            const k = Math.round(razao);
-            if (k === 0) return '0';
-            if (k === 1) return 'π';
-            if (k === -1) return '-π';
-            return `${k}π`;
-        }
-        const meio = razao * 2;
-        if (Math.abs(meio - Math.round(meio)) < 0.08) {
-            const k = Math.round(meio);
-            if (k === 1) return 'π/2';
-            if (k === -1) return '-π/2';
-            return `${k}π/2`;
+        if (Math.abs(xv) < 1e-7) return '0';
+        const sinal = xv < 0 ? '−' : '';
+        const abs = Math.abs(xv);
+        const razao = abs / Math.PI;
+        // Testa denominadores 1, 2, 3, 4, 6 para exibir múltiplos exatos de π
+        for (const den of [1, 2, 3, 4, 6]) {
+            const num = Math.round(razao * den);
+            if (num > 0 && Math.abs(razao - num / den) < 0.04) {
+                const mdc = (a, b) => (b === 0 ? a : mdc(b, a % b));
+                const g = mdc(num, den);
+                const n = num / g;
+                const d = den / g;
+                const coef = n === 1 ? '' : String(n);
+                return d === 1 ? `${sinal}${coef}π` : `${sinal}${coef}π/${d}`;
+            }
         }
         return this.formatarCurto(xv);
     },
@@ -597,7 +648,10 @@ const MathLabGraph = {
      */
     ajustarAFuncao() {
         this.fecharPopoverMarcador();
-        if (this.config?.ajusteIntegral) { this.resetarJanela(); return; }
+        if (this.config?.ajusteIntegral || this.config?.ajustePadrao || this.config?.eixoXPi) {
+            this.resetarJanela();
+            return;
+        }
         if (!this.config || !Array.isArray(this.config.marcadores) || this.config.marcadores.length === 0) {
             this.resetarJanela();
             return;
