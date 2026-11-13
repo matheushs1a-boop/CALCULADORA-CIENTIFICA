@@ -1,0 +1,109 @@
+
+Executando modulos-gerais.test.js
+================================================================
+ INICIANDO SUÍTE DE VALIDAÇÃO MATEMÁTICA DO MATHLAB
+================================================================
+  [OK] 01. Científica: Demonstração 2 · sen(π/6) + √16 = 5
+  [OK] 02. Científica: Fatorial 5! + √49 = 127
+  [OK] 03. Científica: Trigonometria em GRAUS sen(30) = 1/2
+  [OK] 04. Estado Especial: Erro de domínio em log(−5)
+  [OK] 05. Funções (Quadrática): f(x) = x² − 4x − 5 → Δ=36, raízes -1 e 5, V(2, -9)
+  [OK] 06. Funções (Quadrática com Δ = 0): x² − 6x + 9 → raiz dupla x = 3
+  [OK] 07. Funções (Quadrática com Δ < 0): x² + x + 5 → sem raízes reais
+  [OK] 08. Funções (Caso Especial a = 0): 0x² + 2x − 4 → avisa que deixou de ser quadrática
+  [OK] 09. Funções (Catálogo dos 8 Tipos): Constante, Afim, Linear, Modular, Exponencial, Logarítmica, Trigonométrica
+  [OK] 10. Limites: lim(x→2) (x² − 4)/(x − 2) = 4 (Descontinuidade removível)
+  [OK] 11. Limites: lim(x→0) 1/x = NÃO EXISTE (Esquerda −∞, Direita +∞)
+  [OK] 12. Derivadas: f(x) = x³ · sen(x) em x = 1 → f′(1) = 3·sen(1) + cos(1) ≈ 3,0647
+  [OK] 13. Geometria: Círculo r = 5 → Área = 25π ≈ 78,54 e Perímetro = 10π ≈ 31,42
+  [OK] 14. Geometria: Todas as 11 figuras (6 planas e 5 espaciais) calculam corretamente
+  [OK] 15. Estatística: Conjunto 4, 6, 6, 8, 10, 12 → n=6, Soma=46, Mediana=7, Moda=6
+================================================================
+ SUCESSO TOTAL: 15 TESTES EXECUTADOS E APROVADOS!
+================================================================
+
+Executando sincronizacao-estado.test.js
+[OK] 1. Normal afim mantém gráfico, propriedades e parâmetros na Fórmula pronta
+[OK] 2. Editar um quadradinho atualiza o texto Normal e o gráfico
+[OK] 3. Função vazia limpa todas as visualizações e sobrevive à troca de modo
+[OK] 4. Expressão livre não herda quadradinhos antigos nem muda ao alternar
+[OK] 5. Quadrática mantém coeficientes, raízes e curva nos dois modos
+[OK] 6. Constante digitada mantém o valor nos dois modos
+[OK] 7. Entrada incompleta suspende o gráfico anterior
+[OK] 8. Termos ausentes mantêm classificação e quadradinhos corretos
+[OK] 9. Casas decimais não arredondam os coeficientes ao gerar no modo Normal
+[OK] 10. Todos os modelos preservam a curva no ciclo pronta → Normal → gerar
+[OK] 11. Derivada e integral livres não mostram quadradinhos de outro modelo
+[OK] 12. PNG na aba tabela usa a função atual e restaura a aba visível
+[OK] 13. Dois desfazeres permitem dois refazeres consecutivos
+13 testes de estado aprovados.
+
+Executando funcoes-auditoria.test.js
+[OK] constante: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] afim: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] linear: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] quadratica: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] modular: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] exponencial: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] logaritmica: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+[OK] trigonometrica: 100 funções, duas referências (fórmula e identidade), propriedades presentes e marcadores coerentes
+800 funções aleatórias; 4000 comparações de valores + identidades e marcadores. Semente: 20261111.
+[OK] Regressões analíticas: classificação, bases inválidas, imagem, paridade, monotonicidade, assíntotas, período e fase.
+
+Executando regressoes-matematicas.test.js
+[OK] 1. Função zero tem todos os reais como raízes
+[OK] 2. Quadrática negativa: imagem limitada acima e quatro formas do vértice
+[OK] 3. Delta negativo não inventa conferência por fatoração real
+[OK] 4. Coeficiente pequeno não é transformado silenciosamente em zero
+[OK] 5. Raiz pequena preservada com Bhaskara estável
+[OK] 6. NaN, infinito e textos iguais não autorizam selo Verificado
+[OK] 7. Erro forçado no segundo método é detectado
+[OK] 8. Amostragem não prova paridade nem gera selo em expressão livre
+[OK] 9. Exemplo científico respeita graus e radianos
+[OK] 10. π e pi têm o mesmo valor sem duplicar Math no compilador
+[OK] 11. Entradas sujas: 2x, vírgula decimal, parênteses, notação científica
+[OK] 12. Código JavaScript e identificadores desconhecidos não são executados
+[OK] 13. Divisão por zero, raiz negativa, log inválido e tangente indefinida
+[OK] 14. Potência preserva funções, precedência e associação à direita
+[OK] 15. Limite sem domínio real não é chamado de infinito negativo
+[OK] 16. Limite em ponto inválido não é calculado em zero
+[OK] 17. Gráfico de limite removível conserva o buraco sem inventar valores
+[OK] 18. Oscilação no infinito não é descrita como crescimento ilimitado
+[OK] 19. Coeficientes enormes não geram gráfico ou selo em silêncio
+[OK] 20. Fatorial acima da faixa suportada não retorna 170! silenciosamente
+20 regressões aprovadas.
+
+Executando calculo-regras.test.js
+[OK] Derivada: constante; regra simbólica, fórmula independente e quociente incremental
+[OK] Derivada: potência; regra simbólica, fórmula independente e quociente incremental
+[OK] Derivada: soma/subtração; regra simbólica, fórmula independente e quociente incremental
+[OK] Derivada: produto; regra simbólica, fórmula independente e quociente incremental
+[OK] Derivada: quociente; regra simbólica, fórmula independente e quociente incremental
+[OK] Derivada: cadeia; regra simbólica, fórmula independente e quociente incremental
+[OK] Modular: derivada não existe na quina x=0.
+[OK] Integral: constante; derivada da primitiva, fórmula independente e Simpson
+[OK] Integral: potência; derivada da primitiva, fórmula independente e Simpson
+[OK] Integral: soma/subtração; derivada da primitiva, fórmula independente e Simpson
+[OK] Integral: exponencial; derivada da primitiva, fórmula independente e Simpson
+[OK] Integral: trigonométrica; derivada da primitiva, fórmula independente e Simpson
+[OK] Integral: substituição; derivada da primitiva, fórmula independente e Simpson
+[OK] Singularidade rejeitada e integral não elementar identificada como aproximação.
+
+Executando graficos-renderizacao.test.js
+[OK] Gráfico 1/x: ramos não são unidos através das assíntotas.
+[OK] Gráfico tg(x): ramos não são unidos através das assíntotas.
+[OK] Sombreamento x²: integral líquida do polígono ≈ 9.000230; referência 9.
+[OK] Sombreamento x: integral líquida do polígono ≈ 0.000000; referência 0.
+
+Executando integrais-modulo.test.js
+[OK] D1/D2/D5: janela, resultado único, três pontos médios e verificação.
+[OK] D3: b = 5 e limite em expressão π/2 atualizam o mesmo estado.
+[OK] Áreas com sinal: seno em [0,π], [0,2π] e potência ímpar em [-1,1].
+[OK] Indefinida, limites invertidos, função vazia e limite vazio preservados.
+[OK] Verificação rejeita Simpson divergente e primitiva incorreta.
+[OK] Conversão texto ↔ fórmula, limites empilhados e expoente.
+
+Executando graficos-layout.test.js
+[OK] A legenda e a pílula de coordenadas usam apenas duas âncoras independentes e não cobrem o gráfico.
+
+SUCESSO: 8 suítes aprovadas. Interface visual: executar interface-navegador.test.js separadamente.

@@ -1,0 +1,2 @@
+# Opcional: somente para calculo.py. O app HTML/JS não usa Python.
+sympy>=1.12,<2

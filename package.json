@@ -1,0 +1,31 @@
+{
+  "name": "mathlab",
+  "version": "2.0.0",
+  "description": "MathLab — Calculadora Científica e Laboratório de Análise Matemática (CDI - AP2 | Engenharia de Software)",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node tests/executar-testes.js",
+    "test:modulos": "node tests/modulos-gerais.test.js",
+    "test:estado": "node tests/sincronizacao-estado.test.js",
+    "test:funcoes": "node tests/funcoes-auditoria.test.js",
+    "test:regressoes": "node tests/regressoes-matematicas.test.js",
+    "test:calculo": "node tests/calculo-regras.test.js",
+    "test:graficos": "node tests/graficos-renderizacao.test.js",
+    "test:integrais": "node tests/integrais-modulo.test.js",
+    "test:layout": "node tests/graficos-layout.test.js",
+    "test:ui": "node tests/interface-navegador.test.js",
+    "test:ui-integrais": "node tests/interface-integrais.test.js"
+  },
+  "keywords": [
+    "matematica",
+    "calculo",
+    "calculadora-cientifica",
+    "funcoes",
+    "limites",
+    "derivadas",
+    "integrais",
+    "engenharia-de-software"
+  ],
+  "license": "MIT"
+}

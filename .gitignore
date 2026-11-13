@@ -1,0 +1,19 @@
+# Dependências e ambientes
+/node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Artefatos temporários e pacotes Git
+*.bundle
+*.log
+npm-debug.log*
+
+# Sistema Operacional e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

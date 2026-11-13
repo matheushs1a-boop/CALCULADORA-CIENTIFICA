@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLab — Calculadora Científica e Laboratório de Matemática</title>
+    <!-- Tipografia Inter e JetBrains Mono (com fallback local caso offline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/estilos.css?v=2.2">
+</head>
+<body>
+
+    <!-- ====================================================================
+         1. CABEÇALHO PRINCIPAL (HEADER)
+         ==================================================================== -->
+    <header class="app-header">
+        <!-- Esquerda: Logotipo e Identificação -->
+        <div class="header-brand">
+            <div class="brand-logo" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19V5l8 9 8-9v14"/>
+                </svg>
+            </div>
+            <div class="brand-titles">
+                <span class="brand-name">MathLab</span>
+            </div>
+        </div>
+
+        <!-- Centro: Barra de Pesquisa (Ctrl + K) -->
+        <div class="header-search">
+            <button type="button" id="btn-open-cmd" class="search-trigger-btn" title="Pesquisar módulos, comandos e fórmulas (Ctrl + K)">
+                <span class="search-trigger-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                    </svg>
+                    <span>Buscar módulos, fórmulas e comandos</span>
+                </span>
+                <kbd class="kbd-shortcut">Ctrl+K</kbd>
+            </button>
+        </div>
+
+        <div class="header-actions">
+<button type="button" id="btn-open-favorites" class="header-btn" title="Abrir Histórico, Favoritos e Fórmulas Fixadas">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span>Favoritos</span>
+                <span id="fav-count-badge" class="badge-counter">0</span>
+            </button>
+            <div class="header-dropdown">
+                <button type="button" id="btn-open-share" class="header-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="share-menu">↗ Compartilhar</button>
+                <div id="share-menu" class="dropdown-panel" role="menu" aria-labelledby="btn-open-share" hidden>
+                    <button type="button" role="menuitem" id="btn-share-result">⧉ Copiar resultado</button>
+                    <button type="button" role="menuitem" id="btn-share-latex">∑ Copiar em LaTeX</button>
+                    <button type="button" role="menuitem" id="btn-graph-png">↓ Baixar PNG do gráfico</button>
+                    <button type="button" role="menuitem" id="btn-share-pdf">▤ Exportar PDF</button>
+                    <button type="button" role="menuitem" id="btn-share-link">↗ Copiar link</button>
+                </div>
+            </div>
+            <div class="header-dropdown">
+                <button type="button" id="btn-open-settings" class="header-btn" aria-haspopup="dialog" aria-label="Configurações" aria-expanded="false" aria-controls="settings-menu" title="Configurações">⚙</button>
+                <div id="settings-menu" class="dropdown-panel settings-menu" role="dialog" aria-modal="false" aria-label="Configurações" hidden>
+                    <section aria-labelledby="settings-appearance">
+                        <h3 id="settings-appearance">Aparência</h3>
+                        <button type="button" id="btn-toggle-theme">◐ Tema claro / escuro</button>
+                        <div class="settings-field"><span id="font-control-label">Tamanho da fonte</span><div class="font-stepper" role="group" aria-labelledby="font-control-label">
+                            <button type="button" id="btn-font-down" aria-label="Diminuir fonte">−</button><output id="font-size-output" aria-live="polite">Média</output><button type="button" id="btn-font-up" aria-label="Aumentar fonte">+</button>
+                        </div></div>
+                        <button type="button" id="btn-toggle-visual">▥ <span id="label-toggle-visual">Painel Visual</span></button>
+                        <label class="settings-field">Reduzir animações <input type="checkbox" id="cfg-reduce-motion"></label>
+                    </section>
+                    <section aria-labelledby="settings-calculation">
+                        <h3 id="settings-calculation">Cálculo</h3>
+                        <label class="settings-field" for="cfg-angle">Ângulos <select id="cfg-angle" class="field-select"><option value="rad">Radianos</option><option value="grau">Graus</option></select></label>
+                        <label class="settings-field" for="cfg-decimals">Casas decimais <select id="cfg-decimals" class="field-select"><option>2</option><option>4</option><option>6</option><option>8</option></select></label>
+                        <label class="settings-field" for="cfg-output">Resultado <select id="cfg-output" class="field-select"><option value="exato">Exato</option><option value="decimal">Decimal</option></select></label>
+                    </section>
+                    <section aria-label="Suporte">
+                        <button type="button" id="btn-keyboard-help">⌨ Atalhos de teclado</button>
+                        <button type="button" id="btn-open-tour">? Ajuda e tour</button>
+                        <button type="button" id="btn-open-states">◇ Estados de exemplo</button>
+                        <button type="button" id="btn-about">Sobre o MathLab</button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================
+         2. BARRA DE NAVEGAÇÃO DOS 11 MÓDULOS ESPECIALIZADOS
+         ==================================================================== -->
+    <nav class="module-navbar" aria-label="Módulos matemáticos">
+        <div class="module-nav-list" id="module-nav-list">
+            <button type="button" class="module-tab" data-module="cientifica">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+                <span>Científica</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="algebra">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h6M7 4v6M14 7h6M14 17h6M4 19l6-6M4 13l6 6"/></svg>
+                <span>Álgebra</span>
+            </button>
+
+            <button type="button" class="module-tab active" data-module="funcoes">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18M4 19c4-12 12-12 16 0"/></svg>
+                <span>Funções</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="limites">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3 19l6.5-4.8M21 5l-6.5 4.8"/></svg>
+                <span>Limites</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="derivadas">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17c3-8 7-10 18-3"/><line x1="4" y1="19" x2="20" y2="5"/></svg>
+                <span>Derivadas</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="integrais">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4c-2 0-3 1.5-3 4v8c0 2.5-1 4-3 4"/></svg>
+                <span>Integrais</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="geometria">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 3 2 20 22 20"/></svg>
+                <span>Geometria</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="trigonometria">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12L19 7"/><path d="M12 12h9"/></svg>
+                <span>Trigonometria</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="vetores">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19L19 5M19 5h-7M19 5v7"/></svg>
+                <span>Vetores e Matrizes</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="estatistica">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="6" width="4" height="14"/><rect x="17" y="9" width="4" height="11"/></svg>
+                <span>Estatística</span>
+            </button>
+
+            <button type="button" class="module-tab" data-module="modelagem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h18M4 17c6-1 11-5 15-13"/><circle cx="19" cy="4" r="2"/></svg>
+                <span>Modelagem</span>
+            </button>
+        </div>
+
+    </nav>
+
+    <!-- ====================================================================
+         3. ÁREA PRINCIPAL DE TRABALHO (3 COLUNAS ADAPTATIVAS)
+         ==================================================================== -->
+    <main id="workspace" class="workspace">
+
+        <!-- ÁREA ESQUERDA: ENTRADA, CONTROLES ESPECÍFICOS E CALCULADORA -->
+        <section class="workspace-panel area-left" aria-label="Entrada e controles do módulo">
+            <header class="panel-header">
+                <div class="panel-title-group">
+                    <span class="panel-title-icon" id="left-panel-icon"></span>
+                    <h2 class="panel-title" id="left-panel-title">Funções</h2>
+                    <span class="panel-subtitle-badge" id="left-panel-badge">8 Tipos</span>
+                </div>
+                <div class="panel-header-actions" id="left-panel-actions"></div>
+            </header>
+            <div class="input-history-tools" role="group" aria-label="Histórico da edição">
+                <span>ENTRADA</span>
+                <button type="button" id="btn-undo" class="header-btn" title="Desfazer (Ctrl+Z)" aria-label="Desfazer">↶</button>
+                <button type="button" id="btn-redo" class="header-btn" title="Refazer (Ctrl+Shift+Z)" aria-label="Refazer">↷</button>
+            </div>
+            <div class="panel-body" id="left-panel-body">
+                <!-- Renderizado dinamicamente pelo app.js conforme o módulo ativo -->
+            </div>
+            <footer class="input-panel-footer">
+                <button type="button" id="btn-generate-footer" class="btn-primary-action">Gerar relatório completo <kbd>Enter</kbd></button>
+                <button type="button" id="btn-study-footer" class="btn-tiny-tool">Abrir estudo da função</button>
+            </footer>
+        </section>
+
+        <!-- ÁREA CENTRAL: LABORATÓRIO VISUAL (GRÁFICO, GEOMETRIA, MATRIZES, TABELA) -->
+        <section class="workspace-panel area-center" id="area-center" aria-label="Laboratório visual">
+            <header class="panel-header">
+                <div class="panel-title-group">
+                    <h2 class="panel-title" id="center-panel-title">Laboratório Gráfico</h2>
+                    <span class="panel-subtitle-badge" id="center-panel-badge">f(x) = x² − 4x − 5</span>
+                </div>
+                <div class="panel-header-actions" id="center-panel-header-extra"></div>
+            </header>
+
+            <!-- Barra de Abas Internas e Ferramentas do Gráfico -->
+            <div class="visual-tabs-bar">
+                <div class="tabs-group" id="center-tabs-group"></div>
+
+            </div>
+
+            <!-- Palco Visual (Alterna entre Canvas Cartesiano, SVG ou Tabelas/Abas) -->
+            <div class="visual-stage" id="visual-stage">
+                <div class="visual-toolbar" id="center-visual-toolbar">
+                    <button type="button" class="icon-tool-btn" id="btn-graph-zoom-in" title="Aproximar gráfico (Zoom +)" aria-label="Aproximar gráfico">+</button>
+                    <button type="button" class="icon-tool-btn" id="btn-graph-zoom-out" title="Afastar gráfico (Zoom −)" aria-label="Afastar gráfico">−</button>
+                    <button type="button" class="icon-tool-btn wide" id="btn-graph-fit-fn" title="Ajustar janela à função e aos pontos notáveis" aria-label="Ajustar à função">⤢</button>
+                    <button type="button" class="icon-tool-btn wide" id="btn-graph-reset" title="Restaurar visualização padrão (ou dê duplo-clique no gráfico)" aria-label="Restaurar janela padrão">⌂</button>
+                </div>
+                <div class="canvas-wrapper" id="canvas-stage-wrapper">
+                    <canvas id="main-graph-canvas" role="img" aria-label="Gráfico da função atual. Os valores também estão disponíveis na aba Tabela."></canvas>
+                    <div id="graph-coords-pill" class="graph-coords-pill">Passe o mouse sobre a curva para inspecionar coordenadas</div>
+                    <div id="graph-legend-floating" class="graph-legend-floating" hidden style="display: none !important;"></div>
+                </div>
+                <div id="custom-stage-wrapper" class="svg-custom-stage" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- ÁREA DIREITA: RESULTADOS, PROPRIEDADES, PASSOS, VERIFICAÇÃO E HISTÓRICO -->
+        <aside class="workspace-panel area-right" aria-label="Resultados e análise matemática">
+            <header class="panel-header">
+                <div class="panel-title-group">
+                    <h2 class="panel-title" id="right-panel-title">Propriedades e Análise</h2>
+                </div>
+                <div class="panel-header-actions" id="right-panel-actions"></div>
+            </header>
+            <div class="panel-body" id="right-panel-body">
+                <!-- Renderizado dinamicamente pelo app.js conforme o módulo ativo -->
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ====================================================================
+         4. PALETA DE COMANDOS CENTRALIZADA (CTRL + K)
+         ==================================================================== -->
+    <div id="modal-cmd-backdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Paleta de comandos">
+        <div class="command-palette">
+            <div class="cmd-input-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="text" id="cmd-search-input" class="cmd-input" placeholder="Digite um módulo, tipo de função, fórmula ou comando..." autocomplete="off">
+                <kbd class="kbd-shortcut">ESC</kbd>
+            </div>
+            <div id="cmd-results-list" class="cmd-results-list"></div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         5. PAINEL LATERAL: ESTUDO COMPLETO DA FUNÇÃO ("ESTUDAR FUNÇÃO")
+         ==================================================================== -->
+    <div id="drawer-study-backdrop" class="slide-drawer-backdrop hidden" role="dialog" aria-modal="true" aria-label="Estudo completo da função">
+        <div class="slide-drawer">
+            <header class="drawer-header">
+                <div>
+                    <h2 class="panel-title" id="study-drawer-title">Estudo Completo da Função</h2>
+                    <span class="panel-subtitle-badge" id="study-drawer-subtitle">f(x) = x² − 4x − 5</span>
+                </div>
+                <button type="button" id="btn-close-study" class="header-btn">Fechar (ESC)</button>
+            </header>
+            <div class="drawer-body" id="study-drawer-body"></div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         6. PAINEL LATERAL: HISTÓRICO, FAVORITOS E ESTADOS ESPECIAIS
+         ==================================================================== -->
+    <div id="drawer-generic-backdrop" class="slide-drawer-backdrop hidden" role="dialog" aria-modal="true">
+        <div class="slide-drawer">
+            <header class="drawer-header">
+                <div>
+                    <h2 class="panel-title" id="generic-drawer-title">Histórico e Favoritos</h2>
+                </div>
+                <button type="button" id="btn-close-generic" class="header-btn">Fechar (ESC)</button>
+            </header>
+            <div class="drawer-body" id="generic-drawer-body"></div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         7. TOUR DE PRIMEIRO USO (4 PASSOS RÁPIDOS)
+         ==================================================================== -->
+    <div id="modal-tour-backdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Tour guiado de 4 passos">
+        <div class="tour-card" id="tour-card-content"></div>
+    </div>
+
+    <!-- Container para Notificações Rápidas (Copiar, Favoritar, Exportar) -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script src="src/js/motor-grafico.js?v=2.2"></script>
+    <script src="src/js/motor-matematico.js?v=2.2"></script>
+    <script src="src/js/app.js?v=2.2"></script>
+</body>
+</html>
