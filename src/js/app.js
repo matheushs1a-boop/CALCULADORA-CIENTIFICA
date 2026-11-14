@@ -122,8 +122,9 @@ const MathLabApp = {
             amplitude: 1,
             frequencia: 1,
             fase: 0,
+            deslocamento: 0,
             anguloGraus: 30,
-            unidadeAngulo: 'rad'
+            unidadeAngulo: 'graus'
         },
 
         // Módulo 09: Vetores e Matrizes
@@ -2215,197 +2216,153 @@ const MathLabApp = {
     /* ========================================================================
        MÓDULO 08 — TRIGONOMETRIA (GRÁFICO + CIRCUNFERÊNCIA TRIGONOMÉTRICA)
        ======================================================================== */
-    renderModuloTrigonometria() {
+    // Todos os componentes consultam este estado; nenhuma cópia paralela dos parâmetros.
+    obterDadosTrigonometria() {
         const st = this.state.trigonometria;
-        document.getElementById('left-panel-title').textContent = 'Trigonometria';
-        document.getElementById('left-panel-badge').textContent = 'Ondas e Ciclo Unitário';
-        document.getElementById('left-panel-actions').innerHTML = '';
-
-        const A = Number(st.amplitude);
-        const B = Number(st.frequencia);
-        const C = Number(st.fase);
-
-        const prefA = A === 1 ? '' : `${MathLabCalc.fmt(A)}·`;
-        const argB = B === 1 ? 'x' : `${MathLabCalc.fmt(B)}x`;
-        const argC = C === 0 ? '' : C > 0 ? ` + ${MathLabCalc.fmt(C)}` : ` − ${MathLabCalc.fmt(Math.abs(C))}`;
-        const exprTrig = `f(x) = ${prefA}${st.funcao}(${argB}${argC})`;
-
-        const fnTrig = (x) => {
-            const arg = B * x + C;
-            if (st.funcao === 'sen') return A * Math.sin(arg);
-            if (st.funcao === 'cos') return A * Math.cos(arg);
-            const c = Math.cos(arg);
-            if (Math.abs(c) < 0.03) return NaN;
-            return A * Math.tan(arg);
+        const A = Number(st.amplitude), B = Number(st.frequencia), C = Number(st.fase), D = Number(st.deslocamento || 0);
+        const valido = [A, B, C, D, st.anguloGraus].every(Number.isFinite);
+        const n = v => this.formatarTrig(v);
+        const sinal = v => v < 0 ? ` − ${n(-v)}` : v > 0 ? ` + ${n(v)}` : '';
+        const expressao = `${A === 1 ? '' : A === -1 ? '−' : n(A) + '·'}${st.funcao}(${B === 1 ? 'x' : B === -1 ? '−x' : n(B) + 'x'}${sinal(C)})${sinal(D)}`;
+        const fn = x => {
+            const t = B * x + C;
+            if (!valido || (st.funcao === 'tg' && Math.abs(Math.cos(t)) < 1e-12)) return NaN;
+            return A * (st.funcao === 'sen' ? Math.sin(t) : st.funcao === 'cos' ? Math.cos(t) : Math.tan(t)) + D;
         };
-
-        const periodoStr = st.funcao === 'tg'
-            ? (B === 1 ? 'π' : `π/${MathLabCalc.fmt(B)}`)
-            : (B === 1 ? '2π' : `2π/${MathLabCalc.fmt(B)}`);
-
-        const imagemStr = st.funcao === 'tg' ? 'ℝ (−∞, +∞)' : `[−${MathLabCalc.fmt(Math.abs(A))}, ${MathLabCalc.fmt(Math.abs(A))}]`;
-
-        const leftBody = document.getElementById('left-panel-body');
-        leftBody.innerHTML = `
-            <div class="math-display-box">
-                <div class="display-top-bar">
-                    <span class="mini-pill active">Período: ${periodoStr}</span>
-                    <span>Amplitude: ${st.funcao === 'tg' ? 'Ilimitada' : MathLabCalc.fmt(Math.abs(A))}</span>
-                </div>
-                <div class="expression-input-row">
-                    <input type="text" class="expression-input" value="${exprTrig}" readonly>
-                </div>
-                <div class="display-result-row">
-                    <span class="result-label">Imagem</span>
-                    <span class="result-primary" style="font-size:17px;">${imagemStr}</span>
-                </div>
-            </div>
-
-            <div class="segmented-control full-width">
-                <button type="button" class="segmented-btn ${st.funcao === 'sen' ? 'active' : ''}" data-trig-fn="sen">f(x) = sen(x)</button>
-                <button type="button" class="segmented-btn ${st.funcao === 'cos' ? 'active' : ''}" data-trig-fn="cos">f(x) = cos(x)</button>
-                <button type="button" class="segmented-btn ${st.funcao === 'tg' ? 'active' : ''}" data-trig-fn="tg">f(x) = tg(x)</button>
-            </div>
-
-            <div class="sliders-box">
-                <span class="field-label">Parâmetros da Onda e Ângulo do Ciclo</span>
-                <div class="slider-item">
-                    <span class="slider-label">Amplitude</span>
-                    <input type="range" id="trig-amp" class="math-slider" min="0.5" max="4" step="0.5" value="${A}">
-                    <span class="slider-value-badge">${MathLabCalc.fmt(A)}</span>
-                </div>
-                <div class="slider-item">
-                    <span class="slider-label">Frequência</span>
-                    <input type="range" id="trig-freq" class="math-slider" min="0.5" max="3" step="0.5" value="${B}">
-                    <span class="slider-value-badge">${MathLabCalc.fmt(B)}</span>
-                </div>
-                <div class="slider-item">
-                    <span class="slider-label">Ângulo θ</span>
-                    <input type="range" id="trig-ang" class="math-slider" min="0" max="360" step="15" value="${st.anguloGraus}">
-                    <span class="slider-value-badge">${st.anguloGraus}°</span>
-                </div>
-            </div>
-
-            <div class="action-btn-row" style="margin-top:auto;">
-                <button type="button" class="btn-secondary-action" id="btn-trig-view-wave" style="flex:1;border-color:${st.visualizacao === 'grafico' ? 'var(--primary)' : ''};">Gráfico Cartesiano</button>
-                <button type="button" class="btn-secondary-action" id="btn-trig-view-circle" style="flex:1;border-color:${st.visualizacao === 'circulo' ? 'var(--primary)' : ''};">Ciclo Trigonométrico</button>
-            </div>
-        `;
-
-        this.renderizarAbasCentro([
-            { id: 'grafico', rotulo: '1. Gráfico Trigonométrico' },
-            { id: 'circulo', rotulo: '2. Circunferência Trigonométrica' },
-            { id: 'tabela', rotulo: 'Tabela de Ângulos Notáveis' }
-        ], st.visualizacao, (vis) => {
-            st.visualizacao = vis;
-            this.renderModuloTrigonometria();
-        });
-
-        if (st.visualizacao === 'circulo') {
-            this.ativarPalcoCustom(
-                MathLabVisuals.gerarSvgCirculoTrigonometrico(st.anguloGraus),
-                'Circunferência Trigonométrica Unitária (R = 1)',
-                `Ângulo θ = ${st.anguloGraus}°`
-            );
-        } else if (st.visualizacao === 'tabela') {
-            this.ativarPalcoCustom(`
-                <div style="width:100%;max-width:640px;">
-                    <div class="data-table-wrapper">
-                        <table class="math-table">
-                            <thead>
-                                <tr><th>Graus (°)</th><th>Radianos (rad)</th><th>sen(θ)</th><th>cos(θ)</th><th>tg(θ)</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>0°</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-                                <tr class="highlight-row"><td>30°</td><td>π / 6</td><td>1 / 2</td><td>√3 / 2</td><td>√3 / 3</td></tr>
-                                <tr><td>45°</td><td>π / 4</td><td>√2 / 2</td><td>√2 / 2</td><td>1</td></tr>
-                                <tr class="highlight-row"><td>60°</td><td>π / 3</td><td>√3 / 2</td><td>1 / 2</td><td>√3</td></tr>
-                                <tr><td>90°</td><td>π / 2</td><td>1</td><td>0</td><td>Não existe (∄)</td></tr>
-                                <tr><td>180°</td><td>π</td><td>0</td><td>−1</td><td>0</td></tr>
-                                <tr><td>270°</td><td>3π / 2</td><td>−1</td><td>0</td><td>Não existe (∄)</td></tr>
-                                <tr><td>360°</td><td>2π</td><td>0</td><td>1</td><td>0</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `, 'Tabela de Ângulos Notáveis Exatos', '180° = π rad');
+        const constante = A === 0 || B === 0;
+        const periodo = constante ? 'Constante (sem período fundamental)' : n((st.funcao === 'tg' ? Math.PI : 2 * Math.PI) / Math.abs(B));
+        const fase = B === 0 ? 'Não se aplica (B = 0)' : n(-C / B);
+        let paridade = 'Nem par nem ímpar';
+        // Paridade analítica: uma translação vertical não preserva funções ímpares.
+        if (constante) paridade = Math.abs(fn(0)) < 1e-12 ? 'Par e ímpar' : 'Par';
+        else if (st.funcao === 'tg') {
+            if (Math.abs(Math.sin(C)) < 1e-12 && D === 0) paridade = 'Ímpar';
         } else {
-            const marcadores = st.funcao === 'sen' && B === 1 && C === 0 ? [
-                { x: Math.PI / 2, y: A, rotulo: `(π/2, ${MathLabCalc.fmt(A)})`, cor: '#EF4444' },
-                { x: (3 * Math.PI) / 2, y: -A, rotulo: `(3π/2, −${MathLabCalc.fmt(A)})`, cor: '#EF4444', offsetY: 12 }
-            ] : [
-                { x: 0, y: fnTrig(0), rotulo: `(0, ${MathLabCalc.fmt(fnTrig(0), 2)})`, cor: '#3B82F6' }
-            ];
-
-            this.ativarPalcoCanvas({
-                janela: { xMin: -2 * Math.PI, xMax: 2 * Math.PI, yMin: -Math.max(1, Math.abs(A)) * 1.3, yMax: Math.max(1, Math.abs(A)) * 1.3 },
-                eixoXPi: true,
-                curvas: [{ rotulo: exprTrig, cor: '#22C55E', espessura: 3, fn: fnTrig }],
-                assintotas: st.funcao === 'tg' && B !== 0 ? Array.from({length: 101}, (_, i) => (Math.PI / 2 + (i - 50) * Math.PI - C) / B).filter(x => Math.abs(x) <= 2 * Math.PI).map(valor => ({tipo: 'vertical', valor, cor: '#EF4444'})) : [],
-                marcadores
-            }, 'Curva Trigonométrica e Pontos Notáveis', exprTrig);
+            const coefCos = A * (st.funcao === 'sen' ? Math.sin(C) : Math.cos(C));
+            const coefSen = A * (st.funcao === 'sen' ? Math.cos(C) : -Math.sin(C));
+            if (Math.abs(coefSen) < 1e-12) paridade = 'Par';
+            else if (Math.abs(coefCos) < 1e-12 && D === 0) paridade = 'Ímpar';
         }
+        const polos = [];
+        const marcadores = [];
+        if (B !== 0) {
+            // Enumera somente eventos da janela: funciona também com frequência negativa.
+            const minT = Math.min(B * -2 * Math.PI + C, B * 2 * Math.PI + C);
+            const maxT = Math.max(B * -2 * Math.PI + C, B * 2 * Math.PI + C);
+            const inicio = Math.ceil((minT - Math.PI / 2) / Math.PI), fim = Math.floor((maxT - Math.PI / 2) / Math.PI);
+            for (let k = inicio; k <= fim && k < inicio + 200; k++) {
+                const x = (Math.PI / 2 + k * Math.PI - C) / B;
+                if (st.funcao === 'tg') polos.push(x);
+            }
+            if (st.funcao !== 'tg' && A !== 0) {
+                const base = st.funcao === 'sen' ? Math.PI / 2 : 0;
+                for (let k = Math.ceil((minT - base) / Math.PI); k <= Math.floor((maxT - base) / Math.PI) && marcadores.length < 30; k++) {
+                    const x = (base + k * Math.PI - C) / B, y = fn(x);
+                    marcadores.push({x, y, cor: '#EF4444', rotulo: `(${n(x)}; ${n(y)})`, offsetY: y < D ? 16 : -16});
+                }
+            }
+            // Raízes de A·fn(t)+D, limitadas à janela exibida.
+            if (A !== 0) {
+                const r = -D / A;
+                const bases = st.funcao === 'tg' ? [Math.atan(r)] : Math.abs(r) <= 1 ? (st.funcao === 'sen' ? [Math.asin(r), Math.PI - Math.asin(r)] : [Math.acos(r), -Math.acos(r)]) : [];
+                const tour = st.funcao === 'tg' ? Math.PI : 2 * Math.PI;
+                for (const base of bases) for (let k = Math.ceil((minT-base)/tour); k <= Math.floor((maxT-base)/tour) && marcadores.length < 60; k++) {
+                    const x = (base + k*tour-C)/B;
+                    if (!marcadores.some(m=>Math.abs(m.x-x)<1e-9)) marcadores.push({x,y:0,cor:'#22C55E'});
+                }
+            }
+        }
+        const imagem = constante ? `{${n(fn(0))}}` : st.funcao === 'tg' ? 'ℝ' : `[${n(D-Math.abs(A))}, ${n(D+Math.abs(A))}]`;
+        const dominio = st.funcao !== 'tg' ? 'ℝ' : B === 0 ? (Math.abs(Math.cos(C)) < 1e-12 ? '∅' : 'ℝ') : `ℝ − {(${n(Math.PI/2)} + kπ − (${n(C)}))/(${n(B)}), k ∈ ℤ}`;
+        const t = st.anguloGraus * Math.PI / 180, sen = Math.sin(t), cos = Math.cos(t);
+        const tangente = Math.abs(cos) < 1e-12 ? null : sen/cos;
+        const verificado = valido && Math.abs(sen*sen+cos*cos-1) < 1e-12 && (tangente === null || Math.abs(Math.tan(t)-tangente) < 1e-10);
+        return {valido, A,B,C,D,fn,expressao,periodo,fase,paridade,imagem,dominio,sen,cos,tangente,verificado,
+            grafico: {janela:{xMin:-2*Math.PI,xMax:2*Math.PI,yMin:-Math.max(.1,Math.abs(A)+Math.abs(D))*1.3,yMax:Math.max(.1,Math.abs(A)+Math.abs(D))*1.3}, eixoXPi:true,
+                mensagemVazia: valido ? '' : 'Preencha parâmetros e ângulo válidos',
+                curvas:valido ? [{rotulo:`f(x) = ${expressao}`,cor:'#22C55E',espessura:3,fn}] : [], marcadores:valido ? marcadores : [],
+                assintotas:polos.map(valor=>({tipo:'vertical',valor,cor:'#EF4444'}))}};
+    },
 
-        document.getElementById('right-panel-title').textContent = 'Identidades e Propriedades';
-        document.getElementById('right-panel-actions').innerHTML = '';
-        document.getElementById('right-panel-body').innerHTML = `
-            <div class="info-section">
-                <span class="section-heading">Propriedades de ${exprTrig}</span>
-                <div class="props-list">
-                    <div class="prop-item"><span class="prop-key">Domínio</span><span class="prop-val">${st.funcao === 'tg' ? 'ℝ − {π/2 + kπ}' : 'ℝ'}</span></div>
-                    <div class="prop-item"><span class="prop-key">Imagem</span><span class="prop-val" style="color:var(--green);">${imagemStr}</span></div>
-                    <div class="prop-item"><span class="prop-key">Período (T)</span><span class="prop-val">${periodoStr}</span></div>
-                    <div class="prop-item"><span class="prop-key">Paridade</span><span class="prop-val">${st.funcao === 'cos' ? 'Par: cos(−x) = cos(x)' : `Ímpar: ${st.funcao}(−x) = −${st.funcao}(x)`}</span></div>
-                    <div class="prop-item"><span class="prop-key">Máximo / Mínimo</span><span class="prop-val">${st.funcao === 'tg' ? 'Não possui' : `+${MathLabCalc.fmt(Math.abs(A))} e −${MathLabCalc.fmt(Math.abs(A))}`}</span></div>
-                </div>
-            </div>
+    formatarTrig(v) {
+        if (!Number.isFinite(v)) return 'Indefinido';
+        if (Math.abs(v) < 1e-12) return '0';
+        for (let d=1; d<=24; d++) {
+            const a=Math.round(v/Math.PI*d);
+            if (a && Math.abs(v-a*Math.PI/d)<1e-10) return `${a<0?'−':''}${Math.abs(a)===1?'':Math.abs(a)}π${d===1?'':'/'+d}`;
+        }
+        return String(Number(v.toFixed(6))).replace('-', '−').replace('.', ',');
+    },
 
-            <div class="info-section">
-                <span class="section-heading">Identidades Fundamentais</span>
-                <div class="steps-list">
-                    <div class="step-card">
-                        <span class="step-title">Relação Fundamental da Trigonometria</span>
-                        <span class="step-math">sen²(x) + cos²(x) = 1</span>
-                    </div>
-                    <div class="step-card">
-                        <span class="step-title">Identidade Quociente</span>
-                        <span class="step-math">tg(x) = sen(x) / cos(x)</span>
-                    </div>
-                    <div class="step-card">
-                        <span class="step-title">Extremos Notáveis do Seno</span>
-                        <span class="step-math">sen(π/2) = 1   •   sen(3π/2) = −1</span>
-                    </div>
-                </div>
-            </div>
-        `;
+    mudarTrigonometria(parcial) {
+        Object.assign(this.state.trigonometria, parcial);
+        this.atualizarTrigonometria();
+    },
 
-        document.querySelectorAll('[data-trig-fn]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                st.funcao = btn.dataset.trigFn;
-                this.renderModuloTrigonometria();
-            });
+    renderModuloTrigonometria() {
+        const st=this.state.trigonometria;
+        document.getElementById('left-panel-title').textContent='Trigonometria';
+        document.getElementById('left-panel-badge').textContent='Ondas e ciclo unitário';
+        document.getElementById('left-panel-actions').innerHTML='';
+        document.getElementById('left-panel-body').innerHTML=`
+            <div class="segmented-control full-width">${['sen','cos','tg'].map(f=>`<button type="button" class="segmented-btn" data-trig-fn="${f}">${f}(x)</button>`).join('')}</div>
+            <div class="sliders-box"><span class="field-label">Parâmetros da onda</span>${[
+                ['amplitude','Amplitude A',-4,4,.1,'blue'],['frequencia','Frequência B',-4,4,.1,'amber'],['fase','Fase C',-6.283,6.283,.01,'purple'],['deslocamento','Vertical D',-4,4,.1,'green']
+            ].map(([key,label,min,max,step,color])=>`<div class="slider-item slot-${color}"><label class="slider-label" for="trig-${key}">${label}</label><input type="range" class="math-slider" id="trig-${key}" data-trig-param="${key}" min="${min}" max="${max}" step="${step}" value="${st[key]}"><output class="slider-value-badge" data-trig-output="${key}"></output></div>`).join('')}</div>
+            <div class="trig-angle"><label for="trig-theta">Ângulo no ciclo: θ =</label><input id="trig-theta" class="formula-slot slot-green" aria-label="Ângulo no ciclo" value="${st.anguloGraus}"><select id="trig-unit" aria-label="Unidade do ângulo"><option value="graus">Graus (°)</option><option value="rad">Radianos</option></select><small id="trig-unit-hint"></small></div>`;
+        document.getElementById('trig-unit').value=st.unidadeAngulo;
+        this.renderizarAbasCentro([{id:'grafico',rotulo:'Gráfico trigonométrico'},{id:'circulo',rotulo:'Circunferência trigonométrica'},{id:'tabela',rotulo:'Tabela de ângulos notáveis'}],st.visualizacao,vis=>this.mudarTrigonometria({visualizacao:vis}));
+        document.querySelectorAll('[data-trig-fn]').forEach(b=>b.addEventListener('click',()=>{
+            this.mudarTrigonometria({funcao:b.dataset.trigFn});
+            // O nome da função é texto, os campos da fórmula permanecem os mesmos.
+            document.querySelector('[data-trig-formula-fn]')?.replaceChildren(document.createTextNode(b.dataset.trigFn));
+        }));
+        document.querySelectorAll('[data-trig-param]').forEach(inp=>inp.addEventListener('input',()=>{
+            const key=inp.dataset.trigParam; delete this.state.slotTextos[`trigonometria_${key}`];
+            const slot=document.querySelector(`.formula-slot[data-slot-key="${key}"]`);if(slot)slot.value=inp.value;
+            this.mudarTrigonometria({[key]:Number(inp.value)});
+        }));
+        document.getElementById('trig-theta').addEventListener('input',e=>{
+            const av=MathLabCalc.avaliarSlotValor(e.target.value,NaN);
+            this.mudarTrigonometria({anguloGraus:av.valido ? av.valor*(st.unidadeAngulo==='rad'?180/Math.PI:1):NaN});
         });
+        document.getElementById('trig-unit').addEventListener('change',e=>{
+            st.unidadeAngulo=e.target.value;
+            document.getElementById('trig-theta').value=this.formatarTrig(st.anguloGraus*(st.unidadeAngulo==='rad'?Math.PI/180:1));
+            this.atualizarTrigonometria();
+        });
+        this.atualizarTrigonometria();
+    },
 
-        document.getElementById('trig-amp')?.addEventListener('input', (e) => {
-            st.amplitude = parseFloat(e.target.value) || 1;
-            this.renderModuloTrigonometria();
-        });
-        document.getElementById('trig-freq')?.addEventListener('input', (e) => {
-            st.frequencia = parseFloat(e.target.value) || 1;
-            this.renderModuloTrigonometria();
-        });
-        document.getElementById('trig-ang')?.addEventListener('input', (e) => {
-            st.anguloGraus = Number(e.target.value);
-            this.renderModuloTrigonometria();
-        });
-        document.getElementById('btn-trig-view-wave')?.addEventListener('click', () => {
-            st.visualizacao = 'grafico';
-            this.renderModuloTrigonometria();
-        });
-        document.getElementById('btn-trig-view-circle')?.addEventListener('click', () => {
-            st.visualizacao = 'circulo';
-            this.renderModuloTrigonometria();
-        });
+    atualizarTrigonometria() {
+        const st=this.state.trigonometria,d=this.obterDadosTrigonometria(),n=v=>this.formatarTrig(v);
+        this._verificacaoModulo={modulo:'trigonometria',aprovado:d.verificado};
+        document.querySelectorAll('[data-trig-fn]').forEach(b=>b.classList.toggle('active',b.dataset.trigFn===st.funcao));
+        document.querySelectorAll('[data-tab-id]').forEach(b=>b.classList.toggle('active',b.dataset.tabId===st.visualizacao));
+        document.querySelectorAll('[data-trig-output]').forEach(o=>o.textContent=n(st[o.dataset.trigOutput]));
+        document.getElementById('trig-unit-hint').textContent=`${n(st.anguloGraus)}° = ${n(st.anguloGraus*Math.PI/180)} rad. O gráfico usa radianos.`;
+        if(st.visualizacao==='circulo' && d.valido) this.ativarPalcoCustom(MathLabVisuals.gerarSvgCirculoTrigonometrico(st.anguloGraus),'Circunferência trigonométrica',`${n(st.anguloGraus)}°`);
+        else if(st.visualizacao==='tabela') this.ativarPalcoCustom(this.gerarTabelaTrigonometrica(),'Ângulos notáveis','Valores exatos');
+        else this.ativarPalcoCanvas(d.grafico,'Gráfico trigonométrico',`f(x) = ${d.expressao}`);
+        const props=[['Amplitude |A|',st.funcao==='tg'?'Não se aplica':n(Math.abs(d.A))],['Período',d.periodo],['Fase −C/B',d.fase],['Deslocamento vertical',n(d.D)],['Imagem',d.imagem],['Paridade',d.paridade],['Domínio',d.dominio]];
+        document.getElementById('right-panel-title').textContent='Resultado e propriedades';
+        document.getElementById('right-panel-actions').innerHTML='';
+        document.getElementById('right-panel-body').innerHTML=`<div class="result-hero-card"><span class="result-hero-label">Resultado</span><div class="result-hero-value">${d.valido?'f(x) = '+d.expressao:'Aguardando resultado válido'}</div><span class="result-status">${d.valido?'Propriedades calculadas':'Confira os parâmetros'}</span></div>
+            <section class="info-section"><h3 class="section-heading">Propriedades da função</h3><div class="props-list">${props.map(([key,value])=>`<div class="prop-item"><span class="prop-key">${key}</span><span class="prop-val">${d.valido?value:'—'}</span></div>`).join('')}</div></section>
+            <section class="info-section" id="trig-cycle-result">${this.renderResultadoCiclo(d)}</section>
+            <section class="info-section"><h3 class="section-heading">Identidades no ângulo θ</h3><p>sen²θ + cos²θ = ${n(d.sen*d.sen+d.cos*d.cos)}</p><p>${d.tangente===null?'tg θ indefinida: quociente não aplicável':'tg θ = sen θ / cos θ = '+n(d.tangente)}</p>${d.verificado?'<span class="verified-badge">Verificado numericamente</span>':'<span class="result-status">Não verificado</span>'}</section>`;
+        // Mantém o input Normal e sua seleção intactos durante alterações dos parâmetros.
+        const normal=document.getElementById('normal-mode-input');
+        if(normal && document.activeElement!==normal) normal.value=d.expressao;
+        const preview=document.getElementById('normal-live-preview-math');if(preview)preview.textContent=d.expressao;
+    },
+
+    renderResultadoCiclo(d) {
+        return `<h3 class="section-heading">Ângulo no ciclo</h3><p>Ponto (${this.formatarTrig(d.cos)}; ${this.formatarTrig(d.sen)})</p><p>sen θ = ${this.formatarTrig(d.sen)}<br>cos θ = ${this.formatarTrig(d.cos)}<br>tg θ = ${d.tangente===null?'Indefinida':this.formatarTrig(d.tangente)}</p>`;
+    },
+
+    gerarTabelaTrigonometrica() {
+        return '<p>Tabela em atualização</p>';
     },
 
     /* ========================================================================
@@ -3681,7 +3638,7 @@ const MathLabApp = {
         }
         if (mod === 'trigonometria') {
             const st = this.state.trigonometria;
-            return `${st.amplitude} * ${st.funcao}(${st.frequencia}x)`;
+            return this.obterDadosTrigonometria().expressao;
         }
         if (mod === 'vetores') {
             const u = this.state.vetores.u;
@@ -4098,8 +4055,8 @@ const MathLabApp = {
                 this.state.passoFluxo = 2;
 
                 const av = MathLabCalc.avaliarSlotValor(bruto, 0);
-                if (!av.valido || (this.state.activeModule === 'integrais' && !bruto.trim())) {
-                    if(this.state.activeModule === 'integrais') {
+                if (!av.valido || (['integrais','trigonometria'].includes(this.state.activeModule) && !bruto.trim())) {
+                    if(['integrais','trigonometria'].includes(this.state.activeModule)) {
                         this.aplicarValorSlot(chave, NaN);
                         return;
                     }
@@ -4315,8 +4272,7 @@ const MathLabApp = {
             this.state.geometria.params[chave] = Math.max(0.1, valor);
             this.renderModuloGeometria();
         } else if (mod === 'trigonometria') {
-            this.state.trigonometria[chave] = valor;
-            this.renderModuloTrigonometria();
+            this.mudarTrigonometria({[chave]:valor});
         } else if (mod === 'vetores') {
             if (chave === 'ux') this.state.vetores.u.x = valor;
             if (chave === 'uy') this.state.vetores.u.y = valor;
@@ -4347,6 +4303,13 @@ const MathLabApp = {
             this.definirExpressaoFuncao(limpo);
             const dados = this.obterDadosAtuaisFuncoes();
             this.atualizarCentroEDireitaFuncoes(dados);
+        } else if (mod === 'trigonometria') {
+            const conv = MathLabCalc.converterTextoParaSlots(limpo, 'funcoes');
+            if (conv.reconhecido && conv.slots?.A !== undefined) {
+                const p=conv.slots;
+                Object.assign(this.state.trigonometria,{amplitude:p.A,frequencia:p.B,fase:p.C||0,deslocamento:p.D||0});
+            }
+            if (forcarRender) this.renderModuloTrigonometria();
         } else if (mod === 'algebra') {
             const conv = MathLabCalc.converterTextoParaSlots(limpo, 'algebra');
             if (conv.reconhecido && conv.subtipo === 'quadratica') {
