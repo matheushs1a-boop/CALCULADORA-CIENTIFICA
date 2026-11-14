@@ -2309,7 +2309,7 @@ const MathLabApp = {
             <div class="sliders-box"><span class="field-label">Parâmetros da onda</span>${[
                 ['amplitude','Amplitude A',-4,4,.1,'blue'],['frequencia','Frequência B',-4,4,.1,'amber'],['fase','Fase C',-6.283,6.283,.01,'purple'],['deslocamento','Vertical D',-4,4,.1,'green']
             ].map(([key,label,min,max,step,color])=>`<div class="slider-item slot-${color}"><label class="slider-label" for="trig-${key}">${label}</label><input type="range" class="math-slider" id="trig-${key}" data-trig-param="${key}" min="${min}" max="${max}" step="${step}" value="${st[key]}"><output class="slider-value-badge" data-trig-output="${key}"></output></div>`).join('')}</div>
-            <div class="trig-angle"><label for="trig-theta">Ângulo no ciclo: θ =</label><input id="trig-theta" class="formula-slot slot-green" aria-label="Ângulo no ciclo" value="${st.anguloGraus}"><select id="trig-unit" aria-label="Unidade do ângulo"><option value="graus">Graus (°)</option><option value="rad">Radianos</option></select><small id="trig-unit-hint"></small></div>`;
+            <div class="trig-angle"><label for="trig-theta">Ângulo no ciclo: θ =</label><input id="trig-theta" class="formula-slot slot-green" aria-label="Ângulo no ciclo" value="${this.formatarTrig(st.anguloGraus*(st.unidadeAngulo==='rad'?Math.PI/180:1))}"><select id="trig-unit" aria-label="Unidade do ângulo"><option value="graus">Graus (°)</option><option value="rad">Radianos</option></select><small id="trig-unit-hint"></small></div>`;
         document.getElementById('trig-unit').value=st.unidadeAngulo;
         this.renderizarAbasCentro([{id:'grafico',rotulo:'Gráfico trigonométrico'},{id:'circulo',rotulo:'Circunferência trigonométrica'},{id:'tabela',rotulo:'Tabela de ângulos notáveis'}],st.visualizacao,vis=>this.mudarTrigonometria({visualizacao:vis}));
         document.querySelectorAll('[data-trig-fn]').forEach(b=>b.addEventListener('click',()=>{
@@ -3667,6 +3667,7 @@ const MathLabApp = {
                            class="formula-slot ${corClasse} ${fxAtivo ? 'fx-mode' : ''} ${invalido ? 'slot-invalid' : ''}"
                            data-slot-key="${chave}"
                            data-slot-uid="${idUnico}"
+                           style="width:${Math.max(2.4, String(valExibido).length + 1.4)}ch"
                            value="${this.escaparHTML(valExibido)}"
                            aria-label="Parâmetro ${chave}">
                     <button type="button" class="slot-fx-toggle" data-fx-uid="${idUnico}" title="Alternar modo expressão fx (ex: 2*sen(pi/6) ou 1/2)">fx</button>
@@ -3817,7 +3818,7 @@ const MathLabApp = {
         if (mod === 'trigonometria') {
             const st = this.state.trigonometria;
             return {
-                formulaMontada: `f(x) = ${slotHtml('amplitude', st.amplitude, 'slot-blue', 'A: amplitude máxima da onda.')} · ${st.funcao}(${slotHtml('frequencia', st.frequencia, 'slot-amber', 'B: frequência da onda.')}x) &nbsp; | &nbsp; θ = ${slotHtml('anguloGraus', st.anguloGraus, 'slot-green', 'θ: ângulo em graus no ciclo trigonométrico.')}°`,
+                formulaMontada: `<span class="trig-formula"><span class="formula-grupo">f(x) = ${slotHtml('amplitude', st.amplitude, 'slot-blue', 'A: escala vertical; amplitude |A|.')}·</span><span class="formula-grupo"><span data-trig-formula-fn>${st.funcao}</span>(${slotHtml('frequencia', st.frequencia, 'slot-amber', 'B: frequência; período inversamente proporcional a |B|.')}x + ${slotHtml('fase', st.fase, 'slot-purple', 'C: fase em radianos; deslocamento horizontal −C/B.')})</span><span class="formula-grupo">+ ${slotHtml('deslocamento', st.deslocamento, 'slot-green', 'D: deslocamento vertical.')}</span></span>`,
                 msgInvalido: '',
                 cartoesTipo: [],
                 tipoSelecionado: st.funcao
@@ -4051,6 +4052,7 @@ const MathLabApp = {
                 const chave = inp.dataset.slotKey;
                 const uid = inp.dataset.slotUid;
                 const bruto = e.target.value;
+                inp.style.width = `${Math.max(2.4, bruto.length + 1.4)}ch`;
                 this.state.slotTextos[uid] = bruto;
                 this.state.passoFluxo = 2;
 

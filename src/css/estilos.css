@@ -2709,3 +2709,16 @@ html[data-reduce-motion="true"] *::after {
 #left-panel-body > * { flex-shrink: 0; }
 .ready-formula-display > sup { align-self: flex-start; transform: translateY(-.35em); font-size: .75em; }
 .ready-formula-display > sub { align-self: flex-end; transform: translateY(.35em); font-size: .75em; }
+
+/* T3: grupos matemáticos indivisíveis, com campos dimensionados pelo conteúdo. */
+.trig-formula { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 20px; line-height: 1.4; }
+.formula-grupo { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.trig-formula .formula-slot { font: inherit; font-size: 16px; padding: 2px 4px; min-width: 2.4ch; }
+.slot-wrapper { position: relative; display: inline-flex; align-items: center; flex: none; }
+.slot-fx-toggle { top: -18px; right: -8px; bottom: auto; font-size: 11px; min-height: 16px; line-height: 1; opacity: 0; visibility: hidden; z-index: 3; }
+.slot-wrapper:focus-within .slot-fx-toggle { opacity: 1; visibility: visible; }
+.trig-angle { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--border-color); border-radius: 10px; }
+.trig-angle label { font: 13px var(--font-ui, sans-serif); }
+.trig-angle input { width: 8ch; }
+.trig-angle select { min-width: 0; max-width: 100%; padding: 8px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; }
+.trig-angle small { flex-basis: 100%; color: var(--text-secondary); font-size: 11px; }
