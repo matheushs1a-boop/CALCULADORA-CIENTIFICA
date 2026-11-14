@@ -2780,3 +2780,12 @@ html, body { max-width: 100%; overflow-x: hidden; }
 #right-panel-body > * { flex-shrink: 0; }
 .input-panel-footer .btn-primary-action { padding: 0 44px; }
 .slider-value-badge { color: var(--slot-color, var(--text-main)); }
+.trig-angle-table { width: 100%; align-self: flex-start; padding: 16px; }
+.trig-angle-table caption { padding: 8px; text-align: left; }
+.trig-angle-table th, .trig-angle-table td { white-space: nowrap; }
+#trig-cycle-result p, #right-panel-body .info-section p { line-height: 1.6; margin: 8px 0; overflow-wrap: anywhere; }
+
+/* Rótulo centralizado na largura total; colunas laterais têm a mesma medida. */
+.input-panel-footer #btn-generate-footer { display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; align-items: center; gap: 0; width: 100%; padding: 0 8px; }
+#btn-generate-footer .generate-label { grid-column: 2; justify-self: center; text-align: center; line-height: 1.2; white-space: nowrap; font-size: 12px; }
+.input-panel-footer #btn-generate-footer kbd { position: static; grid-column: 3; justify-self: end; top: auto; right: auto; transform: none; font-size: 10px; padding: 4px; }
