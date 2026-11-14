@@ -15,7 +15,8 @@ const suites = [
     'calculo-regras.test.js',
     'graficos-renderizacao.test.js',
     'integrais-modulo.test.js',
-    'graficos-layout.test.js'
+    'graficos-layout.test.js',
+    'trigonometria-modulo.test.js'
 ];
 
 for (const suite of suites) {

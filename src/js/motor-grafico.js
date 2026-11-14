@@ -215,9 +215,10 @@ const MathLabGraph = {
         for (let xv = primeiroX; xv <= xMax + 1e-9; xv += passoX) {
             if (Math.abs(xv) < 1e-7) continue;
             const px = this.xParaPx(xv);
-            if (px < 18 || px > w - 18) continue;
+            if (!this.config.eixoXPi && (px < 18 || px > w - 18)) continue;
             const txt = this.config.eixoXPi ? this.formatarMultiploPi(xv) : this.formatarCurto(xv);
-            ctx.fillText(txt, px, posRotuloX);
+            const margem = ctx.measureText(txt).width / 2 + 4;
+            ctx.fillText(txt, Math.max(margem, Math.min(w - margem, px)), posRotuloX);
         }
 
         ctx.textAlign = 'right';
@@ -557,7 +558,7 @@ const MathLabGraph = {
             }
 
             // Rótulo tipo pílula sem sobreposição
-            if (m.rotulo) {
+            if (m.rotulo && !m.ocultarRotulo) {
                 ctx.font = '600 11.5px "JetBrains Mono", monospace';
                 const largTexto = ctx.measureText(m.rotulo).width;
                 const wCaixa = largTexto + 12;
@@ -699,7 +700,7 @@ const MathLabGraph = {
 
         const xDec = Number(m.x).toFixed(4).replace('.', ',');
         const yDec = Number(m.y).toFixed(4).replace('.', ',');
-        const tipoPonto = m.rotulo.includes('V(') ? 'Vértice (Extremo da Parábola)'
+        const tipoPonto = (m.rotulo || '').includes('V(') ? 'Vértice (Extremo da Parábola)'
             : m.y === 0 ? 'Raiz / Zero da Função (f(x) = 0)'
             : m.x === 0 ? 'Intercepto no Eixo Y (x = 0)'
             : m.vazado ? 'Descontinuidade Removível (Ponto Aberto)'
@@ -711,7 +712,7 @@ const MathLabGraph = {
                 <button type="button" id="btn-close-marker-pop" style="color:var(--text-muted);font-weight:700;">✕</button>
             </div>
             <div style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--text-main);">
-                Exato: ${m.rotulo}
+                Exato: ${m.rotulo || `(${xDec}; ${yDec})`}
             </div>
             <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--text-secondary);">
                 Decimal: x = ${xDec}  |  y = ${yDec}

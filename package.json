@@ -15,7 +15,9 @@
     "test:integrais": "node tests/integrais-modulo.test.js",
     "test:layout": "node tests/graficos-layout.test.js",
     "test:ui": "node tests/interface-navegador.test.js",
-    "test:ui-integrais": "node tests/interface-integrais.test.js"
+    "test:ui-integrais": "node tests/interface-integrais.test.js",
+    "test:trigonometria": "node tests/trigonometria-modulo.test.js",
+    "test:firefox": "python3 tests/interface-firefox.py"
   },
   "keywords": [
     "matematica",
