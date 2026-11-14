@@ -2332,15 +2332,16 @@ const MathLabApp = {
         } else {
             const marcadores = st.funcao === 'sen' && B === 1 && C === 0 ? [
                 { x: Math.PI / 2, y: A, rotulo: `(π/2, ${MathLabCalc.fmt(A)})`, cor: '#EF4444' },
-                { x: (3 * Math.PI) / 2, y: -A, rotulo: `(3π/2, −${MathLabCalc.fmt(A)})`, cor: '#3B82F6', offsetY: 12 }
+                { x: (3 * Math.PI) / 2, y: -A, rotulo: `(3π/2, −${MathLabCalc.fmt(A)})`, cor: '#EF4444', offsetY: 12 }
             ] : [
                 { x: 0, y: fnTrig(0), rotulo: `(0, ${MathLabCalc.fmt(fnTrig(0), 2)})`, cor: '#3B82F6' }
             ];
 
             this.ativarPalcoCanvas({
-                janela: { xMin: -1.5, xMax: 7.2, yMin: -Math.max(2.5, A + 1), yMax: Math.max(2.5, A + 1) },
+                janela: { xMin: -2 * Math.PI, xMax: 2 * Math.PI, yMin: -Math.max(1, Math.abs(A)) * 1.3, yMax: Math.max(1, Math.abs(A)) * 1.3 },
                 eixoXPi: true,
-                curvas: [{ rotulo: exprTrig, cor: '#22C55E', fn: fnTrig }],
+                curvas: [{ rotulo: exprTrig, cor: '#22C55E', espessura: 3, fn: fnTrig }],
+                assintotas: st.funcao === 'tg' && B !== 0 ? Array.from({length: 101}, (_, i) => (Math.PI / 2 + (i - 50) * Math.PI - C) / B).filter(x => Math.abs(x) <= 2 * Math.PI).map(valor => ({tipo: 'vertical', valor, cor: '#EF4444'})) : [],
                 marcadores
             }, 'Curva Trigonométrica e Pontos Notáveis', exprTrig);
         }
