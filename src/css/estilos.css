@@ -2722,3 +2722,30 @@ html[data-reduce-motion="true"] *::after {
 .trig-angle input { width: 8ch; }
 .trig-angle select { min-width: 0; max-width: 100%; padding: 8px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; }
 .trig-angle small { flex-basis: 100%; color: var(--text-secondary); font-size: 11px; }
+
+/* T4: a coluna central pode encolher sem empurrar o painel de resultados. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+.workspace { grid-template-columns: minmax(300px, 380px) minmax(0, 1fr) minmax(280px, 360px); gap: 12px; padding: 12px; }
+.workspace > *, .panel-title-group, .panel-header-actions, .header-actions, .app-header > *, .panel-body > *, .result-hero-card { min-width: 0; min-height: 0; }
+.workspace-panel, .panel-body { max-width: 100%; }
+.panel-body { overflow-y: auto; overflow-x: hidden; }
+.prop-val, .step-math, .result-hero-value, .panel-subtitle-badge { overflow-wrap: anywhere; }
+.data-table-wrapper { max-width: 100%; overflow: auto; }
+.svg-custom-stage { min-width: 0; overflow: auto; }
+.svg-custom-stage > * { min-width: 0; max-width: 100%; }
+.dropdown-panel { max-width: calc(100vw - 24px); }
+.app-header { grid-template-columns: minmax(100px, 160px) minmax(0, 460px) auto; gap: 12px; }
+@media (max-width: 1150px) {
+    .workspace { grid-template-columns: minmax(260px, 300px) minmax(0, 1fr) minmax(250px, 280px); }
+    .workspace.mode-no-visual { grid-template-columns: minmax(260px, 1fr) minmax(0, 1fr); }
+    .workspace.visual-collapsed { grid-template-columns: minmax(260px, 380px) minmax(0, 1fr); }
+    .header-search { min-width: 0; }
+    .header-actions { gap: 4px; }
+}
+@media (max-width: 850px) {
+    .workspace, .workspace.mode-no-visual, .workspace.visual-collapsed { grid-template-columns: minmax(0, 1fr); overflow-y: auto; }
+    .workspace-panel { min-height: 420px; }
+    .app-header { grid-template-columns: minmax(80px, 1fr) auto; }
+    .header-search { display: none; }
+}

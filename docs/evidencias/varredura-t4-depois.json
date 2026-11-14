@@ -1,0 +1,2907 @@
+[
+  {
+    "modulo": "cientifica",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 568,
+      "y": 156,
+      "width": 762,
+      "height": 599,
+      "top": 156,
+      "right": 1330,
+      "bottom": 755,
+      "left": 568
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-sci-err-demo",
+        "texto": "Testar log(−5)",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "RAD",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "GRAU",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "EXATO",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "DECIMAL",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "MC",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "MR",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "M+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "M−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "C",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌫",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "sen",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "cos",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "tg",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "log",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "ln",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "x²",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "xʸ",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "√x",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "|x|",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "1/x",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "π",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "e",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "eˣ",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "n!",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "%",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "7",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "8",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "9",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "(",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": ")",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "4",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "5",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "6",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "×",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "÷",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "1",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "2",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "3",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "+",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "−",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "0",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": ",",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "=",
+        "altura": 31,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "btn-copy-sci",
+        "texto": "Copiar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-Restore-Demo-Sci",
+        "texto": "Demo Inicial",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "★",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⧉",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "★",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⧉",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "★",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⧉",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "★",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⧉",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "★",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⧉",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "★",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⧉",
+        "altura": 24,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "algebra",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Eq. 2º Grau\n                        \n                        [a]x²+[b]x+[c]=0",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Fatoração\n                        \n                        (x−x₁)(x−x₂)",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Eq. 1º Grau\n                        \n                        [a]x + [b] = 0",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Sistema 2×2\n                        \n                        {x+y=5; 2x−y=1}",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "btn-reset-alg",
+        "texto": "Padrão (1, −5, 6)",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Eq. 2º Grau",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Fatoração",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Expansão",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Simplificação",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Sistemas",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Prod. Notáveis",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "funcoes",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-reset-quad",
+        "texto": "Padrão",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "btn-study-footer",
+        "texto": "Abrir estudo da função",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Gráfico",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Tabela",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Propriedades",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Passos",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Verificação",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Tipos de funções (8)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "limites",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Racional 0/0\n                        \n                        (x²−4)/(x−2)",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Assíntota 1/x\n                        \n                        lim x→0 (1/x)",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Esquerda (x→a⁻)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Ambos",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Direita (x→a⁺)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "btn-lim-demo1",
+        "texto": "(x²−4)/(x−2) → 4",
+        "altura": 36,
+        "cortado": false
+      },
+      {
+        "id": "btn-lim-demo2",
+        "texto": "lim(x→0) 1/x (Não Existe)",
+        "altura": 36,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Gráfico e Descontinuidade",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Tabela de Aproximações",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "derivadas",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-der-reset",
+        "texto": "Padrão",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Produto\n                        \n                        x³ · sen(x)",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Polinômio\n                        \n                        [a]xⁿ + [b]x",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Gráfico",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Regras utilizadas",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Passo a passo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Tabela",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Verificação",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "integrais",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Definida\n                        \n                        ∫ₐᵇ [c]xⁿ dx",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Indefinida\n                        \n                        ∫ [c]xⁿ dx + C",
+        "altura": 81,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Área",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Resolução",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Métodos (Riemann / Simpson)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Verificação",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "geometria",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Círculo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Quadrado",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Retângulo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Triângulo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Cilindro (3D)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Esfera (3D)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Cone (3D)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "trigonometria",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "sen(x)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "cos(x)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "tg(x)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Gráfico trigonométrico",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Circunferência trigonométrica",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Tabela de ângulos notáveis",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "vetores",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Matrizes",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores no Plano ℝ²",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Editor e Operações de Matrizes",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "estatistica",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-stat-preset",
+        "texto": "Alternar Exemplo",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Populacional (σ²)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Amostral (s²)",
+        "altura": 26,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Histograma",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Gráfico de Barras",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Gráfico de Linhas",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Tabela de Frequências",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  },
+  {
+    "modulo": "modelagem",
+    "largura": 1366,
+    "documento": 1366,
+    "painel": {
+      "x": 995,
+      "y": 146,
+      "width": 358,
+      "height": 609,
+      "top": 146,
+      "right": 1353,
+      "bottom": 755,
+      "left": 995
+    },
+    "botoes": [
+      {
+        "id": "btn-open-cmd",
+        "texto": "Buscar módulos, fórmulas e comandos\n                \n                Ctrl+K",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-favorites",
+        "texto": "Favoritos\n                2",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-share",
+        "texto": "↗ Compartilhar",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-open-settings",
+        "texto": "⚙",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Científica",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Álgebra",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Funções",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Limites",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Derivadas",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Integrais",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Geometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Trigonometria",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Vetores e Matrizes",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Estatística",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Modelagem",
+        "altura": 32,
+        "cortado": false
+      },
+      {
+        "id": "btn-undo",
+        "texto": "↶",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "btn-redo",
+        "texto": "↷",
+        "altura": 25,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⊞ Fórmula pronta",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "⌨ Normal",
+        "altura": 34,
+        "cortado": false
+      },
+      {
+        "id": "btn-see-as-text",
+        "texto": "Ver como texto",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "fx",
+        "altura": 16,
+        "cortado": false
+      },
+      {
+        "id": "btn-restore-example",
+        "texto": "↺ Restaurar exemplo",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-random-slots",
+        "texto": "🎲 Aleatório",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-mod-preset-img",
+        "texto": "Preset P(6)=400",
+        "altura": 24,
+        "cortado": false
+      },
+      {
+        "id": "btn-generate-footer",
+        "texto": "Gerar relatório completo Enter",
+        "altura": 37,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "P₀·e^(kt)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Dobramento 2^(t/3)",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Juros Compostos",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "",
+        "texto": "Decaimento",
+        "altura": 28,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-in",
+        "texto": "+",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-zoom-out",
+        "texto": "−",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-fit-fn",
+        "texto": "⤢",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-graph-reset",
+        "texto": "⌂",
+        "altura": 29,
+        "cortado": false
+      },
+      {
+        "id": "btn-quick-copy-res",
+        "texto": "⧉",
+        "altura": 32,
+        "cortado": false
+      }
+    ]
+  }
+]
