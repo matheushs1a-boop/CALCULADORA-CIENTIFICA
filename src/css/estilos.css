@@ -2749,3 +2749,34 @@ html, body { max-width: 100%; overflow-x: hidden; }
     .app-header { grid-template-columns: minmax(80px, 1fr) auto; }
     .header-search { display: none; }
 }
+
+/* T5: um conjunto de ícones e um molde para controles de todos os módulos. */
+.icone, button svg, .module-tab svg { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+:where(.header-btn, .btn-secondary-action, .btn-tiny-tool, .btn-primary-action, .input-mode-btn, .sub-tab-btn, .segmented-btn) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; min-height: 36px; padding: 0 12px; border-radius: 10px; line-height: 1; font-size: 13px; white-space: nowrap; }
+.header-btn, .btn-secondary-action, .btn-tiny-tool { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; min-height: 36px; border-radius: 10px; line-height: 1; }
+.input-mode-btn, .sub-tab-btn, .segmented-btn { height: 36px; min-height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.input-mode-btn > span { display: inline-flex; align-items: center; gap: 8px; }
+.visual-toolbar { gap: 4px; padding: 4px; border-radius: 10px; box-shadow: none; }
+.visual-toolbar .icon-tool-btn, .input-history-tools .header-btn { width: 36px; min-width: 36px; height: 36px; min-height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; }
+.input-panel-footer .btn-primary-action { position: relative; display: flex; align-items: center; justify-content: center; height: 44px; min-height: 44px; padding: 0 48px 0 12px; border-radius: 10px; line-height: 1.2; font-weight: 600; text-align: center; }
+.input-panel-footer kbd { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 4px; border: 1px solid currentColor; border-radius: 4px; font-size: 10px; }
+.slider-item { display: grid; grid-template-columns: 104px minmax(0, 1fr) 64px; align-items: center; gap: 8px; }
+.slider-label { width: auto; min-width: 0; font: 12px var(--font-ui, sans-serif); white-space: normal; overflow: visible; }
+.math-slider { width: 100%; min-width: 0; accent-color: var(--slot-color, var(--primary)); }
+.slider-value-badge { width: 64px; min-width: 0; text-align: center; overflow-wrap: anywhere; font: 12px var(--font-ui, sans-serif); padding: 4px; }
+.mini-pill, .panel-subtitle-badge, .formula-type-badge, .type-chip, .model-chip, .field-badge { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 22px; min-height: 22px; padding: 0 8px; border: 1px solid var(--border-color); border-radius: 6px; font: 11px var(--font-ui, sans-serif); white-space: nowrap; max-width: 100%; }
+.panel-title-group { flex-wrap: wrap; gap: 8px; }
+.panel-subtitle-badge { height: auto; min-height: 22px; white-space: normal; padding: 4px 8px; }
+.workspace-panel, .math-display-box, .step-card, .result-hero-card, .sliders-box, .interpretation-box { border-radius: 10px; box-shadow: none; border-color: var(--border-color); }
+.action-btn-row { gap: 8px; flex-wrap: wrap; }
+.action-btn-row > button { min-width: 0; }
+.ready-formula-toolbar { gap: 8px; flex-wrap: wrap; }
+.ready-formula-toolbar .btn-tiny-tool { padding: 0 8px; font-size: 11px; }
+.input-mode-btn.active, .sub-tab-btn.active, .segmented-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+:where(button, input, select, summary):focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.dropdown-panel button, .layered-details > summary { display: flex; align-items: center; gap: 8px; }
+.layered-details > summary > span:last-child { display: flex; align-items: center; }
+/* O painel de resultados rola sem comprimir as seções umas contra as outras. */
+#right-panel-body > * { flex-shrink: 0; }
+.input-panel-footer .btn-primary-action { padding: 0 44px; }
+.slider-value-badge { color: var(--slot-color, var(--text-main)); }

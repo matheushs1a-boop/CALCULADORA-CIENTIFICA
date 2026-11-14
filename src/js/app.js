@@ -649,8 +649,8 @@ const MathLabApp = {
                 </div>
                 <div class="history-card-right">
                     <span class="history-res">= ${item.resultado}</span>
-                    <button type="button" class="mini-icon-btn ${item.favorito ? 'favorited' : ''}" data-fav-id="${item.id}" title="Favoritar cálculo">★</button>
-                    <button type="button" class="mini-icon-btn" data-copy-expr="${item.expressao} = ${item.resultado}" title="Copiar">⧉</button>
+                    <button type="button" class="mini-icon-btn ${item.favorito ? 'favorited' : ''}" data-fav-id="${item.id}" title="Favoritar cálculo"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 10l6-1z"/></svg></button>
+                    <button type="button" class="mini-icon-btn" data-copy-expr="${item.expressao} = ${item.resultado}" title="Copiar"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg></button>
                 </div>
             </div>
         `).join('');
@@ -3101,7 +3101,7 @@ const MathLabApp = {
                 </div>
                 <div class="segmented-control full-width" style="margin-bottom:8px;">
                     <button type="button" class="segmented-btn ${filtro === 'todos' ? 'active' : ''}" data-hist-filter="todos">Todos (${this.state.historico.length})</button>
-                    <button type="button" class="segmented-btn ${filtro === 'favoritos' ? 'active' : ''}" data-hist-filter="favoritos">★ Favoritos</button>
+                    <button type="button" class="segmented-btn ${filtro === 'favoritos' ? 'active' : ''}" data-hist-filter="favoritos"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 10l6-1z"/></svg> Favoritos</button>
                     <button type="button" class="segmented-btn ${filtro === 'fixados' ? 'active' : ''}" data-hist-filter="fixados">📌 Fixados</button>
                 </div>
                 <div class="section-header-line">
@@ -3122,8 +3122,8 @@ const MathLabApp = {
                             <div class="history-card-right">
                                 <span class="history-res">= ${item.resultado}</span>
                                 <button type="button" class="mini-icon-btn ${item.fixado ? 'favorited' : ''}" data-drawer-pin="${item.id}" title="Fixar fórmula no topo">📌</button>
-                                <button type="button" class="mini-icon-btn ${item.favorito ? 'favorited' : ''}" data-drawer-fav="${item.id}" title="Favoritar">★</button>
-                                <button type="button" class="mini-icon-btn" data-drawer-copy="${item.expressao} = ${item.resultado}" title="Copiar">⧉</button>
+                                <button type="button" class="mini-icon-btn ${item.favorito ? 'favorited' : ''}" data-drawer-fav="${item.id}" title="Favoritar"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 10l6-1z"/></svg></button>
+                                <button type="button" class="mini-icon-btn" data-drawer-copy="${item.expressao} = ${item.resultado}" title="Copiar"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg></button>
                             </div>
                         </div>
                     `).join('')}
@@ -3917,8 +3917,8 @@ const MathLabApp = {
                     <span>⚠</span> <span>${cfg.msgInvalido}</span>
                 </div>
                 <div class="ready-formula-toolbar">
-                    <button type="button" class="btn-tiny-tool" id="btn-restore-example" title="Restaurar valores de exemplo da fórmula">↺ Restaurar exemplo</button>
-                    <button type="button" class="btn-tiny-tool" id="btn-random-slots" title="Sortear valores válidos aleatórios">🎲 Aleatório</button>
+                    <button type="button" class="btn-tiny-tool" id="btn-restore-example" title="Restaurar valores de exemplo da fórmula"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></svg> Restaurar exemplo</button>
+                    <button type="button" class="btn-tiny-tool" id="btn-random-slots" title="Sortear valores válidos aleatórios"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 7h.01M17 7h.01M12 12h.01M7 17h.01M17 17h.01"/></svg> Aleatório</button>
 
                 </div>
                 ${htmlCartoesTipo}
@@ -3961,10 +3961,10 @@ const MathLabApp = {
             <div class="dual-mode-system-root" style="display:flex;flex-direction:column;gap:8px;">
                 <div class="input-mode-switcher" role="tablist" aria-label="Modo de entrada da fórmula">
                     <button type="button" class="input-mode-btn ${modo === 'pronta' ? 'active' : ''}" data-switch-imode="pronta" role="tab" tabindex="${modo === 'pronta' ? 0 : -1}" aria-selected="${modo === 'pronta'}">
-                        <span>⊞ Fórmula pronta</span>
+                        <span><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg> Fórmula pronta</span>
                     </button>
                     <button type="button" class="input-mode-btn ${modo === 'normal' ? 'active' : ''}" data-switch-imode="normal" role="tab" tabindex="${modo === 'normal' ? 0 : -1}" aria-selected="${modo === 'normal'}">
-                        <span>⌨ Normal</span>
+                        <span><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 13h.01M10 13h.01M14 13h.01M18 13h.01M8 16h8"/></svg> Normal</span>
                     </button>
                 </div>
 
@@ -4487,7 +4487,7 @@ const MathLabApp = {
 
             const summary = document.createElement('summary');
             summary.innerHTML = `
-                <span>${ehVerificacao ? 'Verificação' : tituloSecao}</span><span aria-hidden="true">⌄</span>
+                <span>${ehVerificacao ? 'Verificação' : tituloSecao}</span><span aria-hidden="true"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
             `;
             details.appendChild(summary);
 
@@ -4524,7 +4524,7 @@ const MathLabApp = {
                         <span class="result-hero-label">Resultado</span><div class="result-expression">${this.escaparHTML(exprAtual)}</div>
                         <div class="result-hero-value" style="margin-top:4px;font-size:15.5px;">${valorPrincipal}</div>
                     </div>
-                    <button type="button" class="header-btn result-copy" id="btn-quick-copy-res" aria-label="Copiar resultado" title="Copiar resultado">⧉</button>
+                    <button type="button" class="header-btn result-copy" id="btn-quick-copy-res" aria-label="Copiar resultado" title="Copiar resultado"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg></button>
 
                 </div>
 
