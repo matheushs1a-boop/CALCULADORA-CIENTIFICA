@@ -2,6 +2,7 @@
 Inicie geckodriver --port 4444 --allow-system-access e npm start (ou servidor na porta 5500).
 MATHLAB_URL, MATHLAB_WEBDRIVER e MATHLAB_SESSION permitem reutilizar ambientes.
 """
+import atexit
 import base64
 import json
 import os
@@ -27,6 +28,15 @@ def request(path, data=None):
 session_file = os.environ.get('MATHLAB_SESSION')
 sid = json.loads(Path(session_file).read_text())['value']['sessionId'] if session_file else request('/session', {
     'capabilities': {'alwaysMatch': {'browserName': 'firefox', 'moz:firefoxOptions': {'args': ['-headless']}}}})['sessionId']
+# Guarda o identificador e fecha apenas as sessões criadas por este teste.
+Path('/tmp/mathlab-firefox-ultima-sessao.json').write_text(json.dumps({'value':{'sessionId':sid}}))
+def fechar_sessao():
+    if not session_file:
+        try:
+            urllib.request.urlopen(urllib.request.Request(BASE+'/session/'+sid,method='DELETE'),timeout=30).read()
+        except Exception:
+            pass
+atexit.register(fechar_sessao)
 def cmd(path, data=None):
     return request('/session/' + sid + path, data)
 def js(script, *args):
@@ -57,6 +67,7 @@ window.MathLabApp=MathLabApp;window.MathLabGraph=MathLabGraph;
 window.mathlabErros=[];addEventListener('error',e=>mathlabErros.push(e.message));
 addEventListener('unhandledrejection',e=>mathlabErros.push(String(e.reason)));
 `;document.head.append(s);""")
+cmd('/execute/async',{'script':'const done=arguments[arguments.length-1];document.fonts.ready.then(()=>done(true));','args':[]})
 viewport(1366,768)
 select('trigonometria')
 shot('trigonometria-' + phase)
@@ -204,7 +215,25 @@ js("document.querySelector('.header-search').click()")
 time.sleep(.1)
 shot('menu-busca-depois')
 js("document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}))")
+select('algebra')
+js("document.getElementById('alg-tool-select').value='expansao';document.getElementById('alg-tool-select').dispatchEvent(new Event('change',{bubbles:true}));document.getElementById('alg-tool-trigger').scrollIntoView({block:'center'})")
+time.sleep(.2)
+js("document.getElementById('alg-tool-trigger').click()")
+time.sleep(.25)
+check("document.querySelectorAll('#alg-tool-options [role=option]').length===7 && document.getElementById('alg-tool-trigger').getAttribute('aria-expanded')==='true'", 'Seletor de Álgebra: sete ferramentas preservadas')
+shot('seletor-algebra-depois')
+check("(()=>{const r=document.getElementById('alg-tool-options').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})()", 'Lista de Álgebra cabe na janela sem recorte')
+cmd('/actions',{'actions':[{'type':'key','id':'algebra','actions':[{'type':'keyDown','value':'\ue015'},{'type':'keyUp','value':'\ue015'},{'type':'keyDown','value':'\ue007'},{'type':'keyUp','value':'\ue007'}]}]})
+check("MathLabApp.state.algebra.ferramenta==='simplificacao' && document.activeElement.id==='alg-tool-trigger'", 'Seletor de Álgebra: setas e Enter selecionam e mantêm foco')
+for tool in ['eq2','fatoracao','expansao','simplificacao','eq1','sistema','notaveis']:
+    js("document.getElementById('alg-tool-trigger').click();const n=[...document.querySelectorAll('#alg-tool-select option')].findIndex(o=>o.value===arguments[0]);document.querySelector('[data-tool-index=\"'+n+'\"]').click()",tool)
+    check('MathLabApp.state.algebra.ferramenta==='+json.dumps(tool), 'Ferramenta preservada: '+tool)
 select('funcoes')
+js("const d=[...document.querySelectorAll('.layered-details')].find(d=>d.querySelector('.props-list'));d.open=true;d.scrollIntoView({block:'nearest'})")
+time.sleep(.25)
+props=js("return document.querySelector('#right-panel-body .props-list')")['element-6066-11e4-a52e-4f735466cecf']
+(OUT/'propriedades-depois.png').write_bytes(base64.b64decode(cmd('/element/'+props+'/screenshot')))
+check("[...document.querySelectorAll('#right-panel-body .prop-item')].every(row=>{const r=row.getBoundingClientRect(),v=row.querySelector('.prop-val').getBoundingClientRect();return v.right<=r.right+1&&v.left>=r.left&&r.height>=36})", 'Propriedades alinhadas, com margem interna e linhas de 36 px')
 js("document.getElementById('btn-study-footer').click()")
 shot('menu-estudo-depois')
 js("document.getElementById('btn-close-study').click()")
@@ -219,6 +248,3 @@ time.sleep(.25)
 shot('trigonometria-depois')
 for f in OUT.glob('*depois*'): shutil.copy2(f,ROOT/'docs/evidencias'/f.name)
 print('SUCESSO: aceitação T1–T6 e varredura dos 11 modos no Firefox.')
-
-if not session_file:
-    urllib.request.urlopen(urllib.request.Request(BASE+'/session/'+sid,method='DELETE'),timeout=30).read()

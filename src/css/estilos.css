@@ -2789,3 +2789,30 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .input-panel-footer #btn-generate-footer { display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; align-items: center; gap: 0; width: 100%; padding: 0 8px; }
 #btn-generate-footer .generate-label { grid-column: 2; justify-self: center; text-align: center; line-height: 1.2; white-space: nowrap; font-size: 12px; }
 .input-panel-footer #btn-generate-footer kbd { position: static; grid-column: 3; justify-self: end; top: auto; right: auto; transform: none; font-size: 10px; padding: 4px; }
+/* Demonstrações de Limites precisam de uma linha própria para o texto completo. */
+.action-btn-row #btn-lim-demo1, .action-btn-row #btn-lim-demo2 { flex: 1 0 100% !important; }
+
+/* Lista de propriedades: margens internas, linhas e duas colunas estáveis. */
+.props-list { gap: 0; padding: 4px 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; }
+.props-list .prop-item { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 12px; min-height: 36px; padding: 8px 0; align-items: baseline; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
+.props-list .prop-item:last-child { border-bottom: 0; padding-bottom: 8px; }
+.props-list .prop-key { display: block; position: relative; font-family: var(--font-sans); line-height: 1.5; }
+.props-list .prop-key:has(.prop-dot) { padding-left: 12px; }
+.props-list .prop-dot { position: absolute; left: 0; top: .5em; width: 6px; height: 6px; }
+.props-list .prop-val { font-family: var(--font-sans); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.5; text-align: right; overflow-wrap: anywhere; }
+
+/* Seletor de Álgebra: popup azul independente da aparência nativa do navegador. */
+#alg-tool-select[hidden] { display: none; }
+.algebra-picker-trigger { width: 100%; min-width: 0; display: grid; grid-template-columns: 28px minmax(0, 1fr) 16px; align-items: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-input); color: var(--text-main); font: 13px var(--font-sans); text-align: left; cursor: pointer; }
+.algebra-picker-trigger:hover, .algebra-picker-trigger[aria-expanded="true"] { border-color: var(--primary); background: var(--bg-surface-2); }
+.algebra-picker-trigger[aria-expanded="true"] > .icone { transform: rotate(180deg); }
+.algebra-tool-symbol { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: var(--primary-soft); color: var(--primary); font: 600 13px var(--font-sans); }
+.algebra-picker-list { position: fixed; z-index: 200; padding: 8px; overflow-y: auto; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 12px; }
+.algebra-picker-list[hidden] { display: none; }
+.algebra-picker-list [role="option"] { display: grid; grid-template-columns: 28px minmax(0, 1fr) 16px; align-items: center; gap: 12px; min-height: 56px; padding: 8px; border: 1px solid transparent; border-radius: 8px; cursor: pointer; }
+.algebra-tool-description { min-width: 0; display: grid; gap: 4px; line-height: 1.4; }
+.algebra-tool-description strong { font: 600 12px var(--font-sans); }
+.algebra-tool-description small { font: 11px var(--font-sans); color: var(--text-secondary); overflow-wrap: anywhere; }
+.algebra-picker-list [role="option"]:hover, .algebra-picker-list .is-highlighted { background: var(--primary-soft); border-color: var(--primary); }
+.algebra-tool-check { opacity: 0; color: var(--green); }
+.algebra-picker-list [aria-selected="true"] .algebra-tool-check { opacity: 1; }

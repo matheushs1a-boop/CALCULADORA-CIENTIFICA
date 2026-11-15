@@ -345,6 +345,7 @@ const MathLabApp = {
        3. NAVEGAÇÃO ENTRE OS 11 MÓDULOS
        ======================================================================== */
     selecionarModulo(nomeModulo) {
+        this.fecharSeletorAlgebra?.();
         this.state.activeModule = nomeModulo;
 
         // Atualiza abas da barra superior
@@ -815,6 +816,74 @@ const MathLabApp = {
     /* ========================================================================
        MÓDULO 02 — ÁLGEBRA
        ======================================================================== */
+    // Mantém o select como fonte de valor e usa uma lista acessível com o tema do app.
+    prepararSeletorAlgebra() {
+        this._seletorAlgebraAbort?.abort();
+        document.getElementById('alg-tool-options')?.remove();
+        const fonte=document.getElementById('alg-tool-select');
+        if(!fonte)return;
+        const controller=new AbortController(),signal=controller.signal;
+        this._seletorAlgebraAbort=controller;
+        const descricoes={eq2:['Equações do 2º grau','ax² + bx + c = 0'],fatoracao:['Fatoração polinomial','Escrever como produto de fatores'],expansao:['Expansão algébrica','Desenvolver produtos e potências'],simplificacao:['Simplificação racional','Reduzir frações algébricas'],eq1:['Equações do 1º grau','ax + b = 0'],sistema:['Sistemas lineares 2×2','Duas equações, duas incógnitas'],notaveis:['Produtos notáveis','Identidades algébricas fundamentais']};
+        fonte.hidden=true;
+        const label=fonte.previousElementSibling;
+        label.id='alg-tool-label';label.htmlFor='alg-tool-trigger';
+        const gatilho=document.createElement('button');
+        gatilho.type='button';gatilho.id='alg-tool-trigger';gatilho.className='algebra-picker-trigger';
+        gatilho.setAttribute('role','combobox');gatilho.setAttribute('aria-haspopup','listbox');
+        gatilho.setAttribute('aria-expanded','false');gatilho.setAttribute('aria-controls','alg-tool-options');
+        gatilho.setAttribute('aria-labelledby','alg-tool-label alg-tool-current');
+        gatilho.innerHTML=`<span class="algebra-tool-symbol" aria-hidden="true">ƒ</span><span id="alg-tool-current">${descricoes[fonte.value][0]}</span><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+        fonte.after(gatilho);
+        const lista=document.createElement('div');
+        lista.id='alg-tool-options';lista.className='algebra-picker-list';lista.hidden=true;
+        lista.setAttribute('role','listbox');lista.setAttribute('aria-labelledby','alg-tool-label');
+        const opcoes=Array.from(fonte.options);let indice=fonte.selectedIndex;
+        lista.innerHTML=opcoes.map((o,i)=>`<div role="option" id="alg-tool-option-${i}" data-tool-index="${i}" aria-selected="${o.selected}"><span class="algebra-tool-symbol" aria-hidden="true">${i+1}</span><span class="algebra-tool-description"><strong>${descricoes[o.value][0]}</strong><small>${descricoes[o.value][1]}</small></span><svg class="icone algebra-tool-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></div>`).join('');
+        document.body.append(lista);
+        const itens=Array.from(lista.children);
+        const destacar=()=>{
+            itens.forEach((o,i)=>o.classList.toggle('is-highlighted',i===indice));
+            gatilho.setAttribute('aria-activedescendant',itens[indice].id);
+            itens[indice].scrollIntoView({block:'nearest'});
+        };
+        const fechar=()=>{lista.hidden=true;gatilho.setAttribute('aria-expanded','false');gatilho.removeAttribute('aria-activedescendant');};
+        this.fecharSeletorAlgebra=fechar;
+        const abrir=()=>{
+            lista.hidden=false;
+            const r=gatilho.getBoundingClientRect();
+            lista.style.width=`${Math.min(Math.max(r.width,300),innerWidth-24)}px`;
+            lista.style.maxHeight=`${Math.min(464,innerHeight-24)}px`;
+            lista.style.left=`${Math.max(12,Math.min(r.left,innerWidth-lista.offsetWidth-12))}px`;
+            const h=lista.offsetHeight;
+            lista.style.top=`${r.bottom+8+h<innerHeight-12?r.bottom+8:Math.max(12,r.top-8-h)}px`;
+            gatilho.setAttribute('aria-expanded','true');indice=fonte.selectedIndex;destacar();
+        };
+        const escolher=()=>{
+            fonte.value=opcoes[indice].value;fechar();
+            fonte.dispatchEvent(new Event('change',{bubbles:true}));
+            document.getElementById('alg-tool-trigger')?.focus({preventScroll:true});
+        };
+        gatilho.addEventListener('click',()=>{gatilho.focus({preventScroll:true});lista.hidden?abrir():fechar();},{signal});
+        gatilho.addEventListener('keydown',e=>{
+            if(e.key==='Escape'){e.preventDefault();fechar();return;}
+            if(e.key==='Tab'){fechar();return;}
+            if(['ArrowDown','ArrowUp','Home','End','Enter',' '].includes(e.key)){
+                e.preventDefault();
+                if(lista.hidden){abrir();return;}
+                if(e.key==='Enter'||e.key===' '){escolher();return;}
+                if(e.key==='Home')indice=0;
+                else if(e.key==='End')indice=itens.length-1;
+                else indice=(indice+(e.key==='ArrowDown'?1:-1)+itens.length)%itens.length;
+                destacar();
+            }
+        },{signal});
+        lista.addEventListener('click',e=>{const item=e.target.closest('[data-tool-index]');if(item){indice=Number(item.dataset.toolIndex);escolher();}},{signal});
+        document.addEventListener('pointerdown',e=>{if(!lista.contains(e.target)&&!gatilho.contains(e.target))fechar();},{signal});
+        window.addEventListener('resize',fechar,{signal});
+        document.addEventListener('scroll',e=>{if(!lista.hidden&&!lista.contains(e.target))fechar();},{capture:true,signal});
+    },
+
     renderModuloAlgebra() {
         const st = this.state.algebra;
         document.getElementById('left-panel-title').textContent = 'Álgebra Simbólica';
@@ -1047,6 +1116,7 @@ const MathLabApp = {
             this.renderModuloAlgebra();
         });
 
+        this.prepararSeletorAlgebra();
         ['a', 'b', 'c'].forEach(coef => {
             document.getElementById(`alg-${coef}`)?.addEventListener('input', (e) => {
                 st.eq2[coef] = parseFloat(e.target.value) || 0;
@@ -2301,7 +2371,7 @@ const MathLabApp = {
             if(campo && campo!==document.activeElement) {
                 delete this.state.slotTextos[`trigonometria_${chave}`];
                 campo.value=this.formatarTrig(this.state.trigonometria[chave]);
-                campo.style.width=`${Math.max(2.4,campo.value.length+1.4)}ch`;
+                campo.style.width=`calc(${Math.max(2,campo.value.length)}ch + 20px)`;
                 campo.classList.toggle('slot-invalid',!Number.isFinite(this.state.trigonometria[chave]));
             }
         }
@@ -3713,7 +3783,7 @@ const MathLabApp = {
                            class="formula-slot ${corClasse} ${fxAtivo ? 'fx-mode' : ''} ${invalido ? 'slot-invalid' : ''}"
                            data-slot-key="${chave}"
                            data-slot-uid="${idUnico}"
-                           style="width:${Math.max(2.4, String(valExibido).length + 1.4)}ch"
+                           style="width:calc(${Math.max(2, String(valExibido).length)}ch + 20px)"
                            value="${this.escaparHTML(valExibido)}"
                            aria-label="Parâmetro ${chave}">
                     <button type="button" class="slot-fx-toggle" data-fx-uid="${idUnico}" title="Alternar modo expressão fx (ex: 2*sen(pi/6) ou 1/2)">fx</button>
@@ -4098,7 +4168,7 @@ const MathLabApp = {
                 const chave = inp.dataset.slotKey;
                 const uid = inp.dataset.slotUid;
                 const bruto = e.target.value;
-                inp.style.width = `${Math.max(2.4, bruto.length + 1.4)}ch`;
+                inp.style.width = `calc(${Math.max(2, bruto.length)}ch + 20px)`;
                 this.state.slotTextos[uid] = bruto;
                 this.state.passoFluxo = 2;
 
@@ -4580,7 +4650,7 @@ const MathLabApp = {
                     <span style="color:var(--green);font-weight:600;">${explicacao.exemplo}</span>
                 </div>
 
-                ${this.obterVerificacaoAtual() ? '<span class="verified-badge">✓ Verificado</span>' : `<span class="result-status">${mod === 'integrais' && this.state.integrais.dados.valido ? 'Resultado disponível; verificação não confirmada' : 'Aguardando resultado válido'}</span>`}
+                ${this.obterVerificacaoAtual() ? '<span class="verified-badge">✓ Verificado</span>' : `<span class="result-status">${valorPrincipal.includes('Aguardando resultado válido') ? 'Aguardando resultado válido' : 'Verificação independente não confirmada'}</span>`}
 
             </div>
         `;
