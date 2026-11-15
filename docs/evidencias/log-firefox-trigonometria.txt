@@ -1,0 +1,369 @@
+[OK] 1. Eixos com rótulos em π e extremos desenhados
+[OK] 1. Canvas contém a curva verde
+[OK] 2. Resultado único e propriedades do seno
+[OK] 3. A=2, B=3 e máximo em π/6
+[OK] 4. Cosseno com deslocamento vertical
+[OK] 5. Fase π/2 equivale ao cosseno
+[OK] 6. Valores exatos em 30°
+[OK] 6. Tangente indefinida em 90°
+[OK] 7. Assíntotas da tangente sem ligação entre ramos
+[OK] 8. Campo e foco preservados após tecla −
+[OK] 8. Campo e foco preservados após tecla 0
+[OK] 8. Campo e foco preservados após tecla ,
+[OK] 8. Campo e foco preservados após tecla 5
+[OK] 8. Texto preservado: −0,5
+[OK] 8. Campo e foco preservados após tecla π
+[OK] 8. Campo e foco preservados após tecla /
+[OK] 8. Campo e foco preservados após tecla 6
+[OK] 8. Texto preservado: π/6
+[OK] 8. Valores interpretados corretamente
+[OK] Conversão GRAUS → RAD preserva θ
+[OK] Conversão RAD → GRAUS preserva θ
+[OK] Tabela com os 17 ângulos notáveis
+[OK] Ciclo com projeções em SVG
+[OK] Ajustar à função restaura a janela trigonométrica
+[OK] Clique na curva corresponde a f(x)
+[OK] Zoom mantém conversão x ↔ pixel
+[OK] Arrastar desloca a janela
+[OK] 9. Troca de aba e tema preserva o gráfico
+[OK] Zoom nativo confirmado em 100%
+[OK] Zoom nativo confirmado em 90%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1366 768 zoom 90 % (DPR 0.8955223880597015 )
+[OK] Zoom nativo confirmado em 100%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1366 768 zoom 100 % (DPR 1 )
+[OK] Zoom nativo confirmado em 110%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1366 768 zoom 110 % (DPR 1.0909090909090908 )
+[OK] Zoom nativo confirmado em 125%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1366 768 zoom 125 % (DPR 1.25 )
+[OK] Zoom nativo confirmado em 100%
+[OK] Zoom nativo confirmado em 90%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1536 864 zoom 90 % (DPR 0.8955223880597015 )
+[OK] Zoom nativo confirmado em 100%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1536 864 zoom 100 % (DPR 1 )
+[OK] Zoom nativo confirmado em 110%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1536 864 zoom 110 % (DPR 1.0909090909090908 )
+[OK] Zoom nativo confirmado em 125%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1536 864 zoom 125 % (DPR 1.25 )
+[OK] Zoom nativo confirmado em 100%
+[OK] Zoom nativo confirmado em 90%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1920 1080 zoom 90 % (DPR 0.8955223880597015 )
+[OK] Zoom nativo confirmado em 100%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1920 1080 zoom 100 % (DPR 1 )
+[OK] Zoom nativo confirmado em 110%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1920 1080 zoom 110 % (DPR 1.0909090909090908 )
+[OK] Zoom nativo confirmado em 125%
+[OK] Textos dos botões cabem: cientifica
+[OK] Rótulo separado do selo Enter: cientifica
+[OK] Textos dos botões cabem: algebra
+[OK] Rótulo separado do selo Enter: algebra
+[OK] Textos dos botões cabem: funcoes
+[OK] Rótulo separado do selo Enter: funcoes
+[OK] Textos dos botões cabem: limites
+[OK] Rótulo separado do selo Enter: limites
+[OK] Textos dos botões cabem: derivadas
+[OK] Rótulo separado do selo Enter: derivadas
+[OK] Textos dos botões cabem: integrais
+[OK] Rótulo separado do selo Enter: integrais
+[OK] Textos dos botões cabem: geometria
+[OK] Rótulo separado do selo Enter: geometria
+[OK] Textos dos botões cabem: trigonometria
+[OK] Rótulo separado do selo Enter: trigonometria
+[OK] Textos dos botões cabem: vetores
+[OK] Rótulo separado do selo Enter: vetores
+[OK] Textos dos botões cabem: estatistica
+[OK] Rótulo separado do selo Enter: estatistica
+[OK] Textos dos botões cabem: modelagem
+[OK] Rótulo separado do selo Enter: modelagem
+[OK] 9. Onze modos em 1920 1080 zoom 125 % (DPR 1.25 )
+[OK] Zoom nativo confirmado em 100%
+[OK] Menu compartilhar sem texto cortado
+[OK] Menu configuracoes sem texto cortado
+[OK] 10. Abas, alternância e zoom com altura de 36 px
+[OK] 10. Botão principal centralizado com 44 px
+[OK] 10. Ícones com traço uniforme de 1,75 px
+[OK] Modo Normal sincroniza a expressão sem recriar o input
+[OK] Normal → Fórmula pronta preserva os parâmetros
+[OK] Menu favoritos cabe na janela
+[OK] Menu atalhos cabe na janela
+[OK] Menu sobre cabe na janela
+[OK] Menu estados cabe na janela
+[OK] Menu tour cabe na janela
+[OK] Seletor de Álgebra: sete ferramentas preservadas
+[OK] Lista de Álgebra cabe na janela sem recorte
+[OK] Seletor de Álgebra: setas e Enter selecionam e mantêm foco
+[OK] Ferramenta preservada: eq2
+[OK] Ferramenta preservada: fatoracao
+[OK] Ferramenta preservada: expansao
+[OK] Ferramenta preservada: simplificacao
+[OK] Ferramenta preservada: eq1
+[OK] Ferramenta preservada: sistema
+[OK] Ferramenta preservada: notaveis
+[OK] Propriedades alinhadas, com margem interna e linhas de 36 px
+[OK] Textos de detalhes não giram: cientifica
+[OK] Selos com tamanho próprio: cientifica
+[OK] Textos de detalhes não giram: algebra
+[OK] Selos com tamanho próprio: algebra
+[OK] Textos de detalhes não giram: funcoes
+[OK] Selos com tamanho próprio: funcoes
+[OK] Textos de detalhes não giram: limites
+[OK] Selos com tamanho próprio: limites
+[OK] Textos de detalhes não giram: derivadas
+[OK] Selos com tamanho próprio: derivadas
+[OK] Textos de detalhes não giram: integrais
+[OK] Selos com tamanho próprio: integrais
+[OK] Textos de detalhes não giram: geometria
+[OK] Selos com tamanho próprio: geometria
+[OK] Textos de detalhes não giram: trigonometria
+[OK] Selos com tamanho próprio: trigonometria
+[OK] Textos de detalhes não giram: vetores
+[OK] Selos com tamanho próprio: vetores
+[OK] Textos de detalhes não giram: estatistica
+[OK] Selos com tamanho próprio: estatistica
+[OK] Textos de detalhes não giram: modelagem
+[OK] Selos com tamanho próprio: modelagem
+[OK] Assíntotas acompanham o arrasto para fora da janela inicial
+[OK] Trocar de modo limpa coordenadas da curva anterior
+[OK] Console sem erros JavaScript durante a execução
+SUCESSO: aceitação T1–T6 e varredura dos 11 modos no Firefox.

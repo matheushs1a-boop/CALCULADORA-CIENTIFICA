@@ -39,7 +39,7 @@ CALCULADORA 2.0/
 │       └── motor_simbolico.py              # Motor simbólico complementar em Python + SymPy
 │
 ├── tests/                                  # Suíte de testes automatizados e auditoria QA (Node.js)
-│   ├── executar-testes.js                  # Orquestrador central das 8 suítes de testes
+│   ├── executar-testes.js                  # Orquestrador central das 9 suítes de testes
 │   ├── modulos-gerais.test.js              # Validação dos módulos (Científica, Funções, Geometria, Estatística)
 │   ├── sincronizacao-estado.test.js        # Sincronização entre Fórmula Pronta, Modo Normal e Histórico
 │   ├── funcoes-auditoria.test.js           # Auditoria estocástica (800 funções aleatórias + 4.000 comparações)
@@ -47,6 +47,8 @@ CALCULADORA 2.0/
 │   ├── calculo-regras.test.js              # Validação das 6 regras de Derivadas e 6 de Integrais
 │   ├── integrais-modulo.test.js            # Estado, somas de Riemann, Regra de Simpson e áreas com sinal
 │   ├── graficos-renderizacao.test.js       # Geometria de curvas, assíntotas e áreas sombreadas no Canvas
+│   ├── trigonometria-modulo.test.js          # Propriedades, exatos e 243 combinações trigonométricas
+│   ├── interface-firefox.py                 # Aceitação real no Firefox via WebDriver
 │   ├── graficos-layout.test.js             # Regressão de cascata CSS e posicionamento de legendas
 │   ├── interface-navegador.test.js         # Teste integrado E2E dos 11 módulos (Playwright)
 │   └── interface-integrais.test.js         # Teste visual de aceitação do módulo de Integrais (Playwright)
@@ -59,7 +61,7 @@ CALCULADORA 2.0/
     ├── roteiro-validacao-humana.md         # Roteiro de inspeção manual e checklist de validação humana
     └── evidencias/                         # Registros de execução e capturas de tela
         ├── captura-sobreposicao-antes.png  # Evidência visual do diagnóstico de legenda corrigido
-        └── log-execucao-testes.txt         # Log consolidado da aprovação das 8 suítes de testes
+        └── log-execucao-testes.txt         # Log consolidado da aprovação das 9 suítes de testes
 ```
 
 ---
@@ -79,7 +81,7 @@ python3 -m http.server 8000
 
 ### 3.2. Suíte de Testes Automatizados
 
-Para executar todas as 8 suítes de validação matemática, estado e layout no Node.js:
+Para executar todas as 9 suítes de validação matemática, estado e layout no Node.js:
 
 ```bash
 npm test
@@ -97,6 +99,17 @@ Em um ambiente que permita inicialização de sockets/navegador headless:
 npm run test:ui
 npm run test:ui-integrais
 ```
+
+### 3.3.1. Aceitação em Firefox
+
+Com o MathLab servido na porta 5500 e o geckodriver instalado, execute em terminais separados:
+
+```bash
+geckodriver --port 4444 --allow-system-access
+npm run test:firefox
+```
+
+O teste usa apenas a biblioteca padrão do Python e o Firefox, em perfil temporário. `MATHLAB_URL` e `MATHLAB_WEBDRIVER` permitem alterar a URL e o controlador. Inclui T1–T6, os 11 modos em três resoluções e zoom nativo de 90% a 125%, alinhamento dos controles, propriedades e o seletor de Álgebra. Consulte o [relatório com antes e depois](docs/relatorio-trigonometria-interface.md), o [log Node atual](docs/evidencias/log-testes-trigonometria.txt) e o [log Firefox](docs/evidencias/log-firefox-trigonometria.txt).
 
 ### 3.4. Motor Simbólico Complementar em Python
 
@@ -175,3 +188,5 @@ Validado em [`tests/calculo-regras.test.js`](tests/calculo-regras.test.js) e [`t
 - [**Relatório Técnico da Revisão de Integrais**](docs/relatorio-revisao-integrais.md)
 - [**Comparativo de Evolução da Interface (Antes / Depois)**](docs/comparativo-evolucao-ui.md)
 - [**Roteiro de Validação Manual e Homologação Humana**](docs/roteiro-validacao-humana.md)
+
+- [Revisão de Trigonometria e alinhamento: causas, capturas e testes](docs/relatorio-trigonometria-interface.md)

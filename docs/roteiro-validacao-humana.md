@@ -56,5 +56,24 @@ npm run test:ui-integrais
 | Pendente | Limite $1/x$ em $x \to 0$ | Laterais $-\infty$/$+\infty$; inexistente | A registrar | Pendente |
 | Pendente | 6 Regras de Derivadas e 6 de Integrais | Conferência por 2 métodos independentes | A registrar | Pendente |
 | Pendente | Acessibilidade (`Esc`, `Tab`, `Ctrl+K`) | Navegação por teclado e foco visível | A registrar | Pendente |
-| Pendente | Resoluções 1366×768, 1600×900, 1920×1080 | Sem cortes ou rolagem horizontal | A registrar | Pendente |
+| Pendente | Resoluções 1366×768, 1536×864, 1920×1080 | Sem cortes ou rolagem horizontal | A registrar | Pendente |
 | Pendente | Exportação (Copiar, LaTeX, PNG, PDF, Link) | Dados correspondentes ao estado ativo | A registrar | Pendente |
+
+
+## 4. Aceitação manual de Trigonometria e dos ajustes visuais
+
+A execução automatizada está no [relatório da revisão](relatorio-trigonometria-interface.md). Os passos abaixo ainda devem ser realizados por uma pessoa; não marque como validação humana apenas porque a automação passou.
+
+1. Abrir `http://127.0.0.1:5500/index.html` no Firefox e selecionar **Trigonometria**. Confirmar onda verde inteira, eixos em π/2, extremos vermelhos, raízes e painel direito com `sen(x)`, amplitude 1, período 2π, imagem [−1, 1] e paridade ímpar.
+2. Digitar A=2 e B=3: conferir máximo 2 em π/6 e período 2π/3. Selecionar cos, A=3, B=2, C=0, D=1: conferir imagem [−2, 4] e período π.
+3. Voltar ao seno com A=B=1 e D=0; digitar C=`π/2`. Conferir a equivalência com cos(x) e o deslocamento para a esquerda. Digitar `−0,5` e `π/6` tecla por tecla, sem mudança de foco ou cursor. Apagar um parâmetro: o gráfico deve explicar o estado inválido.
+4. Conferir θ=30°: ponto (√3/2; 1/2), sen=1/2, cos=√3/2 e tg=√3/3, com decimais. Trocar para radianos: o campo deve passar a π/6 mantendo o ponto. Em θ=90°, conferir tangente indefinida.
+5. Abrir ciclo e tabela: conferir as projeções, quadrante/sinais e os 17 ângulos pedidos. Em tg(x), conferir assíntotas tracejadas em π/2+kπ, sem segmentos unindo ramos.
+6. Arrastar, ampliar, clicar na onda e usar **Ajustar à função**. Alternar aba e tema; conferir gráfico e valores. Alternar Normal/Fórmula pronta e confirmar que os parâmetros continuam coerentes.
+7. Conferir os 11 modos em 1366×768, 1536×864 e 1920×1080, com zoom do Firefox em 90%, 100%, 110% e 125%. O painel direito, cabeçalho e rodapé devem caber; conteúdos extensos podem rolar dentro do painel.
+8. Em todos os modos, confirmar que o rótulo **Gerar relatório completo** está centralizado na largura do botão, com Enter separado. Conferir ícones, alturas, foco visível, chips e controles fx sem sobreposição.
+9. Em Funções, expandir as propriedades: conferir margens internas, valores alinhados à direita e pontos coloridos alinhados aos rótulos. Conferir as formas fatorada/canônica sem corte.
+10. Em Álgebra, abrir **Ferramenta Algébrica**: conferir lista azul com sete ferramentas, opção selecionada e descrições. Testar setas, Home, End, Enter, Escape, Tab e clique fora. Selecionar cada ferramenta e conferir que o resultado muda. Confirmar que a lista abre para cima quando não há espaço abaixo.
+11. Abrir Compartilhar, Configurações, Favoritos, Atalhos, Sobre, Estados, Tour, Busca e Estudo da função. Conferir textos, alinhamento e navegação por teclado. Registrar responsável, data e evidências na tabela de validação humana.
+
+12. Abrir e fechar **Por que deu esse resultado?** nos 11 modos: o selo **Intuição** deve continuar na posição normal. Conferir que apenas as setas giram, que os selos de verificação não ocupam a linha inteira e que a troca de modo limpa coordenadas da curva anterior. Em tg(x), arrastar para x entre 10 e 20 e conferir que as novas assíntotas aparecem.

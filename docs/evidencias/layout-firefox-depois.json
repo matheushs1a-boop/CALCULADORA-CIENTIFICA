@@ -1,0 +1,2114 @@
+[
+  {
+    "modulo": "cientifica",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1410.683349609375,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "algebra",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 792.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "limites",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "integrais",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "geometria",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "vetores",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1525,
+    "h": 858,
+    "dpr": 0.8955223880597015,
+    "largura": 1525,
+    "painelDireito": 1513.36669921875,
+    "rodape": 834.4833374023438,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1331,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "algebra",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 703,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "limites",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "integrais",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "geometria",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "vetores",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1366,
+    "h": 768,
+    "dpr": 1,
+    "largura": 1366,
+    "painelDireito": 1354,
+    "rodape": 745,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "algebra",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 639.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "limites",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "integrais",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "geometria",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "vetores",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1252,
+    "h": 704,
+    "dpr": 1.0909090909090908,
+    "largura": 1252,
+    "painelDireito": 1240.1666870117188,
+    "rodape": 681.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.800048828125,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "algebra",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 549.6000061035156,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "limites",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "integrais",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "geometria",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "vetores",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1093,
+    "h": 614,
+    "dpr": 1.25,
+    "largura": 1093,
+    "painelDireito": 1080.7999877929688,
+    "rodape": 591.5999755859375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1366,
+      768
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1505.5999755859375,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "algebra",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 899.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "limites",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "integrais",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "geometria",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "vetores",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1715,
+    "h": 965,
+    "dpr": 0.8955223880597015,
+    "largura": 1715,
+    "painelDireito": 1703.199951171875,
+    "rodape": 941.683349609375,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1416,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "algebra",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 799,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "limites",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "integrais",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "geometria",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "vetores",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1352,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "algebra",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 727.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "limites",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "integrais",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "geometria",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "vetores",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1408,
+    "h": 792,
+    "dpr": 1.0909090909090908,
+    "largura": 1408,
+    "painelDireito": 1396,
+    "rodape": 769.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "algebra",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 626.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "limites",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "integrais",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "geometria",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "vetores",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1229,
+    "h": 691,
+    "dpr": 1.25,
+    "largura": 1229,
+    "painelDireito": 1216.7999877929688,
+    "rodape": 668.4000244140625,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1536,
+      864
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "cientifica",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 1720,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "algebra",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "funcoes",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1140.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "limites",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "derivadas",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "integrais",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "geometria",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "vetores",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "estatistica",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "modelagem",
+    "w": 2144,
+    "h": 1206,
+    "dpr": 0.8955223880597015,
+    "largura": 2144,
+    "painelDireito": 2132,
+    "rodape": 1182.88330078125,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 90
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1608,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "algebra",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1015,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "limites",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "integrais",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "geometria",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "vetores",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1920,
+    "h": 1080,
+    "dpr": 1,
+    "largura": 1920,
+    "painelDireito": 1908,
+    "rodape": 1057,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 100
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1528,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "algebra",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 925.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "limites",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "integrais",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "geometria",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "vetores",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1760,
+    "h": 990,
+    "dpr": 1.0909090909090908,
+    "largura": 1760,
+    "painelDireito": 1748,
+    "rodape": 967.0833129882812,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 110
+  },
+  {
+    "modulo": "cientifica",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1416,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "algebra",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "funcoes",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 799.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "limites",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "derivadas",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "integrais",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "geometria",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "trigonometria",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "vetores",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "estatistica",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  },
+  {
+    "modulo": "modelagem",
+    "w": 1536,
+    "h": 864,
+    "dpr": 1.25,
+    "largura": 1536,
+    "painelDireito": 1524,
+    "rodape": 841.2000122070312,
+    "ctaCentralizado": true,
+    "botoesVisiveis": true,
+    "resolucao": [
+      1920,
+      1080
+    ],
+    "zoom": 125
+  }
+]
