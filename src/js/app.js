@@ -2351,6 +2351,12 @@ const MathLabApp = {
             grafico: {janela:{xMin:-2*Math.PI,xMax:2*Math.PI,yMin:-Math.max(.1,Math.abs(A)+Math.abs(D))*1.3,yMax:Math.max(.1,Math.abs(A)+Math.abs(D))*1.3}, eixoXPi:true,
                 mensagemVazia: valido ? '' : 'Preencha parâmetros e ângulo válidos',
                 curvas:valido ? [{rotulo:`f(x) = ${expressao}`,cor:'#22C55E',espessura:3,fn}] : [], marcadores:valido ? marcadores : [],
+                gerarAssintotas: janela=>{
+                    if(!valido || st.funcao!=='tg' || B===0)return [];
+                    const lo=Math.min(B*janela.xMin+C,B*janela.xMax+C),hi=Math.max(B*janela.xMin+C,B*janela.xMax+C);
+                    const inicio=Math.ceil((lo-Math.PI/2)/Math.PI),fim=Math.floor((hi-Math.PI/2)/Math.PI);
+                    return Array.from({length:Math.max(0,Math.min(200,fim-inicio+1))},(_,i)=>({tipo:'vertical',valor:(Math.PI/2+(inicio+i)*Math.PI-C)/B,cor:'#EF4444'}));
+                },
                 assintotas:polos.map(valor=>({tipo:'vertical',valor,cor:'#EF4444'}))}};
     },
 
@@ -4603,7 +4609,7 @@ const MathLabApp = {
 
             const summary = document.createElement('summary');
             summary.innerHTML = `
-                <span>${ehVerificacao ? 'Verificação' : tituloSecao}</span><span aria-hidden="true"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+                <span>${ehVerificacao ? 'Verificação' : tituloSecao}</span><span class="details-chevron" aria-hidden="true"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
             `;
             details.appendChild(summary);
 

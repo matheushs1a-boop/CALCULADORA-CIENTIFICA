@@ -20,6 +20,7 @@ d=dados({anguloGraus:90});assert.equal(d.tangente,null);assert.ok(d.verificado);
 console.log('[OK] 6. Valores exatos em 30° e tangente indefinida em 90°.');
 d=dados({funcao:'tg'});assert.equal(d.grafico.assintotas.length,4);assert.ok(!Number.isFinite(d.fn(Math.PI/2)));assert.equal(d.periodo,'π');
 d=dados({funcao:'tg',frequencia:-2,fase:Math.PI/6});for(const a of d.grafico.assintotas)assert.ok(Math.abs(Math.cos(-2*a.valor+Math.PI/6))<1e-10);
+assert.ok(d.grafico.gerarAssintotas({xMin:10,xMax:20}).length>0);for(const a of d.grafico.gerarAssintotas({xMin:10,xMax:20}))assert.ok(a.valor>=10&&a.valor<=20);
 console.log('[OK] 7. Polos da tangente transformada, incluindo B negativo.');
 for(const p of [{amplitude:NaN},{fase:NaN},{deslocamento:NaN},{anguloGraus:NaN}]){d=dados(p);assert.equal(d.valido,false);assert.equal(d.grafico.curvas.length,0);assert.ok(d.grafico.mensagemVazia);}
 d=dados({frequencia:0});assert.equal(d.imagem,'{0}');assert.ok(d.periodo.includes('Constante'));

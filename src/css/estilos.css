@@ -2652,7 +2652,7 @@ html[data-reduce-motion="true"] *::after {
 .layered-details { border: 0; border-bottom: 1px solid var(--border-subtle); border-radius: 0; background: transparent; }
 .layered-details > summary { padding: 11px 2px; font-size: 12px; list-style: none; }
 .layered-details > summary::-webkit-details-marker { display: none; }
-.layered-details[open] > summary > span:last-child { transform: rotate(180deg); }
+.layered-details[open] > summary .details-chevron { transform: rotate(180deg); }
 .layered-details-body { padding: 4px 0 10px; }
 .prop-item { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 10px; align-items: start; }
 .prop-key, .prop-val { min-width: 0; max-width: none; white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: break-word; word-break: normal; line-height: 1.5; }
@@ -2775,7 +2775,7 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .input-mode-btn.active, .sub-tab-btn.active, .segmented-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 :where(button, input, select, summary):focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 .dropdown-panel button, .layered-details > summary { display: flex; align-items: center; gap: 8px; }
-.layered-details > summary > span:last-child { display: flex; align-items: center; }
+.layered-details > summary .details-chevron { display: flex; align-items: center; }
 /* O painel de resultados rola sem comprimir as seções umas contra as outras. */
 #right-panel-body > * { flex-shrink: 0; }
 .input-panel-footer .btn-primary-action { padding: 0 44px; }
@@ -2816,3 +2816,10 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .algebra-picker-list [role="option"]:hover, .algebra-picker-list .is-highlighted { background: var(--primary-soft); border-color: var(--primary); }
 .algebra-tool-check { opacity: 0; color: var(--green); }
 .algebra-picker-list [aria-selected="true"] .algebra-tool-check { opacity: 1; }
+
+/* Só a seta gira; textos e chips continuam legíveis ao abrir um detalhe. */
+.layered-details > summary { gap: 12px; }
+.layered-details > summary > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.layered-details > summary .mini-pill { flex: none; margin-left: auto; transform: none; }
+.details-chevron { flex: none; margin-left: auto; transition: transform .15s ease; }
+.verified-badge { align-self: flex-start; width: fit-content; max-width: 100%; min-height: 22px; padding: 4px 8px; border: 1px solid var(--green); border-radius: 6px; background: var(--green-soft); color: var(--green); font: 600 11px var(--font-sans); }

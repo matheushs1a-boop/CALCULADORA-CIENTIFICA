@@ -61,6 +61,9 @@ const MathLabGraph = {
         if (!this.canvas) return;
         this.ctx = this.canvas.getContext('2d');
         this.config = config || {};
+        this.pontoHover = null;
+        const coordenadas = typeof document !== 'undefined' ? document.getElementById?.('graph-coords-pill') : null;
+        if (coordenadas) coordenadas.textContent = 'Passe o mouse sobre a curva para inspecionar coordenadas';
         this.curvasOcultas = {};
 
         if (config && config.janela) {
@@ -140,6 +143,7 @@ const MathLabGraph = {
      */
     desenhar() {
         if (!this.canvas || !this.ctx || !this.config) return;
+        if (this.config.gerarAssintotas) this.config.assintotas = this.config.gerarAssintotas(this.janela);
         const ctx = this.ctx;
         const w = this.largura;
         const h = this.altura;
