@@ -190,3 +190,4 @@ Validado em [`tests/calculo-regras.test.js`](tests/calculo-regras.test.js) e [`t
 - [**Roteiro de Validação Manual e Homologação Humana**](docs/roteiro-validacao-humana.md)
 
 - [Revisão de Trigonometria e alinhamento: causas, capturas e testes](docs/relatorio-trigonometria-interface.md)
+# CALCULADORA-CIENTIFICA
