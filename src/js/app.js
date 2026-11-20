@@ -3813,7 +3813,7 @@ const MathLabApp = {
             try { localStorage.setItem('mathlab_reduce_motion', String(e.target.checked)); } catch (erro) {}
         });
         document.getElementById('btn-keyboard-help').addEventListener('click', () => {
-            this.abrirInformacao('Atalhos de teclado', '<dl class="shortcuts-list"><dt>Ctrl+K</dt><dd>Buscar módulos, fórmulas e comandos</dd><dt>Ctrl+Z</dt><dd>Desfazer</dd><dt>Ctrl+Shift+Z</dt><dd>Refazer</dd><dt>Enter</dt><dd>Gerar relatório a partir da entrada</dd><dt>Tab / Shift+Tab</dt><dd>Percorrer controles</dd><dt>↑ / ↓</dt><dd>Navegar menus ou ajustar um quadradinho</dd><dt>Esc</dt><dd>Fechar menu, ajuda ou painel</dd></dl>');
+            this.abrirInformacao('Atalhos de teclado', '<dl class="shortcuts-list"><dt>Alt+H</dt><dd>Voltar à Calculadora Científica</dd><dt>Ctrl+K</dt><dd>Buscar módulos, fórmulas e comandos</dd><dt>Ctrl+Z</dt><dd>Desfazer</dd><dt>Ctrl+Shift+Z</dt><dd>Refazer</dd><dt>Enter</dt><dd>Gerar relatório a partir da entrada</dd><dt>Tab / Shift+Tab</dt><dd>Percorrer controles</dd><dt>↑ / ↓</dt><dd>Navegar menus ou ajustar um quadradinho</dd><dt>Esc</dt><dd>Fechar menu, ajuda ou painel</dd></dl>');
         });
         document.getElementById('btn-about').addEventListener('click', () => {
             this.abrirInformacao('Sobre o CalcLab', '<p>Laboratório de Cálculo para Cálculo Diferencial e Integral. Onze módulos com cálculos, gráficos, tabelas, estudo de funções e histórico. Executado no navegador com HTML, CSS, JavaScript, Canvas e SVG.</p>');
@@ -3984,7 +3984,10 @@ const MathLabApp = {
 
         // Atalhos globais de teclado (Ctrl+K, Ctrl+Z, Ctrl+Shift+Z e Escape)
         window.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            if (e.altKey && !e.ctrlKey && !e.metaKey && e.key.toLowerCase() === 'h') {
+                e.preventDefault();
+                this.irParaInicio();
+            } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
                 e.preventDefault();
                 this.abrirPaletaComandos();
             } else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'z') {
