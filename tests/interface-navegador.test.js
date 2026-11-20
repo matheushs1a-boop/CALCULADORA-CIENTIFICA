@@ -45,6 +45,7 @@ catch (erro) { console.error('NÃO TESTADO: Playwright indisponível. Consulte R
         await page.locator('#cfg-decimals').selectOption('6');
         assert.strictEqual(await page.evaluate(() => MathLabCalc.casasDecimais), 6);
         await page.locator('.header-brand').click();
+        await page.locator('[data-module=cientifica].active').waitFor();
         assert.strictEqual(await page.locator('#btn-open-settings').getAttribute('aria-expanded'), 'false');
         await page.keyboard.press('Control+k');
         assert.strictEqual(await page.locator('#modal-cmd-backdrop').evaluate(el => el.classList.contains('hidden')), false);

@@ -356,6 +356,22 @@ const MathLabApp = {
     /* ========================================================================
        3. NAVEGAÇÃO ENTRE OS 11 MÓDULOS
        ======================================================================== */
+    fecharMenusEModais() {
+        this.fecharMenusCompactos?.();
+        this.fecharPaletaComandos();
+        for (const id of ['drawer-study-backdrop', 'drawer-generic-backdrop', 'modal-tour-backdrop']) {
+            document.getElementById(id)?.classList.add('hidden');
+        }
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    },
+
+    irParaInicio() {
+        this.fecharMenusEModais();
+        this.selecionarModulo('cientifica');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        this.focarEntradaCientifica();
+    },
+
     selecionarModulo(nomeModulo, { registrar = true } = {}) {
         const mudou = this.state.activeModule !== nomeModulo;
         this.fecharSeletorAlgebra?.();
@@ -3708,6 +3724,7 @@ const MathLabApp = {
                 if (estavaAberto && restaurarFoco) botaoGatilho.focus();
             });
         };
+        this.fecharMenusCompactos = fechar;
         const controles = menu => Array.from(menu.querySelectorAll('button:not(:disabled), select, input:not(:disabled)'));
         pares.forEach(([idBotao, idMenu]) => {
             const botaoGatilho = document.getElementById(idBotao);
@@ -3890,6 +3907,11 @@ const MathLabApp = {
         document.getElementById('btn-graph-reset')?.addEventListener('click', () => MathLabGraph.resetarJanela());
         document.getElementById('btn-graph-png')?.addEventListener('click', () => this.exportarGraficoAtual());
 
+        document.getElementById('logo-inicio')?.addEventListener('click', e => {
+            e.preventDefault();
+            this.irParaInicio();
+        });
+
         // Botões do Cabeçalho (Desfazer, Refazer, Fonte, Link, Tour, Estados, Favoritos, Tema)
         document.getElementById('btn-undo')?.addEventListener('click', () => this.desfazer());
         document.getElementById('btn-redo')?.addEventListener('click', () => this.refazer());
@@ -3975,10 +3997,7 @@ const MathLabApp = {
                     this.desfazer();
                 }
             } else if (e.key === 'Escape') {
-                this.fecharPaletaComandos();
-                document.getElementById('drawer-study-backdrop')?.classList.add('hidden');
-                document.getElementById('drawer-generic-backdrop')?.classList.add('hidden');
-                document.getElementById('modal-tour-backdrop')?.classList.add('hidden');
+                this.fecharMenusEModais();
             }
         });
     },
