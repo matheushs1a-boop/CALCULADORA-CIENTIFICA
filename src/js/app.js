@@ -791,7 +791,7 @@ const MathLabApp = {
         const btnCopySci = document.getElementById('btn-copy-sci');
         if (btnCopySci) {
             btnCopySci.addEventListener('click', () => {
-                this.copiarTexto(`${st.expressao} = ${av.resultadoExibido}`);
+                this.copiarResultadoAtual();
             });
         }
 
@@ -3970,8 +3970,14 @@ const MathLabApp = {
     },
 
     copiarResultadoAtual() {
-        const valor = document.querySelector('.result-hero-value')?.textContent.trim() || this.obterExpressaoTextoAtual();
-        this.copiarTexto(`${this.obterExpressaoTextoAtual()} => ${valor}`, 'Resultado copiado');
+        if (this.entradaIncompleta()) return;
+        if (this.state.activeModule === 'cientifica') {
+            const resultado = this.avaliarEntradaCientifica();
+            if (!resultado.erro) this.copiarTexto(resultado.resultadoExibido, 'Copiado');
+            return;
+        }
+        const valor = document.querySelector('.result-hero-value')?.textContent.trim();
+        if (valor) this.copiarTexto(valor, 'Copiado');
     },
 
     vincularEventosGlobais() {
