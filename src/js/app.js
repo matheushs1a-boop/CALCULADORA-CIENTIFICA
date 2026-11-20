@@ -876,7 +876,10 @@ const MathLabApp = {
                 inicio = 0;
                 fim = texto.length;
                 inserir = resultado.includes('/') ? `(${resultado})/100` : resultado + '%';
-            } else inserir = selecao + '%';
+            } else {
+                inserir = selecao && !/^\d+(?:[.,]\d+)?$/.test(selecao)
+                    ? `(${selecao})/100` : selecao + '%';
+            }
             if (!cientifica) {
                 const marcado = texto.slice(0, inicio) + inserir + texto.slice(fim);
                 const normalizado = this.interpretarPorcentagem(marcado);
@@ -3667,6 +3670,10 @@ const MathLabApp = {
         document.getElementById('btn-share-pdf').addEventListener('click', () => window.print());
         document.getElementById('btn-generate-footer').addEventListener('click', () => {
             const entrada = document.getElementById('normal-mode-input') || document.getElementById('ready-custom-expression') || document.getElementById('ready-expression-input');
+            if (entrada?.id === 'normal-mode-input' && document.getElementById('teclado-funcao')) {
+                this.confirmarExpressaoFuncao(entrada);
+                return;
+            }
             if (entrada) this.aplicarExpressaoModoNormal(entrada.value, true);
             if (this.state.activeModule === 'funcoes') {
                 const dados = this.obterDadosAtuaisFuncoes();
@@ -4499,8 +4506,12 @@ const MathLabApp = {
                     }
                 } else if (e.key === 'Enter') {
                     e.preventDefault();
-                    this.aplicarExpressaoModoNormal(normalInp.value, true);
-                    this.executarBotaoGerar();
+                    if (teclado) {
+                        this.confirmarExpressaoFuncao(normalInp);
+                    } else {
+                        this.aplicarExpressaoModoNormal(normalInp.value, true);
+                        this.executarBotaoGerar();
+                    }
                 }
             });
         }
@@ -4524,9 +4535,31 @@ const MathLabApp = {
         });
 
         document.getElementById('btn-gerar-normal')?.addEventListener('click', () => {
-            if (normalInp) this.aplicarExpressaoModoNormal(normalInp.value, true);
+            const campo = document.getElementById('normal-mode-input');
+            if (leftBody.querySelector('#teclado-funcao') && campo) {
+                this.confirmarExpressaoFuncao(campo);
+                return;
+            }
+            if (campo) this.aplicarExpressaoModoNormal(campo.value, true);
             this.executarBotaoGerar();
         });
+    },
+
+    confirmarExpressaoFuncao(campo) {
+        const texto = campo.value;
+        if (!texto.trim()) return;
+        if (this.state.activeModule !== 'integrais' && !MathLabCalc.validarExpressaoNormal(texto).valido) return;
+        const { selectionStart, selectionEnd } = campo;
+        this.aplicarExpressaoModoNormal(texto);
+        this.executarBotaoGerar(texto);
+        const editor = document.getElementById(campo.id);
+        if (editor) {
+            editor.value = texto;
+            editor.focus({ preventScroll: true });
+            editor.setSelectionRange(selectionStart, selectionEnd);
+            const preview = document.getElementById('normal-live-preview-math');
+            if (preview) preview.textContent = texto;
+        }
     },
 
     aplicarValorSlot(chave, valor) {
@@ -4721,14 +4754,14 @@ const MathLabApp = {
         this.renderizarModuloAtivo();
     },
 
-    executarBotaoGerar() {
+    executarBotaoGerar(expressao) {
         this.state.passoFluxo = 3;
         if (this.state.activeModule === 'cientifica') {
             this.confirmarCientifica();
             document.getElementById('sci-expr-input')?.focus();
             return;
         }
-        const expr = this.obterExpressaoTextoAtual();
+        const expr = expressao ?? this.obterExpressaoTextoAtual();
         const mod = this.state.activeModule;
         const nomes = {
             cientifica: 'Científica', algebra: 'Álgebra', funcoes: 'Funções', limites: 'Limites',
