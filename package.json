@@ -14,6 +14,7 @@
     "test:graficos": "node tests/graficos-renderizacao.test.js",
     "test:integrais": "node tests/integrais-modulo.test.js",
     "test:layout": "node tests/graficos-layout.test.js",
+    "test:abertura": "node tests/abertura.test.js",
     "test:aceitacao": "node tests/aceitacao-calclab.test.js",
     "test:ui": "node tests/interface-navegador.test.js",
     "test:ui-integrais": "node tests/interface-integrais.test.js",

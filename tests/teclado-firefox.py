@@ -6,9 +6,13 @@ from pathlib import Path
 import sys
 import urllib.error
 import urllib.request
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 BASE = os.environ.get('MATHLAB_WEBDRIVER', 'http://127.0.0.1:4444')
 URL = os.environ.get('MATHLAB_URL', (Path(__file__).resolve().parents[1] / 'index.html').as_uri())
+partes = urlsplit(URL)
+consulta = parse_qsl(partes.query, keep_blank_values=True)
+URL = urlunsplit(partes._replace(query=urlencode([*consulta, ('sem-abertura', '')])))
 
 
 def request(path, data=None, method=None):

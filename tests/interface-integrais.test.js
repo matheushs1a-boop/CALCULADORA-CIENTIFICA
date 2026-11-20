@@ -6,7 +6,9 @@ const pasta=path.resolve(__dirname,'../docs/evidencias');fs.mkdirSync(pasta,{rec
  const browser=await chromium.launch({executablePath:process.env.MATHLAB_BROWSER||undefined,args:['--no-sandbox']});
  try {
  const p=await browser.newPage({viewport:{width:1366,height:768},deviceScaleFactor:2});const erros=[];p.on('pageerror',e=>erros.push(e.message));
- await p.goto(process.env.MATHLAB_URL||'http://127.0.0.1:5500/index.html');
+ const url=new URL(process.env.MATHLAB_URL||'http://127.0.0.1:5500/index.html');
+ url.searchParams.set('sem-abertura','');
+ await p.goto(url.href);
  await p.evaluate(()=>{MathLabApp.state.inputMode='pronta';MathLabApp.selecionarModulo('integrais');MathLabApp.restaurarExemploModulo()});
  const foto=nome=>p.screenshot({path:path.join(pasta,nome+'.png')});
  if(process.env.MATHLAB_CAPTURA_ANTES==='1'){await p.waitForTimeout(150);await foto('antes');console.log('Captura inicial salva.');return;}
