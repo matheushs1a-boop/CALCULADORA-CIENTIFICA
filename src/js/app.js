@@ -365,6 +365,58 @@ const MathLabApp = {
         if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     },
 
+    limparTudo() {
+        this._cancelarAvisoLimpeza?.();
+        const anterior = this.state;
+        const visor = this._resultadoNoVisor;
+        const ans = this._ultimoResultadoCientifico;
+        const prontoParaAC = this._prontoParaAC;
+        const novo = this.criarEstadoInicial();
+        for (const chave of ['theme','inputMode','fontScale','reduceMotion','visualCollapsed','activeModule']) {
+            novo[chave] = anterior[chave];
+        }
+        novo.cientifica.unidadeAngulo = anterior.cientifica.unidadeAngulo;
+        novo.cientifica.modoSaida = anterior.cientifica.modoSaida;
+        novo.historico = anterior.historico.filter(item => item.favorito || item.fixado)
+            .map(item => ({ ...item, salvo: true }));
+        this.state = novo;
+        this._resultadoNoVisor = null;
+        this._ultimoResultadoCientifico = null;
+        this._prontoParaAC = false;
+        this._verificacaoModulo = null;
+        this.salvarHistorico();
+        this.irParaInicio();
+
+        const aviso = document.createElement('div');
+        aviso.className = 'toast-msg';
+        aviso.append('Tudo limpo. ');
+        const desfazer = document.createElement('button');
+        desfazer.type = 'button';
+        desfazer.className = 'header-btn';
+        desfazer.textContent = 'Desfazer';
+        aviso.append(desfazer);
+        document.getElementById('toast-container').append(aviso);
+        const fechar = () => {
+            clearTimeout(tempo);
+            aviso.remove();
+            this._cancelarAvisoLimpeza = null;
+        };
+        const tempo = setTimeout(fechar, 8000);
+        this._cancelarAvisoLimpeza = fechar;
+        desfazer.addEventListener('click', () => {
+            const anteriorModo = anterior.activeModule;
+            anterior.activeModule = this.state.activeModule;
+            this.state = anterior;
+            this._resultadoNoVisor = visor;
+            this._ultimoResultadoCientifico = ans;
+            this._prontoParaAC = prontoParaAC;
+            this.salvarHistorico();
+            this.selecionarModulo(anteriorModo);
+            if (anteriorModo === 'cientifica') this.focarEntradaCientifica();
+            fechar();
+        }, { once: true });
+    },
+
     irParaInicio() {
         this.fecharMenusEModais();
         this.selecionarModulo('cientifica');
@@ -3820,8 +3872,9 @@ const MathLabApp = {
             try { localStorage.setItem('mathlab_reduce_motion', String(e.target.checked)); } catch (erro) {}
         });
         document.getElementById('btn-keyboard-help').addEventListener('click', () => {
-            this.abrirInformacao('Atalhos de teclado', '<dl class="shortcuts-list"><dt>Alt+H</dt><dd>Voltar à Calculadora Científica</dd><dt>Ctrl+K</dt><dd>Buscar módulos, fórmulas e comandos</dd><dt>Ctrl+Z</dt><dd>Desfazer</dd><dt>Ctrl+Shift+Z</dt><dd>Refazer</dd><dt>Enter</dt><dd>Gerar relatório a partir da entrada</dd><dt>Tab / Shift+Tab</dt><dd>Percorrer controles</dd><dt>↑ / ↓</dt><dd>Navegar menus ou ajustar um quadradinho</dd><dt>Esc</dt><dd>Fechar menu, ajuda ou painel</dd></dl>');
+            this.abrirInformacao('Atalhos de teclado', '<dl class="shortcuts-list"><dt>Alt+H</dt><dd>Voltar à Calculadora Científica</dd><dt>Ctrl+K</dt><dd>Buscar módulos, fórmulas e comandos</dd><dt>Ctrl+Z</dt><dd>Desfazer</dd><dt>Ctrl+Shift+Z</dt><dd>Refazer</dd><dt>Ctrl+Shift+Backspace</dt><dd>Limpar tudo</dd><dt>Enter</dt><dd>Gerar relatório a partir da entrada</dd><dt>Tab / Shift+Tab</dt><dd>Percorrer controles</dd><dt>↑ / ↓</dt><dd>Navegar menus ou ajustar um quadradinho</dd><dt>Esc</dt><dd>Fechar menu, ajuda ou painel</dd></dl>');
         });
+        document.getElementById('btn-clear-session')?.addEventListener('click', () => this.limparTudo());
         document.getElementById('btn-about').addEventListener('click', () => {
             this.abrirInformacao('Sobre o CalcLab', '<p>Laboratório de Cálculo para Cálculo Diferencial e Integral. Onze módulos com cálculos, gráficos, tabelas, estudo de funções e histórico. Executado no navegador com HTML, CSS, JavaScript, Canvas e SVG.</p>');
         });
@@ -3991,7 +4044,10 @@ const MathLabApp = {
 
         // Atalhos globais de teclado (Ctrl+K, Ctrl+Z, Ctrl+Shift+Z e Escape)
         window.addEventListener('keydown', (e) => {
-            if (e.altKey && !e.ctrlKey && !e.metaKey && e.key.toLowerCase() === 'h') {
+            if (e.ctrlKey && e.shiftKey && !e.altKey && e.key === 'Backspace') {
+                e.preventDefault();
+                this.limparTudo();
+            } else if (e.altKey && !e.ctrlKey && !e.metaKey && e.key.toLowerCase() === 'h') {
                 e.preventDefault();
                 this.irParaInicio();
             } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
