@@ -1,2 +1,2 @@
-# Opcional: somente para calculo.py. O app HTML/JS não usa Python.
+# SymPy é opcional e serve ao motor complementar src/python/motor_simbolico.py.
 sympy>=1.12,<2

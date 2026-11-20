@@ -4,7 +4,9 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 
 const raiz = path.resolve(__dirname, '..');
-const url = process.env.MATHLAB_URL || pathToFileURL(path.join(raiz, 'index.html')).href;
+const endereco = new URL(process.env.MATHLAB_URL || pathToFileURL(path.join(raiz, 'index.html')).href);
+endereco.searchParams.set('sem-abertura', '');
+const url = endereco.href;
 const pasta = process.env.CALCLAB_CAPTURAS;
 const modos = ['cientifica', 'algebra', 'funcoes', 'limites', 'derivadas', 'integrais',
     'geometria', 'trigonometria', 'vetores', 'estatistica', 'modelagem'];

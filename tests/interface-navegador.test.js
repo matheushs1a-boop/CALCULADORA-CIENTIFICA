@@ -17,7 +17,9 @@ catch (erro) { console.error('NÃO TESTADO: Playwright indisponível. Consulte R
         const page = await browser.newPage({ viewport: { width: 1366, height: 768 } });
         const erros = [];
         page.on('pageerror', erro => erros.push(erro.message));
-        await page.goto(pathToFileURL(path.resolve(__dirname, '..', 'index.html')).href);
+        const url = pathToFileURL(path.resolve(__dirname, '..', 'index.html'));
+        url.searchParams.set('sem-abertura', '');
+        await page.goto(url.href);
         await page.locator('[data-module=cientifica].active').waitFor();
         assert.strictEqual(await page.locator('#sci-expr-input').inputValue(), '');
         assert.strictEqual((await page.locator('#sci-res-primary').innerText()).trim(), '0');

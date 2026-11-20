@@ -11,11 +11,15 @@ import sys
 import shutil
 import time
 import urllib.request
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path('/tmp/mathlab-evidencias-firefox')
 BASE = os.environ.get('MATHLAB_WEBDRIVER', 'http://127.0.0.1:4444')
 URL = os.environ.get('MATHLAB_URL', 'http://127.0.0.1:5500/index.html')
+partes = urlsplit(URL)
+consulta = parse_qsl(partes.query, keep_blank_values=True)
+URL = urlunsplit(partes._replace(query=urlencode([*consulta, ('sem-abertura', '')])))
 
 def request(path, data=None):
     req = urllib.request.Request(BASE + path, data=json.dumps(data).encode() if data is not None else None,

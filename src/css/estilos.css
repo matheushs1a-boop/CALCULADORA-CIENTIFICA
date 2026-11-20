@@ -2822,3 +2822,8 @@ html, body { max-width: 100%; overflow-x: hidden; }
 }
 
 #btn-generate-footer[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+
+/* Exemplos locais da Científica, recolhidos enquanto o teclado está em uso. */
+.sci-exemplos { margin-top: 10px; }
+.sci-exemplos > summary { width: fit-content; cursor: pointer; color: var(--text-secondary); }
+.sci-lista-exemplos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }

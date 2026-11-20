@@ -8,7 +8,7 @@
   <p>Calculadora científica e laboratório de Cálculo Diferencial e Integral.</p>
 </div>
 
-![Tela inicial do CalcLab no tema escuro com a Calculadora Científica ativa e visor em zero](docs/assets/capturas/depois/abertura-escuro.png)
+![Tela inicial do CalcLab no tema escuro com a Calculadora Científica ativa e visor em zero](docs/assets/capturas/cientifica/depois-dark.png)
 
 Projeto acadêmico do 1º período de **Engenharia de Software** — **UNICATÓLICA RN**.
 
@@ -20,7 +20,9 @@ Projeto acadêmico do 1º período de **Engenharia de Software** — **UNICATÓL
 
 ## Primeiros passos
 
-Abra o aplicativo e digite `2+3×4`. A Calculadora Científica começa com o visor em `0`. Pressione Enter para confirmar o resultado `14`. Os demais modos começam sem dados. Use **Exemplo 1** em Funções, Limites, Derivadas ou Integrais para preencher um caso da AP2.
+Na primeira abertura da sessão, a marca aparece por cerca de dois segundos. Clique ou pressione uma tecla para pular. O link com `?sem-abertura` abre sem a animação. [Guia de uso](docs/guia-de-uso.md)
+
+Abra o aplicativo e digite `2+3×4`. A Calculadora Científica começa com o visor em `0`. Pressione Enter para confirmar o resultado `14`. Use o teclado físico, o teclado da tela ou o menu **Exemplos**, que preenche a entrada e aguarda sua confirmação. Os demais modos começam sem dados. Use **Exemplo 1** em Funções, Limites, Derivadas ou Integrais para preencher um caso da AP2.
 
 A marca e `Alt+H` voltam à Científica mantendo o trabalho da sessão. Recarregar limpa as entradas e o histórico da sessão, mantendo favoritos e preferências. Um novo acesso a `#limites` abre Limites. **Configurações → Limpar tudo** oferece **Desfazer** por oito segundos.
 
@@ -38,51 +40,28 @@ O objetivo é relacionar expressões algébricas às suas propriedades analític
 
 ## 2. Estrutura do Projeto
 
-O repositório está organizado segundo padrões modernos de Engenharia de Software, separando código-fonte (`src/`), testes automatizados (`tests/`) e documentação técnica (`docs/`):
+A aplicação web, os ativos, os testes e a documentação ficam em pastas próprias.
 
 ```text
-CALCULADORA 2.0/
-├── index.html                              # Entrada principal da aplicação web (abre direto no navegador)
-├── package.json                            # Manifesto do projeto e scripts de automação (npm test, npm start)
-├── requirements.txt                        # Dependências opcionais do motor simbólico em Python (SymPy)
-├── README.md                               # Documentação principal do projeto
-├── .gitignore                              # Regras de exclusão do controle de versão
-│
-├── src/                                    # Código-fonte da aplicação
-│   ├── css/
-│   │   └── estilos.css                     # Sistema de design, temas (Escuro/Claro) e layout responsivo
-│   ├── js/
-│   │   ├── app.js                          # Controlador principal de interface, estado reativo e eventos
-│   │   ├── motor-matematico.js             # Motor de cálculo analítico e numérico (MathLabCalc)
-│   │   └── motor-grafico.js                # Motor de renderização em HTML5 Canvas 2D e SVG (MathLabGraph)
-│   └── python/
-│       └── motor_simbolico.py              # Motor simbólico complementar em Python + SymPy
-│
-├── tests/                                  # Suíte de testes automatizados e auditoria QA (Node.js)
-│   ├── executar-testes.js                  # Orquestrador central das 9 suítes de testes
-│   ├── modulos-gerais.test.js              # Validação dos módulos (Científica, Funções, Geometria, Estatística)
-│   ├── sincronizacao-estado.test.js        # Sincronização entre Fórmula Pronta, Modo Normal e Histórico
-│   ├── funcoes-auditoria.test.js           # Auditoria estocástica (800 funções aleatórias + 4.000 comparações)
-│   ├── regressoes-matematicas.test.js      # Casos de borda, segurança do parser e estabilidade numérica
-│   ├── calculo-regras.test.js              # Validação das 6 regras de Derivadas e 6 de Integrais
-│   ├── integrais-modulo.test.js            # Estado, somas de Riemann, Regra de Simpson e áreas com sinal
-│   ├── graficos-renderizacao.test.js       # Geometria de curvas, assíntotas e áreas sombreadas no Canvas
-│   ├── trigonometria-modulo.test.js          # Propriedades, exatos e 243 combinações trigonométricas
-│   ├── interface-firefox.py                 # Aceitação real no Firefox via WebDriver
-│   ├── graficos-layout.test.js             # Regressão de cascata CSS e posicionamento de legendas
-│   ├── interface-navegador.test.js         # Teste integrado E2E dos 11 módulos (Playwright)
-│   └── interface-integrais.test.js         # Teste visual de aceitação do módulo de Integrais (Playwright)
-│
-└── docs/                                   # Documentação acadêmica, guias e relatórios técnicos
-    ├── guia-defesa-projeto.md              # Guia de explicação do código e 10 perguntas da apresentação
-    ├── relatorio-auditoria-qa.md           # Relatório técnico de auditoria matemática e QA
-    ├── relatorio-revisao-integrais.md      # Relatório técnico de revisão do módulo de Integrais
-    ├── comparativo-evolucao-ui.md          # Comparativo descritivo da evolução da interface (Antes/Depois)
-    ├── roteiro-validacao-humana.md         # Roteiro de inspeção manual e checklist de validação humana
-    └── evidencias/                         # Registros de execução e capturas de tela
-        ├── captura-sobreposicao-antes.png  # Evidência visual do diagnóstico de legenda corrigido
-        └── log-execucao-testes.txt         # Log consolidado da aprovação das 9 suítes de testes
+.
+├── index.html                  # Entrada da aplicação web
+├── package.json                # Scripts de execução e testes
+├── requirements.txt           # SymPy para o motor complementar em Python
+├── CHANGELOG.md                # Alterações por etapa
+├── assets/logo/                # Marca, ícones e imagem social
+├── src/
+│   ├── css/                    # Temas, layout e animação de abertura
+│   ├── js/                     # Interface e motores web
+│   └── python/                 # Motor simbólico complementar
+├── tests/
+│   └── regressao/golden/       # Referência de regressão matemática
+└── docs/
+    ├── README.md               # Índice de guias, relatórios e capturas
+    ├── assets/capturas/        # Capturas organizadas por etapa
+    └── evidencias/             # Evidências de auditorias anteriores
 ```
+
+[Índice da documentação](docs/README.md) · [Histórico de mudanças](CHANGELOG.md)
 
 ---
 
@@ -109,7 +88,13 @@ npm test
 node tests/executar-testes.js
 ```
 
-A saída integral da execução validada está registrada em [`docs/evidencias/log-execucao-testes.txt`](docs/evidencias/log-execucao-testes.txt).
+Use a referência de regressão do motor para comparar as 269 entradas registradas.
+
+```bash
+node tests/regressao/golden/conferir.js
+```
+
+[Registro de execução anterior](docs/evidencias/log-execucao-testes.txt)
 
 ### 3.3. Testes Visuais em Navegador Real (Opcional — Playwright)
 
@@ -118,6 +103,9 @@ Em um ambiente que permita inicialização de sockets/navegador headless:
 ```bash
 npm run test:ui
 npm run test:ui-integrais
+npm run test:aceitacao
+npm run test:abertura
+npm run test:cientifica
 ```
 
 ### 3.3.1. Aceitação em Firefox
@@ -129,7 +117,7 @@ geckodriver --port 4444 --allow-system-access
 npm run test:firefox
 ```
 
-O teste usa apenas a biblioteca padrão do Python e o Firefox, em perfil temporário. `MATHLAB_URL` e `MATHLAB_WEBDRIVER` permitem alterar a URL e o controlador. Inclui T1–T6, os 11 modos em três resoluções e zoom nativo de 90% a 125%, alinhamento dos controles, propriedades e o seletor de Álgebra. Consulte o [relatório com antes e depois](docs/relatorio-trigonometria-interface.md), o [log Node atual](docs/evidencias/log-testes-trigonometria.txt) e o [log Firefox](docs/evidencias/log-firefox-trigonometria.txt).
+O teste usa apenas a biblioteca padrão do Python e o Firefox, em perfil temporário. `MATHLAB_URL` e `MATHLAB_WEBDRIVER` permitem alterar a URL e o controlador. Inclui T1–T6, os 11 modos em três resoluções e zoom nativo de 90% a 125%, alinhamento dos controles, propriedades e o seletor de Álgebra. Consulte o [relatório com antes e depois](docs/relatorio-trigonometria-interface.md), o [log Node da auditoria](docs/evidencias/log-testes-trigonometria.txt) e o [log Firefox](docs/evidencias/log-firefox-trigonometria.txt).
 
 ### 3.4. Motor Simbólico Complementar em Python
 
@@ -144,7 +132,7 @@ python3 -m pip install -r requirements.txt
 ## 4. Arquitetura e Fluxo de Usabilidade
 
 - **Cabeçalho enxuto:** Reúne identificação da marca, busca global (`Ctrl+K`), **Favoritos**, menu **Compartilhar** (Copiar resultado, LaTeX, PNG, PDF e Link) e menu **Configurações** (tema escuro/claro, escala tipográfica, painel visual, unidade de ângulo e casas decimais).
-- **Dois Modos de Entrada (`Fórmula pronta` e `Normal`):**
+- **Dois modos de entrada nos módulos de fórmulas (`Fórmula pronta` e `Normal`):**
   - **Fórmula pronta (padrão):** Exibe a estrutura matemática montada com campos editáveis coloridos (slots), dicas contextuais ao focar, navegação por `Tab`/setas e atualização em tempo real.
   - **Modo Normal:** Campo em fonte monoespaçada para digitação livre (`x^2 - 4x - 5`, `2*sen(pi/6)`, `sqrt(x)`), sincronizado com a mesma fonte de estado (`MathLabApp.state`).
 

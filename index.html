@@ -8,9 +8,28 @@
     <link rel="icon" href="assets/logo/favicon-32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
-    <link rel="stylesheet" href="src/css/estilos.css?v=2.3">
+    <link rel="stylesheet" href="src/css/estilos.css?v=2.4">
+    <link rel="stylesheet" href="src/css/componentes/abertura.css">
 </head>
 <body>
+    <div id="abertura" class="abertura" role="presentation" aria-hidden="true" hidden>
+        <div class="abertura-conteudo">
+            <svg class="abertura-simbolo" viewBox="0 0 96 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <g class="eixos" stroke-width="4">
+                    <path pathLength="1" d="M13 83V12m-5 5 5-5 5 5M6 76h85m-6-5 6 5-6 5"/>
+                </g>
+                <g stroke-width="8">
+                    <polyline class="traco-azul" pathLength="1" points="18,73 29,30 51,72"/>
+                    <polyline class="traco-verde" pathLength="1" points="51,72 74,29 84,73"/>
+                </g>
+                <circle class="ponto p1 pt-azul" cx="29" cy="30" r="6.5"/>
+                <circle class="ponto p2 pt-azul" cx="74" cy="29" r="6.5"/>
+                <circle class="ponto p3 pt-verde" cx="51" cy="72" r="6.5"/>
+            </svg>
+            <div class="abertura-nome"><span class="calc">Calc</span><span class="lab">Lab</span></div>
+            <div class="abertura-lema">Laboratório de Cálculo</div>
+        </div>
+    </div>
 
     <!-- ====================================================================
          1. CABEÇALHO PRINCIPAL (HEADER)
@@ -286,6 +305,7 @@
 
     <script src="src/js/motor-grafico.js?v=2.3"></script>
     <script src="src/js/motor-matematico.js?v=2.2"></script>
-    <script src="src/js/app.js?v=2.3"></script>
+    <script src="src/js/app.js?v=2.5"></script>
+    <script src="src/js/interface/abertura.js" async></script>
 </body>
 </html>
