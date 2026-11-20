@@ -14,7 +14,7 @@ const MathLabApp = {
        ======================================================================== */
     state: {
         theme: 'dark',
-        activeModule: 'funcoes', // Abre inicialmente em Funções → Quadrática (Seção 6 - Módulo 03)
+        activeModule: 'cientifica',
         visualCollapsed: false,
         loadingSkeleton: false,
 
@@ -35,11 +35,11 @@ const MathLabApp = {
 
         // Módulo 01: Científica
         cientifica: {
-            expressao: '2 · sen(π/6) + √16',
+            expressao: '',
             unidadeAngulo: 'rad', // 'rad' | 'grau'
             modoSaida: 'exato',   // 'exato' | 'decimal'
             memoria: 0,
-            slots: { c1: 2, c2: 6, c3: 16 }
+            slots: { c1: '', c2: '', c3: '' }
         },
 
         // Módulo 02: Álgebra
@@ -171,7 +171,13 @@ const MathLabApp = {
         this.vincularMenusCompactos();
         this.renderizarModuloAtivo();
         this.atualizarBadgeFavoritos();
-        this.verificarTourPrimeiroUso();
+        if (this.state.activeModule === 'cientifica') this.focarEntradaCientifica();
+    },
+
+    focarEntradaCientifica() {
+        if (!window.matchMedia('(pointer: coarse), (max-width: 600px)').matches) {
+            document.getElementById('sci-expr-input')?.focus({ preventScroll: true });
+        }
     },
 
     instalarDecoradoresDoisModos() {
@@ -255,27 +261,19 @@ const MathLabApp = {
                 if ([2, 4, 6, 8].includes(preferenciasCalculo.casas)) MathLabCalc.casasDecimais = preferenciasCalculo.casas;
             }
 
-            const histSalvo = localStorage.getItem('mathlab_history');
-            if (histSalvo) {
-                this.state.historico = JSON.parse(histSalvo);
-            } else {
-                // Histórico inicial igual à referência visual do MathLab
-                this.state.historico = [
-                    { id: 1, expressao: '2 · sen(π/6) + √16', resultado: '5', modulo: 'cientifica', nomeModulo: 'Científica', horario: '14:20', favorito: true, fixado: true },
-                    { id: 2, expressao: 'f(x) = x² − 4x − 5', resultado: 'V(2, −9)', modulo: 'funcoes', nomeModulo: 'Funções', horario: '14:18', favorito: true, fixado: true, quad: { a: 1, b: -4, c: -5 } },
-                    { id: 3, expressao: '√(49)', resultado: '7', modulo: 'cientifica', nomeModulo: 'Científica', horario: '14:15', favorito: false, fixado: false },
-                    { id: 4, expressao: 'log(100)', resultado: '2', modulo: 'cientifica', nomeModulo: 'Científica', horario: '14:12', favorito: false, fixado: false },
-                    { id: 5, expressao: 'e²', resultado: '7,3891', modulo: 'cientifica', nomeModulo: 'Científica', horario: '14:10', favorito: false, fixado: false },
-                    { id: 6, expressao: 'π', resultado: '3,1416', modulo: 'cientifica', nomeModulo: 'Científica', horario: '14:05', favorito: false, fixado: false }
-                ];
-                this.salvarHistorico();
-            }
+            const favoritos = localStorage.getItem('mathlab_favorites');
+            const registros = JSON.parse(favoritos ?? localStorage.getItem('mathlab_history') ?? '[]');
+            this.state.historico = registros.filter(item => item.id > 6 && (item.favorito || item.fixado))
+                .map(item => ({ ...item, salvo: true }));
+            this.salvarHistorico();
+            localStorage.removeItem('mathlab_history');
+            this.state.visualCollapsed = localStorage.getItem('mathlab_visual_collapsed') === 'true';
         } catch (e) {}
     },
 
     salvarHistorico() {
         try {
-            localStorage.setItem('mathlab_history', JSON.stringify(this.state.historico));
+            localStorage.setItem('mathlab_favorites', JSON.stringify(this.state.historico.filter(item => item.favorito || item.fixado)));
         } catch (e) {}
         this.atualizarBadgeFavoritos();
     },
@@ -293,7 +291,8 @@ const MathLabApp = {
             favorito: false
         };
         this.state.historico.unshift(novo);
-        if (this.state.historico.length > 30) this.state.historico.pop();
+        const sessao = this.state.historico.filter(item => !item.salvo && !item.favorito && !item.fixado);
+        if (sessao.length > 30) this.state.historico = this.state.historico.filter(item => item !== sessao.at(-1));
         this.salvarHistorico();
     },
 
@@ -313,7 +312,8 @@ const MathLabApp = {
         const badge = document.getElementById('fav-count-badge');
         if (badge) {
             const qtd = this.state.historico.filter(h => h.favorito).length;
-            badge.textContent = String(qtd);
+            badge.textContent = qtd ? String(qtd) : '';
+            badge.hidden = !qtd;
         }
     },
 
@@ -592,7 +592,7 @@ const MathLabApp = {
         }
 
         // Lista de Histórico
-        const htmlHistorico = this.state.historico.slice(0, 8).map(item => `
+        const htmlHistorico = this.state.historico.filter(item => !item.salvo).slice(0, 8).map(item => `
             <div class="history-card" data-hist-id="${item.id}">
                 <div class="history-card-left">
                     <span class="history-expr">${item.expressao}</span>
@@ -618,7 +618,7 @@ const MathLabApp = {
                     <button type="button" class="mini-icon-btn" id="btn-Restore-Demo-Sci" title="Restaurar demonstração inicial" style="width:auto;padding:0 6px;font-size:11px;">Demo Inicial</button>
                 </div>
                 <div class="history-items">
-                    ${htmlHistorico}
+                    ${htmlHistorico || '<p>Seus cálculos aparecerão aqui</p>'}
                 </div>
             </div>
         `;
@@ -3378,6 +3378,7 @@ const MathLabApp = {
             const filtro = this.state.filtroHistorico || 'todos';
 
             const filtrados = this.state.historico.filter(item => {
+                if (filtro === 'todos' && item.salvo) return false;
                 if (filtro === 'favoritos' && !item.favorito) return false;
                 if (filtro === 'fixados' && !item.fixado) return false;
                 if (!termo) return true;
@@ -3393,7 +3394,7 @@ const MathLabApp = {
                     <input type="text" id="hist-search-inp" class="field-input" value="${this.state.buscaHistorico || ''}" placeholder="Buscar no histórico por fórmula, módulo ou resultado...">
                 </div>
                 <div class="segmented-control full-width" style="margin-bottom:8px;">
-                    <button type="button" class="segmented-btn ${filtro === 'todos' ? 'active' : ''}" data-hist-filter="todos">Todos (${this.state.historico.length})</button>
+                    <button type="button" class="segmented-btn ${filtro === 'todos' ? 'active' : ''}" data-hist-filter="todos">Todos (${this.state.historico.filter(item => !item.salvo).length})</button>
                     <button type="button" class="segmented-btn ${filtro === 'favoritos' ? 'active' : ''}" data-hist-filter="favoritos"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 10l6-1z"/></svg> Favoritos</button>
                     <button type="button" class="segmented-btn ${filtro === 'fixados' ? 'active' : ''}" data-hist-filter="fixados">📌 Fixados</button>
                 </div>
@@ -3402,7 +3403,7 @@ const MathLabApp = {
                     <button type="button" class="btn-secondary-action" id="btn-clear-hist-all" style="height:26px;font-size:11px;">Limpar Histórico</button>
                 </div>
                 <div class="history-items">
-                    ${filtrados.length === 0 ? `<div style="padding:14px;color:var(--text-secondary);font-size:12.5px;">Nenhum registro encontrado para este filtro.</div>` : filtrados.map(item => `
+                    ${filtrados.length === 0 ? `<div style="padding:14px;color:var(--text-secondary);font-size:12.5px;">${termo ? 'Nenhum registro encontrado.' : filtro === 'favoritos' ? 'Nenhum favorito ainda' : filtro === 'todos' ? 'Seus cálculos aparecerão aqui' : 'Nenhum cálculo fixado'}</div>` : filtrados.map(item => `
                         <div class="history-card" data-restore-id="${item.id}">
                             <div class="history-card-left">
                                 <span class="history-expr">${item.fixado ? '📌 ' : ''}${item.expressao}</span>
@@ -3822,6 +3823,7 @@ const MathLabApp = {
                 return;
             }
             this.state.visualCollapsed = !this.state.visualCollapsed;
+            try { localStorage.setItem('mathlab_visual_collapsed', String(this.state.visualCollapsed)); } catch (e) {}
             this.renderizarModuloAtivo();
         });
 
@@ -5017,15 +5019,6 @@ const MathLabApp = {
                 if (p.ft) this.state.funcoes.tipoAtivo = p.ft;
                 if (p.q) Object.assign(this.state.funcoes.quad, p.q);
                 if (p.sc) this.state.cientifica.expressao = p.sc;
-            }
-        } catch (e) {}
-    },
-
-    verificarTourPrimeiroUso() {
-        try {
-            const viuTour = localStorage.getItem('mathlab_tour_done');
-            if (!viuTour) {
-                localStorage.setItem('mathlab_tour_done', 'true');
             }
         } catch (e) {}
     },

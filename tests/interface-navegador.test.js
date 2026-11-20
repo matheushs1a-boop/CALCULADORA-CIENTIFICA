@@ -18,6 +18,10 @@ catch (erro) { console.error('NÃO TESTADO: Playwright indisponível. Consulte R
         const erros = [];
         page.on('pageerror', erro => erros.push(erro.message));
         await page.goto(pathToFileURL(path.resolve(__dirname, '..', 'index.html')).href);
+        await page.locator('[data-module=cientifica].active').waitFor();
+        assert.strictEqual(await page.locator('#sci-expr-input').inputValue(), '');
+        assert.strictEqual((await page.locator('#sci-res-primary').innerText()).trim(), '0');
+        await page.locator('[data-module=funcoes]').click();
         await page.locator('.result-hero-card').waitFor();
         await page.locator('[data-switch-imode="normal"]').click();
         await page.locator('#normal-mode-input').fill('2x + 1');

@@ -12,6 +12,7 @@ for (const arquivo of ['src/js/motor-matematico.js', 'src/js/app.js']) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, '..', arquivo), 'utf8'), contexto);
 }
 const app = vm.runInContext('MathLabApp', contexto);
+app.state.activeModule = 'funcoes';
 // Somente a pintura é substituída; conversão, estado e análise são os da aplicação.
 app.renderizarModuloAtivo = () => {};
 app.renderModuloFuncoes = () => {};
