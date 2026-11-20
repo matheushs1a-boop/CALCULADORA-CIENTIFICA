@@ -17,7 +17,8 @@
     "test:ui": "node tests/interface-navegador.test.js",
     "test:ui-integrais": "node tests/interface-integrais.test.js",
     "test:trigonometria": "node tests/trigonometria-modulo.test.js",
-    "test:firefox": "python3 tests/interface-firefox.py"
+    "test:firefox": "python3 tests/interface-firefox.py",
+    "test:teclado": "python3 tests/teclado-firefox.py"
   },
   "keywords": [
     "matematica",

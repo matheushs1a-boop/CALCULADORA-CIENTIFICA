@@ -191,3 +191,15 @@ Validado em [`tests/calculo-regras.test.js`](tests/calculo-regras.test.js) e [`t
 
 - [Revisão de Trigonometria e alinhamento: causas, capturas e testes](docs/relatorio-trigonometria-interface.md)
 # CALCULADORA-CIENTIFICA
+
+## Teclado da calculadora
+
+Na Científica, o teclado aparece abaixo do visor. Em Funções, Limites, Derivadas e Integrais, escolha **Normal** e abra **Teclado**. Use Tab para navegar e Enter ou Espaço para acionar uma tecla. Depois da ação, o foco volta à expressão.
+
+- **Inverso.** `1/x` usa a seleção, o último resultado confirmado ou a expressão inteira, nessa ordem. Com o campo vazio, insere `1/(` na Científica e `1/x` nos modos de função. O inverso de zero exibe uma mensagem de divisão por zero.
+- **Porcentagem.** `50%` vale `0,5` e `200*15%` vale `30`. Um percentual ao fim de uma soma ou subtração incide sobre a expressão à esquerda. `200+10%` vale `220` e `200−10%` vale `180`. A Científica mostra a interpretação junto à resolução.
+- **Sinal.** `±` troca o sinal da seleção ou do valor inteiro quando o cursor está no fim. Assim, `4` vira `−4` e `2+3` vira `−(2+3)`. Com o cursor no meio e sem seleção, a tecla insere o sinal no cursor.
+- **Potências e constantes.** Uma expressão composta recebe parênteses ao servir de base, como em `(2+3)^2`. Na Científica, `0^0` gera a mensagem de indeterminação. `2π` é interpretado como multiplicação e a tecla de Euler insere `2·e` após um número.
+- **Memória e histórico.** M+ e M− operam sobre uma expressão com resultado numérico. O indicador M aparece quando a memória contém um valor diferente de zero. MR insere a memória no cursor, MC zera a memória e Ans insere o último resultado confirmado na Científica. `=` registra a expressão no histórico. `C` pede confirmação se a expressão passar de 500 caracteres.
+
+Com o geckodriver em execução, rode `npm run test:teclado` para a regressão com Firefox real, ou `npm run test:teclado -- --matriz` para registrar as ações por tecla e cenário.
