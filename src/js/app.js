@@ -5301,6 +5301,7 @@ const MathLabApp = {
             <span class="tour-step-badge">Passo ${atual.num} de 4 — Guia Rápido CalcLab</span>
             <h3 class="tour-title">${atual.titulo}</h3>
             <p class="tour-desc">${atual.desc}</p>
+            <button type="button" class="btn-secondary-action" id="btn-rever-abertura">Rever abertura</button>
             <div class="tour-footer">
                 <div class="tour-dots">
                     ${passosTour.map(p => `<span class="tour-dot ${p.num === atual.num ? 'active' : ''}"></span>`).join('')}

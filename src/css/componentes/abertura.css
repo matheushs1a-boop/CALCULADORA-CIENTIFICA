@@ -1,0 +1,105 @@
+.abertura {
+    --abertura-azul: var(--primary);
+    --abertura-verde: var(--green);
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    place-items: center;
+    background: var(--bg-main);
+    pointer-events: none;
+}
+
+[data-theme="light"] .abertura {
+    --abertura-azul: var(--primary-hover);
+    /* Verde da versão oficial do símbolo para fundo claro. */
+    --abertura-verde: #087C15;
+}
+
+.abertura:not([hidden]) { display: grid; }
+
+.abertura-conteudo {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.abertura-simbolo {
+    width: clamp(120px, 22vw, 168px);
+    height: auto;
+}
+
+.abertura .eixos { stroke: var(--text-secondary); }
+.abertura .traco-azul { stroke: var(--abertura-azul); }
+.abertura .traco-verde { stroke: var(--abertura-verde); }
+.abertura .pt-azul { fill: var(--abertura-azul); }
+.abertura .pt-verde { fill: var(--abertura-verde); }
+
+.abertura-nome {
+    color: var(--text-main);
+    font-size: clamp(34px, 6.5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1;
+}
+
+.abertura-nome .lab { color: var(--abertura-azul); }
+
+.abertura-lema {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.abertura-lema::before,
+.abertura-lema::after {
+    content: "";
+    width: 20px;
+    height: 1px;
+    background: currentColor;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .abertura:not([hidden], .abertura-reduzida) {
+        animation: abertura-sair .35s 1.65s ease both;
+    }
+
+    .abertura:not(.abertura-reduzida) [pathLength] {
+        stroke-dasharray: 1;
+        animation: abertura-desenhar .55s ease both;
+    }
+
+    .abertura:not(.abertura-reduzida) .eixos path { animation-duration: .5s; }
+    .abertura:not(.abertura-reduzida) .traco-azul { animation-delay: .45s; }
+    .abertura:not(.abertura-reduzida) .traco-verde { animation-delay: .8s; }
+
+    .abertura:not(.abertura-reduzida) .ponto {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: abertura-ponto .4s ease-out both;
+    }
+
+    .abertura:not(.abertura-reduzida) .p1 { animation-delay: .9s; }
+    .abertura:not(.abertura-reduzida) .p2 { animation-delay: 1.05s; }
+    .abertura:not(.abertura-reduzida) .p3 { animation-delay: 1.2s; }
+
+    .abertura:not(.abertura-reduzida) .abertura-nome {
+        animation: abertura-nome .42s 1.15s ease-out both;
+    }
+
+    .abertura:not(.abertura-reduzida) .abertura-lema {
+        animation: abertura-lema .25s 1.45s ease-out both;
+    }
+}
+
+@keyframes abertura-desenhar { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes abertura-ponto { from { opacity: 0; transform: scale(0); } }
+@keyframes abertura-nome { from { opacity: 0; transform: translateY(8px); } }
+@keyframes abertura-lema { from { opacity: 0; } }
+@keyframes abertura-sair { to { opacity: 0; visibility: hidden; } }
