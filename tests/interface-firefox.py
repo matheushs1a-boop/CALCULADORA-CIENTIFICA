@@ -70,11 +70,13 @@ addEventListener('unhandledrejection',e=>mathlabErros.push(String(e.reason)));
 cmd('/execute/async',{'script':'const done=arguments[arguments.length-1];document.fonts.ready.then(()=>done(true));','args':[]})
 viewport(1366,768)
 select('trigonometria')
+js('MathLabApp.restaurarExemploModulo()')
 shot('trigonometria-' + phase)
 modules=['cientifica','algebra','funcoes','limites','derivadas','integrais','geometria','trigonometria','vetores','estatistica','modelagem']
 metrics=[]
 for module in modules:
     select(module)
+    js('MathLabApp.restaurarExemploModulo()')
     shot(module + '-' + phase)
     metrics.append(js("""return {modulo:MathLabApp.state.activeModule,
         largura:innerWidth,documento:document.documentElement.scrollWidth,
@@ -229,6 +231,7 @@ for tool in ['eq2','fatoracao','expansao','simplificacao','eq1','sistema','notav
     js("document.getElementById('alg-tool-trigger').click();const n=[...document.querySelectorAll('#alg-tool-select option')].findIndex(o=>o.value===arguments[0]);document.querySelector('[data-tool-index=\"'+n+'\"]').click()",tool)
     check('MathLabApp.state.algebra.ferramenta==='+json.dumps(tool), 'Ferramenta preservada: '+tool)
 select('funcoes')
+js('MathLabApp.restaurarExemploModulo()')
 js("const d=[...document.querySelectorAll('.layered-details')].find(d=>d.querySelector('.props-list'));d.open=true;d.scrollIntoView({block:'nearest'})")
 time.sleep(.25)
 props=js("return document.querySelector('#right-panel-body .props-list')")['element-6066-11e4-a52e-4f735466cecf']
