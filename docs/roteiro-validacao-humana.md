@@ -1,6 +1,6 @@
 # Roteiro de Validação Manual e Homologação Humana
 
-Este documento consolida o roteiro de inspeção visual, testes de usabilidade e checklist de validação humana para apresentação e entrega acadêmica do **MathLab (CDI — AP2)**.
+Este documento consolida o roteiro de inspeção visual, testes de usabilidade e checklist de validação humana para apresentação e entrega acadêmica do **CalcLab (CDI — AP2)**.
 
 ---
 
@@ -77,3 +77,11 @@ A execução automatizada está no [relatório da revisão](relatorio-trigonomet
 11. Abrir Compartilhar, Configurações, Favoritos, Atalhos, Sobre, Estados, Tour, Busca e Estudo da função. Conferir textos, alinhamento e navegação por teclado. Registrar responsável, data e evidências na tabela de validação humana.
 
 12. Abrir e fechar **Por que deu esse resultado?** nos 11 modos: o selo **Intuição** deve continuar na posição normal. Conferir que apenas as setas giram, que os selos de verificação não ocupam a linha inteira e que a troca de modo limpa coordenadas da curva anterior. Em tg(x), arrastar para x entre 10 e 20 e conferir que as novas assíntotas aparecem.
+
+## Abertura e identidade CalcLab
+
+1. Em janela anônima, abra o endereço sem fragmento. Confirme o modo Científica, visor `0`, histórico vazio, ausência de login ou modal e calcule `2+3×4 = 14`.
+2. Use os quatro botões **Exemplo 1** e confira o gráfico, o cálculo e a tabela de cada caso. Use a marca e `Alt+H`, depois volte no navegador e confirme que o trabalho ainda está no modo anterior.
+3. Favorite um cálculo e mude tema, ângulos e casas decimais. Recarregue de outro modo e confira que a Científica zerou, com o favorito e as preferências preservados.
+4. Use **Limpar tudo** e, dentro de oito segundos, **Desfazer**. Confira também C/AC, `1/x`, porcentagem, cópia e Esc.
+5. Confira foco da marca via Tab, ícone da aba e símbolo no cabeçalho em tela estreita. Com a conexão externa desligada e um servidor local disponível, abra o app novamente e confirme que a marca aparece.

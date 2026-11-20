@@ -1,4 +1,4 @@
-# Revisão acadêmica e técnica do MathLab
+# Revisão acadêmica e técnica do CalcLab
 
 Data da revisão: 11/11/2026. Escopo principal: Funções, sincronização GERAR e cálculos de CDI; inclui a refatoração compacta solicitada anteriormente. Revisão e alterações feitas por IA; não equivale a validação humana.
 

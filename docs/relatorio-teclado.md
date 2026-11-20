@@ -1,4 +1,4 @@
-# Auditoria do teclado do MathLab
+# Auditoria do teclado do CalcLab
 
 ## Causa e execução
 
