@@ -228,6 +228,7 @@ const MathLabApp = {
             if (temaSalvo === 'light' || temaSalvo === 'dark') {
                 this.state.theme = temaSalvo;
                 document.documentElement.setAttribute('data-theme', temaSalvo);
+                this.atualizarCorDaAba();
             }
 
             const modoEntradaSalvo = localStorage.getItem('mathlab_input_mode');
@@ -3288,7 +3289,7 @@ const MathLabApp = {
         const body = document.getElementById('generic-drawer-body');
         body.innerHTML = `
             <p style="font-size:12.5px;color:var(--text-secondary);">
-                Abaixo estão os estados visuais padronizados do MathLab (idênticos ao painel <strong>Estados</strong> da especificação). Você pode testá-los diretamente nos módulos clicando nos botões de ação:
+                Abaixo estão os estados visuais padronizados do CalcLab (idênticos ao painel <strong>Estados</strong> da especificação). Você pode testá-los diretamente nos módulos clicando nos botões de ação:
             </p>
 
             <!-- 1. Erro de Domínio -->
@@ -3596,9 +3597,14 @@ const MathLabApp = {
     /* ========================================================================
        6. TEMA CLARO / ESCURO E EVENTOS GLOBAIS
        ======================================================================== */
+    atualizarCorDaAba() {
+        document.querySelector?.('meta[name=theme-color]')?.setAttribute('content', this.state.theme === 'dark' ? '#111B2E' : '#FFFFFF');
+    },
+
     alternarTema() {
         this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', this.state.theme);
+        this.atualizarCorDaAba();
         try {
             localStorage.setItem('mathlab_theme', this.state.theme);
         } catch (e) {}
@@ -3706,7 +3712,7 @@ const MathLabApp = {
             this.abrirInformacao('Atalhos de teclado', '<dl class="shortcuts-list"><dt>Ctrl+K</dt><dd>Buscar módulos, fórmulas e comandos</dd><dt>Ctrl+Z</dt><dd>Desfazer</dd><dt>Ctrl+Shift+Z</dt><dd>Refazer</dd><dt>Enter</dt><dd>Gerar relatório a partir da entrada</dd><dt>Tab / Shift+Tab</dt><dd>Percorrer controles</dd><dt>↑ / ↓</dt><dd>Navegar menus ou ajustar um quadradinho</dd><dt>Esc</dt><dd>Fechar menu, ajuda ou painel</dd></dl>');
         });
         document.getElementById('btn-about').addEventListener('click', () => {
-            this.abrirInformacao('Sobre o MathLab', '<p>Laboratório de Matemática para Cálculo Diferencial e Integral. Onze módulos com cálculos, gráficos, tabelas, estudo de funções e histórico. Executado no navegador com HTML, CSS, JavaScript, Canvas e SVG.</p>');
+            this.abrirInformacao('Sobre o CalcLab', '<p>Laboratório de Cálculo para Cálculo Diferencial e Integral. Onze módulos com cálculos, gráficos, tabelas, estudo de funções e histórico. Executado no navegador com HTML, CSS, JavaScript, Canvas e SVG.</p>');
         });
         this.atualizarControlesPreferencias();
     },
@@ -3759,7 +3765,7 @@ const MathLabApp = {
             if (document.getElementById('canvas-stage-wrapper').style.display === 'none') {
                 this.mostrarToast('Abra a aba de gráfico deste modo para exportar o PNG.'); return;
             }
-            MathLabGraph.exportarPNG(`mathlab-${this.state.activeModule}.png`); return;
+            MathLabGraph.exportarPNG(`calclab-${this.state.activeModule}.png`); return;
         }
         const dados = this.obterDadosAtuaisFuncoes();
         if (!dados.grafico.curvas.length) { this.mostrarToast('Digite uma função válida antes de exportar.'); return; }
@@ -3770,7 +3776,7 @@ const MathLabApp = {
         try {
             canvas.style.display = 'block'; custom.style.display = 'none';
             MathLabGraph.conectarCanvas(document.getElementById('main-graph-canvas'), dados.grafico);
-            MathLabGraph.exportarPNG('mathlab-funcoes.png');
+            MathLabGraph.exportarPNG('calclab-funcoes.png');
         } finally { [canvas.style.display, custom.style.display] = visibilidade; }
     },
 
@@ -5044,7 +5050,7 @@ const MathLabApp = {
             {
                 num: 3,
                 titulo: '3. Pré-visualização ao Vivo e Botão GERAR',
-                desc: 'Enquanto você digita, o gráfico e o vértice mudam ao vivo! Ao apertar Enter ou clicar em GERAR, o MathLab fecha o relatório completo e salva no Histórico.'
+                desc: 'Enquanto você digita, o gráfico e o vértice mudam ao vivo! Ao apertar Enter ou clicar em GERAR, o CalcLab fecha o relatório completo e salva no Histórico.'
             },
             {
                 num: 4,
@@ -5055,7 +5061,7 @@ const MathLabApp = {
 
         const atual = passosTour[passo - 1] || passosTour[0];
         card.innerHTML = `
-            <span class="tour-step-badge">Passo ${atual.num} de 4 — Guia Rápido MathLab</span>
+            <span class="tour-step-badge">Passo ${atual.num} de 4 — Guia Rápido CalcLab</span>
             <h3 class="tour-title">${atual.titulo}</h3>
             <p class="tour-desc">${atual.desc}</p>
             <div class="tour-footer">
