@@ -8,7 +8,7 @@
   <p>Calculadora científica e laboratório de Cálculo Diferencial e Integral.</p>
 </div>
 
-![Tela inicial do CalcLab no tema escuro com a Calculadora Científica ativa e visor em zero](docs/assets/capturas/depois/abertura-escuro.png)
+![Tela inicial do CalcLab no tema escuro com a Calculadora Científica ativa e visor em zero](docs/assets/capturas/cientifica/depois-dark.png)
 
 Projeto acadêmico do 1º período de **Engenharia de Software** — **UNICATÓLICA RN**.
 
@@ -22,7 +22,7 @@ Projeto acadêmico do 1º período de **Engenharia de Software** — **UNICATÓL
 
 Na primeira abertura da sessão, a marca aparece por cerca de dois segundos. Clique ou pressione uma tecla para pular. O link com `?sem-abertura` abre sem a animação. [Guia de uso](docs/guia-de-uso.md)
 
-Abra o aplicativo e digite `2+3×4`. A Calculadora Científica começa com o visor em `0`. Pressione Enter para confirmar o resultado `14`. Os demais modos começam sem dados. Use **Exemplo 1** em Funções, Limites, Derivadas ou Integrais para preencher um caso da AP2.
+Abra o aplicativo e digite `2+3×4`. A Calculadora Científica começa com o visor em `0`. Pressione Enter para confirmar o resultado `14`. Use o teclado físico, o teclado da tela ou o menu **Exemplos**, que preenche a entrada e aguarda sua confirmação. Os demais modos começam sem dados. Use **Exemplo 1** em Funções, Limites, Derivadas ou Integrais para preencher um caso da AP2.
 
 A marca e `Alt+H` voltam à Científica mantendo o trabalho da sessão. Recarregar limpa as entradas e o histórico da sessão, mantendo favoritos e preferências. Um novo acesso a `#limites` abre Limites. **Configurações → Limpar tudo** oferece **Desfazer** por oito segundos.
 
@@ -146,7 +146,7 @@ python3 -m pip install -r requirements.txt
 ## 4. Arquitetura e Fluxo de Usabilidade
 
 - **Cabeçalho enxuto:** Reúne identificação da marca, busca global (`Ctrl+K`), **Favoritos**, menu **Compartilhar** (Copiar resultado, LaTeX, PNG, PDF e Link) e menu **Configurações** (tema escuro/claro, escala tipográfica, painel visual, unidade de ângulo e casas decimais).
-- **Dois Modos de Entrada (`Fórmula pronta` e `Normal`):**
+- **Dois modos de entrada nos módulos de fórmulas (`Fórmula pronta` e `Normal`):**
   - **Fórmula pronta (padrão):** Exibe a estrutura matemática montada com campos editáveis coloridos (slots), dicas contextuais ao focar, navegação por `Tab`/setas e atualização em tempo real.
   - **Modo Normal:** Campo em fonte monoespaçada para digitação livre (`x^2 - 4x - 5`, `2*sen(pi/6)`, `sqrt(x)`), sincronizado com a mesma fonte de estado (`MathLabApp.state`).
 

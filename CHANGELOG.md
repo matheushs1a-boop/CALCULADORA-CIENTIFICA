@@ -1,5 +1,10 @@
 # Histórico de mudanças
 
+## Entrada da Científica
+
+- Campo de digitação e teclado direto na Científica. O menu fechado de exemplos preenche sem confirmar o cálculo.
+- Demonstrações centralizadas em Estados de exemplo, com retorno à entrada anterior. A preferência de editor dos demais módulos foi preservada.
+
 ## Abertura CalcLab
 
 - Logo animada de cerca de dois segundos na primeira abertura da sessão. Clique, toque ou pressione uma tecla para pular.
