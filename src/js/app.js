@@ -380,9 +380,16 @@ const MathLabApp = {
             window.history.pushState(null, '', '#' + nomeModulo);
         }
 
-        // Atualiza abas da barra superior
+        // O rótulo do menu também dá nome à aba do navegador.
         document.querySelectorAll('.module-tab').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.module === nomeModulo);
+            const ativo = btn.dataset.module === nomeModulo;
+            btn.classList.toggle('active', ativo);
+            if (ativo) {
+                btn.setAttribute('aria-current', 'page');
+                document.title = 'CalcLab — ' + btn.textContent.trim();
+            } else {
+                btn.removeAttribute('aria-current');
+            }
         });
 
         this.renderizarModuloAtivo();
