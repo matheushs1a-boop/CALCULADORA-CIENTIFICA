@@ -20,6 +20,8 @@ Projeto acadêmico do 1º período de **Engenharia de Software** — **UNICATÓL
 
 ## Primeiros passos
 
+Na primeira abertura da sessão, a marca aparece por cerca de dois segundos. Clique ou pressione uma tecla para pular. O link com `?sem-abertura` abre sem a animação. [Guia de uso](docs/guia-de-uso.md)
+
 Abra o aplicativo e digite `2+3×4`. A Calculadora Científica começa com o visor em `0`. Pressione Enter para confirmar o resultado `14`. Os demais modos começam sem dados. Use **Exemplo 1** em Funções, Limites, Derivadas ou Integrais para preencher um caso da AP2.
 
 A marca e `Alt+H` voltam à Científica mantendo o trabalho da sessão. Recarregar limpa as entradas e o histórico da sessão, mantendo favoritos e preferências. Um novo acesso a `#limites` abre Limites. **Configurações → Limpar tudo** oferece **Desfazer** por oito segundos.
