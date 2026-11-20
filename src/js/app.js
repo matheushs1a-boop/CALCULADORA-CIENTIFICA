@@ -173,7 +173,7 @@ const MathLabApp = {
         this.carregarEstadoDaUrl();
         this.vincularEventosGlobais();
         this.vincularMenusCompactos();
-        this.renderizarModuloAtivo();
+        this.selecionarModulo(this.state.activeModule, { registrar: false });
         this.atualizarBadgeFavoritos();
         if (this.state.activeModule === 'cientifica') this.focarEntradaCientifica();
     },
@@ -356,9 +356,13 @@ const MathLabApp = {
     /* ========================================================================
        3. NAVEGAÇÃO ENTRE OS 11 MÓDULOS
        ======================================================================== */
-    selecionarModulo(nomeModulo) {
+    selecionarModulo(nomeModulo, { registrar = true } = {}) {
+        const mudou = this.state.activeModule !== nomeModulo;
         this.fecharSeletorAlgebra?.();
         this.state.activeModule = nomeModulo;
+        if (mudou && registrar && typeof window !== 'undefined') {
+            window.history.pushState(null, '', '#' + nomeModulo);
+        }
 
         // Atualiza abas da barra superior
         document.querySelectorAll('.module-tab').forEach(btn => {
@@ -3949,6 +3953,13 @@ const MathLabApp = {
             }
         });
 
+        const sincronizarModo = () => {
+            const modo = this.modoDaUrl();
+            if (modo !== this.state.activeModule) this.selecionarModulo(modo, { registrar: false });
+        };
+        window.addEventListener('popstate', sincronizarModo);
+        window.addEventListener('hashchange', sincronizarModo);
+
         // Atalhos globais de teclado (Ctrl+K, Ctrl+Z, Ctrl+Shift+Z e Escape)
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -5094,37 +5105,36 @@ const MathLabApp = {
     },
 
     gerarLinkCompartilhavel() {
-        try {
-            const payload = {
-                m: this.state.activeModule,
-                im: this.state.inputMode,
-                f: this.state.funcoes,
-                ft: this.state.funcoes.tipoAtivo,
-                q: this.state.funcoes.quad,
-                sc: this.state.cientifica.expressao
-            };
-            const hash = '#state=' + encodeURIComponent(JSON.stringify(payload));
-            window.history.replaceState(null, '', hash);
-            this.copiarTexto(window.location.href, 'Link compartilhável copiado para a área de transferência!');
-        } catch (e) {
-            this.mostrarToast('Link atualizado na barra de endereços');
-        }
+        const url = new URL(window.location.href);
+        url.hash = this.state.activeModule;
+        this.copiarTexto(url.href, 'Link do módulo copiado');
+    },
+
+    modoDaUrl(hash = window.location.hash) {
+        const modo = hash.slice(1);
+        const aba = [...document.querySelectorAll('.module-tab')].find(botao => botao.dataset.module === modo);
+        return aba?.dataset.module ?? 'cientifica';
     },
 
     carregarEstadoDaUrl() {
-        try {
-            const hash = window.location.hash || '';
-            if (hash.startsWith('#state=')) {
-                const raw = decodeURIComponent(hash.slice(7));
-                const p = JSON.parse(raw);
-                if (p.m) this.state.activeModule = p.m;
-                if (p.im) this.state.inputMode = p.im;
-                if (p.f && typeof p.f === 'object') Object.assign(this.state.funcoes, p.f);
-                if (p.ft) this.state.funcoes.tipoAtivo = p.ft;
-                if (p.q) Object.assign(this.state.funcoes.quad, p.q);
-                if (p.sc) this.state.cientifica.expressao = p.sc;
+        const url = new URL(window.location.href);
+        if (window.performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+            if (url.hash) {
+                url.hash = '';
+                window.history.replaceState(null, '', url.href);
             }
-        } catch (e) {}
+            return;
+        }
+        this.state.activeModule = this.modoDaUrl(url.hash);
+        // Links da versão anterior ainda abrem o módulo indicado.
+        if (url.hash.startsWith('#state=')) {
+            try {
+                const anterior = JSON.parse(decodeURIComponent(url.hash.slice(7)));
+                this.state.activeModule = this.modoDaUrl('#' + anterior.m);
+            } catch (erro) { /* Fragmento quebrado abre a Científica. */ }
+            url.hash = this.state.activeModule;
+            window.history.replaceState(null, '', url.href);
+        }
     },
 
     abrirTourGuiado(passo = 1) {
