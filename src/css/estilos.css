@@ -2823,3 +2823,16 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .layered-details > summary .mini-pill { flex: none; margin-left: auto; transform: none; }
 .details-chevron { flex: none; margin-left: auto; transition: transform .15s ease; }
 .verified-badge { align-self: flex-start; width: fit-content; max-width: 100%; min-height: 22px; padding: 4px 8px; border: 1px solid var(--green); border-radius: 6px; background: var(--green-soft); color: var(--green); font: 600 11px var(--font-sans); }
+
+.key-btn:focus {
+    outline: none;
+}
+
+.key-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.key-btn:active {
+    filter: brightness(0.9);
+}

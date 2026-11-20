@@ -194,10 +194,13 @@ const MathLabApp = {
                 const foco = campo?.dataset?.slotKey ? { chave: campo.dataset.slotKey, inicio: campo.selectionStart, fim: campo.selectionEnd } :
                     ['normal-mode-input','ready-expression-input'].includes(campo?.id) ? { id: campo.id, inicio: campo.selectionStart, fim: campo.selectionEnd } :
                     campo?.type === 'range' ? { id: campo.id } : null;
+                const tecladoAberto = document.getElementById('teclado-funcao')?.open;
                 this._emRenderModulo = true;
                 original(...args);
                 this._emRenderModulo = false;
                 this.injetarSistemaDoisModos();
+                const teclado = document.getElementById('teclado-funcao');
+                if (teclado && tecladoAberto) teclado.open = true;
                 this.aprimorarPainelDireitoEmCamadas();
                 if (foco) {
                     const novo = foco.chave ? document.querySelector(`.formula-slot[data-slot-key="${foco.chave}"]`) : document.getElementById(foco.id);
@@ -468,7 +471,8 @@ const MathLabApp = {
        ======================================================================== */
     renderModuloCientifica() {
         const st = this.state.cientifica;
-        const avaliacao = MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, st.modoSaida);
+        if (this._resultadoNoVisor?.expressao !== st.expressao) this._resultadoNoVisor = null;
+        const avaliacao = this.avaliarEntradaCientifica();
 
         document.getElementById('left-panel-title').textContent = 'Calculadora Científica';
         document.getElementById('left-panel-badge').textContent = 'Cálculos Gerais e Funções';
@@ -484,20 +488,20 @@ const MathLabApp = {
                     <div class="display-badges">
                         <span class="mini-pill active">${st.unidadeAngulo.toUpperCase()}</span>
                         <span class="mini-pill">${st.modoSaida.toUpperCase()}</span>
-                        <span class="mini-pill">MEM: ${MathLabCalc.fmt(st.memoria)}</span>
+                        <span class="mini-pill" id="sci-mem" title="Memória: ${MathLabCalc.fmt(st.memoria)}" ${st.memoria ? '' : 'hidden'}>M</span>
                     </div>
                     <span>Expressão Científica</span>
                 </div>
                 <div class="expression-input-row">
-                    <input type="text" id="sci-expr-input" class="expression-input" value="${st.expressao}" placeholder="Digite uma expressão (ex: 2 · sen(π/6) + √16)" aria-label="Expressão matemática">
+                    <input type="text" id="sci-expr-input" class="expression-input" value="${this.escaparHTML(st.expressao)}" placeholder="Digite uma expressão (ex: 2 · sen(π/6) + √16)" aria-label="Expressão matemática">
                 </div>
                 <div class="display-result-row">
                     <span class="result-label">Resultado</span>
                     <div class="result-values">
                         <span class="result-primary" id="sci-res-primary" style="color:${avaliacao.erro ? 'var(--red)' : 'var(--text-main)'};">
-                            ${avaliacao.erro ? 'Erro' : avaliacao.resultadoExibido}
+                            ${avaliacao.erro ? 'Erro' : (avaliacao.resultadoExibido ?? '0')}
                         </span>
-                        ${!avaliacao.erro && st.modoSaida === 'exato' ? `<span class="result-secondary">(≈ ${avaliacao.resultadoDecimal})</span>` : ''}
+                        <span class="result-secondary" id="sci-res-secondary" ${avaliacao.erro || avaliacao.vazio || st.modoSaida !== 'exato' ? 'hidden' : ''}>(≈ ${avaliacao.resultadoDecimal ?? ''})</span>
                     </div>
                 </div>
             </div>
@@ -514,59 +518,7 @@ const MathLabApp = {
                 </div>
             </div>
 
-            <!-- Teclado Científico Completo -->
-            <div class="scientific-keypad">
-                <div class="keypad-row-memory">
-                    <button type="button" class="key-btn key-mem" data-key-mem="mc" title="Limpar memória">MC</button>
-                    <button type="button" class="key-btn key-mem" data-key-mem="mr" title="Recuperar memória">MR</button>
-                    <button type="button" class="key-btn key-mem" data-key-mem="m+" title="Somar à memória">M+</button>
-                    <button type="button" class="key-btn key-mem" data-key-mem="m-" title="Subtrair da memória">M−</button>
-                    <button type="button" class="key-btn key-danger" data-key-act="clear" title="Limpar expressão">C</button>
-                    <button type="button" class="key-btn key-danger" data-key-act="back" title="Apagar último caractere">⌫</button>
-                </div>
-
-                <div class="keypad-grid-main">
-                    <button type="button" class="key-btn key-fn" data-key-ins="sen(">sen</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="cos(">cos</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="tg(">tg</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="log(">log</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="ln(">ln</button>
-
-                    <button type="button" class="key-btn key-fn" data-key-ins="^2">x²</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="^">xʸ</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="√(">√x</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="|">|x|</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="1/(">1/x</button>
-
-                    <button type="button" class="key-btn key-fn" data-key-ins="π">π</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="e">e</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="e^">eˣ</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="!">n!</button>
-                    <button type="button" class="key-btn key-fn" data-key-ins="%">%</button>
-
-                    <button type="button" class="key-btn key-num" data-key-ins="7">7</button>
-                    <button type="button" class="key-btn key-num" data-key-ins="8">8</button>
-                    <button type="button" class="key-btn key-num" data-key-ins="9">9</button>
-                    <button type="button" class="key-btn key-op" data-key-ins="(">(</button>
-                    <button type="button" class="key-btn key-op" data-key-ins=")">)</button>
-
-                    <button type="button" class="key-btn key-num" data-key-ins="4">4</button>
-                    <button type="button" class="key-btn key-num" data-key-ins="5">5</button>
-                    <button type="button" class="key-btn key-num" data-key-ins="6">6</button>
-                    <button type="button" class="key-btn key-op" data-key-ins=" · ">×</button>
-                    <button type="button" class="key-btn key-op" data-key-ins=" / ">÷</button>
-
-                    <button type="button" class="key-btn key-num" data-key-ins="1">1</button>
-                    <button type="button" class="key-btn key-num" data-key-ins="2">2</button>
-                    <button type="button" class="key-btn key-num" data-key-ins="3">3</button>
-                    <button type="button" class="key-btn key-op" data-key-ins=" + ">+</button>
-                    <button type="button" class="key-btn key-op" data-key-ins=" − ">−</button>
-
-                    <button type="button" class="key-btn key-num" data-key-ins="0" style="grid-column: span 2;">0</button>
-                    <button type="button" class="key-btn key-num" data-key-ins=",">,</button>
-                    <button type="button" class="key-btn key-equal" data-key-act="eval" style="grid-column: span 2;">=</button>
-                </div>
-            </div>
+            ${this.htmlTecladoCalculadora()}
         `;
 
         this.renderizarPainelDireitoCientifica(avaliacao);
@@ -575,7 +527,7 @@ const MathLabApp = {
 
     renderizarPainelDireitoCientifica(avaliacao) {
         const st = this.state.cientifica;
-        const av = avaliacao || MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, st.modoSaida);
+        const av = avaliacao || this.avaliarEntradaCientifica();
 
         document.getElementById('right-panel-title').textContent = 'Resolução e Histórico';
         document.getElementById('right-panel-actions').innerHTML = `
@@ -593,10 +545,10 @@ const MathLabApp = {
                         <div>
                             <div class="state-banner-title">${av.tituloErro}</div>
                             <div class="state-banner-desc">${av.mensagemErro}</div>
-                            <div class="state-banner-suggestion">${av.sugestaoErro}</div>
+                            <div class="state-banner-suggestion">${av.sugestaoErro ?? ''}</div>
                         </div>
                     </div>
-                    <button type="button" class="btn-secondary-action" id="btn-fix-sci-err">Corrigir</button>
+                    ${av.expressaoCorrigida ? '<button type="button" class="btn-secondary-action" id="btn-fix-sci-err">Corrigir</button>' : ''}
                 </div>
             `;
         } else if (av.vazio) {
@@ -611,13 +563,14 @@ const MathLabApp = {
                 <div class="info-section">
                     <div class="section-header-line">
                         <span class="section-heading">Resolução Passo a Passo</span>
-                        <span class="panel-subtitle-badge">${st.expressao} = ${av.resultadoExato}</span>
+                        <span class="panel-subtitle-badge">${this.escaparHTML(st.expressao)} = ${av.resultadoExato}</span>
                     </div>
+                    ${av.interpretacao ? `<p>Entendi como: ${this.escaparHTML(av.interpretacao)}</p>` : ''}
                     <div class="steps-list">
                         ${av.passos.map(p => `
                             <div class="step-card">
                                 <span class="step-title">${p.titulo}</span>
-                                <span class="step-math">${p.math}</span>
+                                <span class="step-math">${this.escaparHTML(p.math)}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -724,32 +677,260 @@ const MathLabApp = {
         });
     },
 
+    htmlTecladoCalculadora() {
+        return `<!-- Teclado Científico Completo -->
+            <div class="scientific-keypad">
+                <div class="keypad-row-memory">
+                    <button type="button" class="key-btn key-mem" data-key-mem="mc" title="Limpar memória">MC</button>
+                    <button type="button" class="key-btn key-mem" data-key-mem="mr" title="Recuperar memória">MR</button>
+                    <button type="button" class="key-btn key-mem" data-key-mem="m+" title="Somar à memória">M+</button>
+                    <button type="button" class="key-btn key-mem" data-key-mem="m-" title="Subtrair da memória">M−</button>
+                    <button type="button" class="key-btn key-danger" data-key-act="clear" title="Limpar expressão">C</button>
+                    <button type="button" class="key-btn key-danger" data-key-act="back" title="Apagar último caractere">⌫</button>
+                </div>
+
+                <div class="keypad-grid-main">
+                    <button type="button" class="key-btn key-fn" data-key-fn="sen(">sen</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="cos(">cos</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="tg(">tg</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="log(">log</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="ln(">ln</button>
+
+                    <button type="button" class="key-btn key-fn" data-key-act="square">x²</button>
+                    <button type="button" class="key-btn key-fn" data-key-act="power">xʸ</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="√(">√x</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="|">|x|</button>
+                    <button type="button" class="key-btn key-fn" data-key-act="inverse" aria-label="Inverso (1 dividido por x)" title="Inverso: 1/(valor)">1/x</button>
+
+                    <button type="button" class="key-btn key-fn" data-key-ins="π">π</button>
+                    <button type="button" class="key-btn key-fn" data-key-ins="e">e</button>
+                    <button type="button" class="key-btn key-fn" data-key-fn="e^">eˣ</button>
+                    <button type="button" class="key-btn key-fn" data-key-ins="!">n!</button>
+                    <button type="button" class="key-btn key-fn" data-key-act="percent">%</button>
+
+                    <button type="button" class="key-btn key-num" data-key-ins="7">7</button>
+                    <button type="button" class="key-btn key-num" data-key-ins="8">8</button>
+                    <button type="button" class="key-btn key-num" data-key-ins="9">9</button>
+                    <button type="button" class="key-btn key-op" data-key-ins="(">(</button>
+                    <button type="button" class="key-btn key-op" data-key-ins=")">)</button>
+
+                    <button type="button" class="key-btn key-num" data-key-ins="4">4</button>
+                    <button type="button" class="key-btn key-num" data-key-ins="5">5</button>
+                    <button type="button" class="key-btn key-num" data-key-ins="6">6</button>
+                    <button type="button" class="key-btn key-op" data-key-ins=" · ">×</button>
+                    <button type="button" class="key-btn key-op" data-key-ins=" / ">÷</button>
+
+                    <button type="button" class="key-btn key-num" data-key-ins="1">1</button>
+                    <button type="button" class="key-btn key-num" data-key-ins="2">2</button>
+                    <button type="button" class="key-btn key-num" data-key-ins="3">3</button>
+                    <button type="button" class="key-btn key-op" data-key-ins=" + ">+</button>
+                    <button type="button" class="key-btn key-op" data-key-ins=" − ">−</button>
+
+                    <button type="button" class="key-btn key-num" data-key-ins="0" style="grid-column: span 2;">0</button>
+                    <button type="button" class="key-btn key-num" data-key-ins=",">,</button>
+                    <button type="button" class="key-btn key-equal" data-key-act="eval" style="grid-column: span 2;">=</button>
+                    <button type="button" class="key-btn key-fn" data-key-act="sign">±</button>
+                    <button type="button" class="key-btn key-fn" data-key-act="ans">Ans</button>
+                    <button type="button" class="key-btn key-fn" data-key-ins="x">x</button>
+                    <button type="button" class="key-btn key-fn" data-key-ins="∞">∞</button>
+                </div>
+            </div>`;
+    },
+
+    avaliarEntradaCientifica(modoSaida = this.state.cientifica.modoSaida) {
+        const { expressao, unidadeAngulo } = this.state.cientifica;
+        const avaliar = texto => MathLabCalc.avaliarCientifica(texto, unidadeAngulo, modoSaida);
+        const normalizada = this.interpretarPorcentagem(expressao);
+        const av = avaliar(normalizada);
+        if (normalizada !== expressao && !av.erro) av.interpretacao = normalizada;
+        const inverso = expressao.trim().match(/^1\/\((.+)\)$/);
+        if (av.tituloErro === 'Divisão por zero / Assíntota' && inverso &&
+            avaliar(inverso[1]).resultadoExato === '0') {
+            return {
+                erro: true,
+                tituloErro: 'Divisão por zero',
+                mensagemErro: 'Não existe inverso de zero: divisão por zero'
+            };
+        }
+        return av;
+    },
+
+    interpretarPorcentagem(texto) {
+        const relativa = texto.match(/^(.+)\s*([+−-])\s*(\d+(?:[.,]\d+)?)\s*%\s*$/);
+        if (relativa && !MathLabCalc.validarSintaxeSegura(relativa[1])) {
+            const [, base, operador, taxa] = relativa;
+            const valor = base.trim();
+            if (!/[+−*/^·×÷-]$/.test(valor)) {
+                return `(${valor}) ${operador} (${valor}) · (${taxa}/100)`;
+            }
+        }
+        return texto.replace(/(\d+(?:[.,]\d+)?)\s*%/g, '($1/100)');
+    },
+
+    atualizarVisorCientifico(av = this.avaliarEntradaCientifica()) {
+        const principal = document.getElementById('sci-res-primary');
+        principal.textContent = av.erro ? 'Erro' : (av.resultadoExibido ?? '0');
+        principal.style.color = av.erro ? 'var(--red)' : 'var(--text-main)';
+        const decimal = document.getElementById('sci-res-secondary');
+        decimal.hidden = av.erro || av.vazio || this.state.cientifica.modoSaida !== 'exato';
+        decimal.textContent = decimal.hidden ? '' : `(≈ ${av.resultadoDecimal})`;
+        this.renderizarPainelDireitoCientifica(av);
+    },
+
+    confirmarCientifica() {
+        const st = this.state.cientifica;
+        const av = this.avaliarEntradaCientifica();
+        if (!av.erro && !av.vazio) {
+            this._ultimoResultadoCientifico = av.resultadoExato;
+            this._resultadoNoVisor = { expressao: st.expressao, valor: av.resultadoExato };
+            this.adicionarAoHistorico(st.expressao, av.resultadoExibido, 'cientifica', 'Científica');
+        }
+        this.atualizarVisorCientifico(av);
+    },
+
+    vincularTecladoCalculadora(teclado, campoId) {
+        teclado.addEventListener('mousedown', e => {
+            if (e.button === 0 && e.target.closest('.key-btn')) e.preventDefault();
+        });
+        teclado.addEventListener('click', e => {
+            const tecla = e.target.closest('.key-btn');
+            if (tecla) this.executarTeclaCalculadora(document.getElementById(campoId), tecla.dataset);
+        });
+    },
+
+    executarTeclaCalculadora(input, { keyIns, keyAct, keyMem, keyFn }) {
+        const cientifica = input.id === 'sci-expr-input';
+        const st = this.state.cientifica;
+        const texto = input.value;
+        let inicio = input.selectionStart;
+        let fim = input.selectionEnd;
+        const selecao = texto.slice(inicio, fim);
+        const resultado = cientifica && this._resultadoNoVisor?.expressao === texto
+            ? this._resultadoNoVisor.valor : null;
+        let inserir = keyIns ?? '';
+        let cursor;
+        input.focus();
+
+        if (keyAct === 'eval') {
+            if (cientifica) this.confirmarCientifica();
+            else input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+            return;
+        }
+        if (keyMem && keyMem !== 'mr') {
+            const av = cientifica ? this.avaliarEntradaCientifica() :
+                MathLabCalc.avaliarCientifica(this.interpretarPorcentagem(texto), st.unidadeAngulo);
+            const [numerador, denominador = '1'] = (av.resultadoExato ?? '').replace('−', '-').split('/');
+            const numero = numerador ? Number(numerador.replace(',', '.')) / Number(denominador) : NaN;
+            if (keyMem === 'mc') st.memoria = 0;
+            else if (Number.isFinite(numero)) st.memoria += keyMem === 'm+' ? numero : -numero;
+            const indicador = document.getElementById('sci-mem') ?? document.querySelector('[data-function-memory]');
+            if (indicador) {
+                indicador.hidden = !st.memoria;
+                indicador.title = `Memória: ${MathLabCalc.fmt(st.memoria)}`;
+            }
+            return;
+        }
+
+        if (keyMem === 'mr') inserir = String(st.memoria).replace('.', ',');
+        if (keyAct === 'ans') {
+            if (this._ultimoResultadoCientifico == null) return;
+            inserir = this._ultimoResultadoCientifico;
+            if (/[/−-]/.test(inserir)) inserir = `(${inserir})`;
+        }
+        if (keyAct === 'clear') {
+            if (texto.length > 500 && !window.confirm('Limpar toda a expressão?')) return;
+            inicio = 0;
+            fim = texto.length;
+        }
+        if (keyAct === 'back' && !selecao) {
+            const bloco = texto.slice(0, inicio).match(/(?:sen|cos|tg|ln|log|sqrt|abs|√|e\^|1\/)?\($/);
+            if (bloco && texto[inicio] === ')') fim++;
+            inicio = Math.max(0, inicio - (bloco?.[0].length || 1));
+        }
+        if (['inverse', 'square', 'power', 'sign'].includes(keyAct) || keyFn) {
+            let alvo = selecao;
+            if (!selecao && (keyAct === 'inverse' || resultado != null ||
+                (['square', 'power', 'sign'].includes(keyAct) && inicio === texto.length))) {
+                inicio = 0;
+                fim = texto.length;
+                alvo = resultado ?? texto;
+            }
+            if (keyAct === 'inverse') inserir = alvo.trim() ? `1/(${alvo})` : cientifica ? '1/(' : '1/x';
+            if (keyAct === 'square' || keyAct === 'power') {
+                const base = !alvo || /^(?:\d+(?:[.,]\d+)?|[xπe])$/.test(alvo) ? alvo : `(${alvo})`;
+                inserir = base + (keyAct === 'square' ? '^2' : '^');
+            }
+            if (keyAct === 'sign') {
+                const negativo = alvo.match(/^[−-](?:([\d.,]+)|\((.+)\))$/);
+                inserir = negativo ? negativo[1] ?? negativo[2] :
+                    /^[\d.,]*$/.test(alvo) ? `−${alvo}` : `−(${alvo})`;
+            }
+            if (keyFn) {
+                const abertura = { '|': 'abs(', 'e^': 'e^(', '√(': 'sqrt(' }[keyFn] ?? keyFn;
+                inserir = alvo ? `${abertura}${alvo})` : `${abertura})`;
+                if (!alvo) cursor = inicio + abertura.length;
+            }
+        }
+        if (keyAct === 'percent') {
+            if (resultado != null && !selecao) {
+                inicio = 0;
+                fim = texto.length;
+                inserir = resultado.includes('/') ? `(${resultado})/100` : resultado + '%';
+            } else inserir = selecao + '%';
+            if (!cientifica) {
+                const marcado = texto.slice(0, inicio) + inserir + texto.slice(fim);
+                const normalizado = this.interpretarPorcentagem(marcado);
+                if (normalizado !== marcado) {
+                    inicio = 0;
+                    fim = texto.length;
+                    inserir = normalizado;
+                    cursor = this.interpretarPorcentagem(marcado.slice(0, input.selectionStart + selecao.length + 1)).length;
+                }
+            }
+        }
+        if (keyIns === 'e' || keyIns === 'π') {
+            const antes = texto.slice(0, inicio);
+            const depois = texto.slice(fim);
+            const operadorAntes = /[\d)πxe²³⁴]$/.test(antes) &&
+                (keyIns === 'e' || !/\d$/.test(antes)) ? '·' : '';
+            const operadorDepois = /^[\d(πxe]/.test(depois) ? '·' : '';
+            inserir = operadorAntes + keyIns + operadorDepois;
+            cursor = inicio + operadorAntes.length + keyIns.length + operadorDepois.length;
+        }
+
+        if (inicio === fim && !inserir) return;
+        input.setSelectionRange(inicio, fim);
+        // A edição nativa entra na mesma pilha de desfazer da digitação.
+        const editado = inserir ? document.execCommand('insertText', false, inserir) :
+            document.execCommand('delete');
+        if (!editado) {
+            input.setRangeText(inserir, inicio, fim, 'end');
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        const campoAtual = document.getElementById(input.id);
+        if (campoAtual) {
+            campoAtual.focus();
+            const posicao = cursor ?? inicio + inserir.length;
+            campoAtual.setSelectionRange(posicao, posicao);
+        }
+    },
+
     vincularEventosCientifica() {
         const st = this.state.cientifica;
         const input = document.getElementById('sci-expr-input');
 
-        if (input) {
-            input.addEventListener('input', (e) => {
-                st.expressao = e.target.value;
-                const av = MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, st.modoSaida);
-                const resEl = document.getElementById('sci-res-primary');
-                if (resEl) {
-                    resEl.textContent = av.erro ? 'Erro' : av.resultadoExibido;
-                    resEl.style.color = av.erro ? 'var(--red)' : 'var(--text-main)';
-                }
-                this.renderizarPainelDireitoCientifica(av);
-            });
-
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const av = MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, st.modoSaida);
-                    if (!av.erro && !av.vazio) {
-                        this.adicionarAoHistorico(st.expressao, av.resultadoExibido, 'cientifica', 'Científica');
-                        this.renderizarPainelDireitoCientifica(av);
-                    }
-                }
-            });
-        }
+        input.addEventListener('input', () => {
+            st.expressao = input.value;
+            this._resultadoNoVisor = null;
+            this.atualizarVisorCientifico();
+        });
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.confirmarCientifica();
+            }
+        });
+        this.vincularTecladoCalculadora(document.querySelector('.scientific-keypad'), input.id);
 
         document.getElementById('btn-sci-err-demo')?.addEventListener('click', () => {
             st.expressao = 'log(−5)';
@@ -770,47 +951,6 @@ const MathLabApp = {
             });
         });
 
-        document.querySelectorAll('[data-key-ins]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                st.expressao = (st.expressao || '') + btn.dataset.keyIns;
-                this.renderModuloCientifica();
-            });
-        });
-
-        document.querySelectorAll('[data-key-act]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const act = btn.dataset.keyAct;
-                if (act === 'clear') {
-                    st.expressao = '';
-                    this.renderModuloCientifica();
-                } else if (act === 'back') {
-                    st.expressao = String(st.expressao || '').slice(0, -1);
-                    this.renderModuloCientifica();
-                } else if (act === 'eval') {
-                    const av = MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, st.modoSaida);
-                    if (!av.erro && !av.vazio) {
-                        this.adicionarAoHistorico(st.expressao, av.resultadoExibido, 'cientifica', 'Científica');
-                        this.mostrarToast(`Calculado: ${av.resultadoExibido}`);
-                    }
-                    this.renderModuloCientifica();
-                }
-            });
-        });
-
-        document.querySelectorAll('[data-key-mem]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const m = btn.dataset.keyMem;
-                const av = MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, 'decimal');
-                const valAtual = !av.erro ? parseFloat(String(av.resultadoDecimal).replace(',', '.')) || 0 : 0;
-
-                if (m === 'mc') st.memoria = 0;
-                else if (m === 'mr') st.expressao += String(st.memoria).replace('.', ',');
-                else if (m === 'm+') st.memoria += valAtual;
-                else if (m === 'm-') st.memoria -= valAtual;
-
-                this.renderModuloCientifica();
-            });
-        });
     },
 
     /* ========================================================================
@@ -1175,13 +1315,40 @@ const MathLabApp = {
                     grafico: { janela: { xMin: -10, xMax: 10, yMin: -10, yMax: 10 }, curvas: [], marcadores: [] }
                 };
             }
-            return MathLabCalc.analisarFuncaoCustomizada(texto);
+            const dados = MathLabCalc.analisarFuncaoCustomizada(texto);
+            this.anotarGraficoReciproco(texto, dados);
+            return dados;
         }
         if (['quadratica', 'canonica', 'fatorada'].includes(st.tipoAtivo)) {
             return MathLabCalc.obterDadosTipoFuncao(st.tipoAtivo, st.quad);
         }
         const p = (st.paramsExtras && st.paramsExtras[st.tipoAtivo]) || {};
         return MathLabCalc.obterDadosTipoFuncao(st.tipoAtivo, p);
+    },
+
+    anotarGraficoReciproco(texto, dados) {
+        const expressao = texto.replace(/\s+/g, '');
+        const denominador = expressao.match(/^1\/\((.+)\)$/)?.[1];
+        const eHiperbole = expressao === '1/x' || denominador === 'x';
+        const quadratica = denominador && MathLabCalc.converterTextoParaSlots(denominador, 'funcoes');
+        const { a, b, c } = quadratica?.subtipo === 'quadratica' ? quadratica.slots : {};
+        const semRaizes = a && b * b - 4 * a * c < 0;
+        if (!eHiperbole && !semRaizes) return;
+
+        const dominio = eHiperbole ? 'ℝ ∖ {0}' : 'ℝ';
+        const assintotas = eHiperbole ? 'x = 0 e y = 0' : 'y = 0';
+        Object.assign(dados.estudoCompleto, { dominio, assintotas });
+        dados.propriedades.push({ chave: 'Domínio', valor: dominio }, { chave: 'Assíntotas', valor: assintotas });
+        dados.grafico.assintotas = [{ tipo: 'horizontal', valor: 0, rotulo: 'y = 0' }];
+        if (eHiperbole) {
+            dados.grafico.assintotas.push({ tipo: 'vertical', valor: 0, rotulo: 'x = 0' });
+        } else {
+            const x = -b / (2 * a);
+            const y = dados.grafico.curvas[0].fn(x);
+            const extremos = `${a > 0 ? 'Máximo' : 'Mínimo'} ${MathLabCalc.fmt(y)} em x = ${MathLabCalc.fmt(x)}`;
+            dados.estudoCompleto.extremos = extremos;
+            dados.propriedades.push({ chave: 'Extremo', valor: extremos });
+        }
     },
 
     renderModuloFuncoes() {
@@ -3567,10 +3734,10 @@ const MathLabApp = {
         if (this.state.activeModule === 'funcoes') return this.obterDadosAtuaisFuncoes().verificacao.aprovado;
         if (this.state.activeModule === 'cientifica') {
             const st = this.state.cientifica;
-            const resultado = MathLabCalc.avaliarCientifica(st.expressao, st.unidadeAngulo, st.modoSaida);
+            const resultado = this.avaliarEntradaCientifica();
             if (resultado.erro || resultado.vazio) return false;
             const principal = Number(String(resultado.resultadoDecimal).replace(',', '.'));
-            const referencia = MathLabCalc.compilarFuncao(st.expressao, st.unidadeAngulo)(0);
+            const referencia = MathLabCalc.compilarFuncao(this.interpretarPorcentagem(st.expressao), st.unidadeAngulo)(0);
             return MathLabCalc.verificarResultadoDuplo(principal, referencia, 1e-3).aprovado;
         }
         // Cada módulo só habilita o selo após executar sua própria conferência.
@@ -4047,6 +4214,7 @@ const MathLabApp = {
             </div>
         `;
 
+        const modoFuncao = ['funcoes', 'limites', 'derivadas', 'integrais'].includes(this.state.activeModule);
         const chipsSugestao = ['sen(', 'cos(', 'tg(', 'sqrt(', 'ln(', 'log(', 'abs(', 'e^', 'π', 'x^2'];
         const htmlNormal = `
             <div class="normal-mode-container">
@@ -4070,6 +4238,12 @@ const MathLabApp = {
                     ${chipsSugestao.map(ch => `<button type="button" class="autocomplete-chip" data-ins-chip="${ch}">${ch}</button>`).join('')}
                 </div>
 
+                ${modoFuncao ? `
+                    <details id="teclado-funcao">
+                        <summary>Teclado <span class="mini-pill" data-function-memory ${this.state.cientifica.memoria ? '' : 'hidden'}>M</span></summary>
+                        ${this.htmlTecladoCalculadora()}
+                    </details>
+                ` : ''}
                 <div id="normal-error-hint-box" class="normal-error-hint" style="display:${!validacaoNormal.valido ? 'flex' : 'none'};">
                     <span>⚠ ${validacaoNormal.mensagem}</span>
                     <button type="button" class="btn-tiny-tool" id="btn-fix-normal-expr">Corrigir</button>
@@ -4271,6 +4445,8 @@ const MathLabApp = {
         // Eventos do modo "Normal"
         const normalInp = document.getElementById('normal-mode-input');
         if (normalInp) {
+            const teclado = leftBody.querySelector('#teclado-funcao .scientific-keypad');
+            if (teclado) this.vincularTecladoCalculadora(teclado, normalInp.id);
             normalInp.addEventListener('input', (e) => {
                 this.salvarSnapshotUndo();
                 const txt = e.target.value;
@@ -4286,7 +4462,15 @@ const MathLabApp = {
                     }
                 }
                 if (val.valido || ['funcoes','integrais','trigonometria'].includes(this.state.activeModule)) {
-                    this.aplicarExpressaoModoNormal(txt, this.state.activeModule === 'integrais');
+                    const integrais = this.state.activeModule === 'integrais';
+                    this.aplicarExpressaoModoNormal(txt, integrais);
+                    const campoNovo = document.getElementById(normalInp.id);
+                    if (integrais && campoNovo && campoNovo !== normalInp) {
+                        // A atualização do relatório recria o editor. Reutilize o campo
+                        // para manter o histórico nativo de desfazer e o cursor.
+                        campoNovo.replaceWith(normalInp);
+                        normalInp.focus({ preventScroll: true });
+                    }
                 }
             });
 
@@ -4322,15 +4506,13 @@ const MathLabApp = {
         }
 
         leftBody.querySelectorAll('[data-ins-chip]').forEach(chip => {
+            chip.addEventListener('mousedown', e => {
+                if (e.button === 0) e.preventDefault();
+            });
             chip.addEventListener('click', () => {
-                if (!normalInp) return;
-                const ins = chip.dataset.insChip;
-                normalInp.value += ins.endsWith('(') ? ins + ')' : ins;
-                normalInp.focus();
-                if (ins.endsWith('(')) {
-                    normalInp.setSelectionRange(normalInp.value.length - 1, normalInp.value.length - 1);
-                }
-                normalInp.dispatchEvent(new Event('input'));
+                const texto = chip.dataset.insChip;
+                const tecla = /[^(]\($|e\^$/.test(texto) ? { keyFn: texto } : { keyIns: texto };
+                this.executarTeclaCalculadora(document.getElementById('normal-mode-input'), tecla);
             });
         });
 
@@ -4541,6 +4723,11 @@ const MathLabApp = {
 
     executarBotaoGerar() {
         this.state.passoFluxo = 3;
+        if (this.state.activeModule === 'cientifica') {
+            this.confirmarCientifica();
+            document.getElementById('sci-expr-input')?.focus();
+            return;
+        }
         const expr = this.obterExpressaoTextoAtual();
         const mod = this.state.activeModule;
         const nomes = {
@@ -4550,7 +4737,6 @@ const MathLabApp = {
         };
         let resResumo = 'Calculado';
         if (mod === 'funcoes') resResumo = this.obterDadosAtuaisFuncoes().subtituloResultado;
-        else if (mod === 'cientifica') resResumo = MathLabCalc.avaliarCientifica(this.state.cientifica.expressao, this.state.cientifica.unidadeAngulo, this.state.cientifica.modoSaida).resultadoExibido;
 
         this.adicionarAoHistorico(expr, resResumo, mod, nomes[mod] || mod);
         this.mostrarToast('Relatório completo gerado e salvo no histórico!');
@@ -4588,7 +4774,7 @@ const MathLabApp = {
             const st=this.state.estatistica, est=MathLabCalc.calcularEstatistica(st.dadosTexto,st.tipoVariancia);
             valorPrincipal=est.valido ? `Média = ${MathLabCalc.fmt(est.media,2)} • Mediana = ${MathLabCalc.fmt(est.mediana,2)} • Moda = ${est.moda}` : 'Aguardando resultado válido';
         } else if (mod === 'cientifica') {
-            const av = MathLabCalc.avaliarCientifica(this.state.cientifica.expressao, this.state.cientifica.unidadeAngulo, this.state.cientifica.modoSaida);
+            const av = this.avaliarEntradaCientifica();
             valorPrincipal = av.erro ? 'Erro de Domínio' : `Resultado = ${av.resultadoExibido}`;
         }
 
