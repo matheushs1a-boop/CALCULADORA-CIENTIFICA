@@ -7,7 +7,7 @@ const pasta=path.resolve(__dirname,'../docs/evidencias');fs.mkdirSync(pasta,{rec
  try {
  const p=await browser.newPage({viewport:{width:1366,height:768},deviceScaleFactor:2});const erros=[];p.on('pageerror',e=>erros.push(e.message));
  await p.goto(process.env.MATHLAB_URL||'http://127.0.0.1:5500/index.html');
- await p.evaluate(()=>{MathLabApp.state.inputMode='pronta';MathLabApp.selecionarModulo('integrais')});
+ await p.evaluate(()=>{MathLabApp.state.inputMode='pronta';MathLabApp.selecionarModulo('integrais');MathLabApp.restaurarExemploModulo()});
  const foto=nome=>p.screenshot({path:path.join(pasta,nome+'.png')});
  if(process.env.MATHLAB_CAPTURA_ANTES==='1'){await p.waitForTimeout(150);await foto('antes');console.log('Captura inicial salva.');return;}
  const dado=()=>p.evaluate(()=>{const d=MathLabApp.state.integrais.dados;return {valido:d.valido,valor:d.integral.resultado,geometrica:d.areaGeometrica,positivo:d.positiva,negativo:d.negativa}});
@@ -58,10 +58,11 @@ const pasta=path.resolve(__dirname,'../docs/evidencias');fs.mkdirSync(pasta,{rec
  await p.evaluate(()=>MathLabApp.aplicarExpressaoModoNormal('',true));assert.ok(!(await dado()).valido);
  // D6: todos os módulos e seus exemplos, gráficos e concordância dos cartões.
  for(const modulo of ['cientifica','algebra','funcoes','limites','derivadas','integrais','geometria','trigonometria','vetores','estatistica','modelagem']){
-  await p.evaluate(m=>{MathLabApp.selecionarModulo(m);if(m==='integrais')MathLabApp.restaurarExemploModulo()},modulo);await p.waitForTimeout(80);
+  await p.evaluate(m=>{MathLabApp.selecionarModulo(m);MathLabApp.restaurarExemploModulo()},modulo);await p.waitForTimeout(80);
   assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),modulo);
   const resultado=await p.locator('.result-hero-value').innerText();assert.ok(resultado.trim(),modulo);
-  if(!['cientifica','funcoes','integrais','estatistica'].includes(modulo)) {const esquerda=await p.locator('#left-panel-body .result-primary').first().innerText();assert.ok(resultado.includes(esquerda.trim()),`Painéis divergem: ${modulo}`);}
+  if(modulo==='trigonometria') assert.strictEqual(resultado.trim(),(await p.locator('#center-panel-badge').innerText()).trim());
+  if(!['cientifica','funcoes','integrais','estatistica','trigonometria'].includes(modulo)) {const esquerda=await p.locator('#left-panel-body .result-primary').first().innerText();assert.ok(resultado.includes(esquerda.trim()),`Painéis divergem: ${modulo}`);}
   if(await p.locator('#canvas-stage-wrapper').isVisible()) {const r=await p.locator('canvas').boundingBox();assert.ok(r.width>100&&r.height>100,modulo);}
   await foto('depois-D6-'+modulo);
  }

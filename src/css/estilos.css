@@ -2820,3 +2820,5 @@ html, body { max-width: 100%; overflow-x: hidden; }
 .key-btn:active {
     filter: brightness(0.9);
 }
+
+#btn-generate-footer[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }

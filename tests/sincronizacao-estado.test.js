@@ -104,6 +104,11 @@ testar('Casas decimais não arredondam os coeficientes ao gerar no modo Normal',
     assert.deepStrictEqual(valores(), antes);
 });
 testar('Todos os modelos preservam a curva no ciclo pronta → Normal → gerar', () => {
+    Object.assign(app.state.funcoes.quad, { a:1, b:-4, c:-5, h:2, k:-9, x1:-1, x2:5 });
+    Object.assign(app.state.funcoes.paramsExtras, {
+        constante:{b:5}, afim:{a:2,b:1}, linear:{a:3}, modular:{a:1,h:0,k:0},
+        exponencial:{a:2,C:1}, logaritmica:{a:2}, trigonometrica:{A:1,B:1,C:0,D:0}, juros:{C:100,i:0.1}
+    });
     for (const tipo of ['constante','afim','linear','quadratica','canonica','fatorada','modular','exponencial','logaritmica','trigonometrica','juros']) {
         app.state.funcoes.tipoAtivo = tipo;
         if(tipo === 'exponencial') app.state.funcoes.paramsExtras.exponencial.C = 3;

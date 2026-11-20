@@ -12,152 +12,156 @@ const MathLabApp = {
     /* ========================================================================
        1. ESTADO GLOBAL DA APLICAÇÃO
        ======================================================================== */
-    state: {
-        theme: 'dark',
-        activeModule: 'cientifica',
-        visualCollapsed: false,
-        loadingSkeleton: false,
+    state: null,
 
-        // Novos recursos de Usabilidade e Dois Modos de Entrada ("Fórmula pronta" vs "Normal")
-        inputMode: 'pronta', // 'pronta' (padrão) | 'normal' (lembrado em localStorage)
-        passoFluxo: 2,       // 1: Escolher | 2: Preencher | 3: Gerar
-        fontScale: 'md',     // 'sm' | 'md' | 'lg' | 'xl'
-        reduceMotion: false,
-        mostrarExplicacaoReal: false,
-        tourStep: 1,
-        undoStack: [],
-        redoStack: [],
-        fxSlots: {},         // controla quais quadradinhos estão com modo expressão "fx" ativo
-        slotTextos: {},      // preserva texto digitado nos quadradinhos (ex: "1/2", "2*sen(pi/6)")
-        erroSlotMensagem: '', // mensagem de validação curta abaixo da fórmula pronta
-        buscaHistorico: '',
-        filtroHistorico: 'todos', // 'todos' | 'favoritos' | 'fixados'
+    criarEstadoInicial() {
+        return {
+            theme: 'dark',
+            activeModule: 'cientifica',
+            visualCollapsed: false,
+            loadingSkeleton: false,
 
-        // Módulo 01: Científica
-        cientifica: {
-            expressao: '',
-            unidadeAngulo: 'rad', // 'rad' | 'grau'
-            modoSaida: 'exato',   // 'exato' | 'decimal'
-            memoria: 0,
-            slots: { c1: '', c2: '', c3: '' }
-        },
+            // Novos recursos de Usabilidade e Dois Modos de Entrada ("Fórmula pronta" vs "Normal")
+            inputMode: 'pronta', // 'pronta' (padrão) | 'normal' (lembrado em localStorage)
+            passoFluxo: 2,       // 1: Escolher | 2: Preencher | 3: Gerar
+            fontScale: 'md',     // 'sm' | 'md' | 'lg' | 'xl'
+            reduceMotion: false,
+            mostrarExplicacaoReal: false,
+            tourStep: 1,
+            undoStack: [],
+            redoStack: [],
+            fxSlots: {},         // controla quais quadradinhos estão com modo expressão "fx" ativo
+            slotTextos: {},      // preserva texto digitado nos quadradinhos (ex: "1/2", "2*sen(pi/6)")
+            erroSlotMensagem: '', // mensagem de validação curta abaixo da fórmula pronta
+            buscaHistorico: '',
+            filtroHistorico: 'todos', // 'todos' | 'favoritos' | 'fixados'
 
-        // Módulo 02: Álgebra
-        algebra: {
-            ferramenta: 'eq2', // 'eq2' | 'eq1' | 'fatoracao' | 'expansao' | 'simplificacao' | 'sistema' | 'notaveis'
-            abaAtiva: 'resolucao',
-            eq2: { a: 1, b: -5, c: 6 }, // x² - 5x + 6 = 0
-            eq1: { a: 3, b: -12 },      // 3x - 12 = 0
-            expressaoCustom: 'x² − 5x + 6 = 0'
-        },
+            // Módulo 01: Científica
+            cientifica: {
+                expressao: '',
+                unidadeAngulo: 'rad', // 'rad' | 'grau'
+                modoSaida: 'exato',   // 'exato' | 'decimal'
+                memoria: 0,
+                slots: { c1: '', c2: '', c3: '' }
+            },
 
-        // Módulo 03: Funções (8 tipos + canônica + fatorada + juros + expressão livre)
-        funcoes: {
-            tipoAtivo: 'quadratica', // 'constante' | 'afim' | 'linear' | 'quadratica' | 'canonica' | 'fatorada' | 'modular' | 'exponencial' | 'logaritmica' | 'trigonometrica' | 'juros' | 'custom'
-            expressaoCustom: 'x² − 4x − 5',
-            abaAtiva: 'grafico',     // 'grafico' | 'tabela' | 'propriedades' | 'passos' | 'verificacao' | 'tipos'
-            quad: { a: 1, b: -4, c: -5, h: 2, k: -9, x1: -1, x2: 5 },
-            paramsExtras: {
-                constante: { b: 5 },
-                afim: { a: 2, b: 1 },
-                linear: { a: 3 },
-                modular: { a: 1, h: 0, k: 0 },
-                exponencial: { C: 1, a: 2 },
-                logaritmica: { a: 2 },
-                trigonometrica: { A: 1, B: 1, C: 0, D: 0 },
-                juros: { C: 100, i: 0.1 }
-            }
-        },
+            // Módulo 02: Álgebra
+            algebra: {
+                ferramenta: 'eq2', // 'eq2' | 'eq1' | 'fatoracao' | 'expansao' | 'simplificacao' | 'sistema' | 'notaveis'
+                abaAtiva: 'resolucao',
+                eq2: { a: '', b: '', c: '' },
+                eq1: { a: '', b: '' },
+                expressaoCustom: ''
+            },
 
-        // Módulo 04: Limites
-        limites: {
-            exemploAtivo: 'removivel', // 'removivel' | 'inexistente' | 'custom'
-            funcaoCustom: '(x² − 4)/(x − 2)',
-            pontoCustom: '2',
-            lado: 'ambos',             // 'ambos' | 'esquerda' | 'direita'
-            abaAtiva: 'grafico',       // 'grafico' | 'tabela'
-            slots: { a: 1, b: -4, c: 1, d: -2, ponto: 2 }
-        },
+            // Módulo 03: Funções (8 tipos + canônica + fatorada + juros + expressão livre)
+            funcoes: {
+                tipoAtivo: 'quadratica', // 'constante' | 'afim' | 'linear' | 'quadratica' | 'canonica' | 'fatorada' | 'modular' | 'exponencial' | 'logaritmica' | 'trigonometrica' | 'juros' | 'custom'
+                expressaoCustom: '',
+                abaAtiva: 'grafico',     // 'grafico' | 'tabela' | 'propriedades' | 'passos' | 'verificacao' | 'tipos'
+                quad: { a: '', b: '', c: '', h: '', k: '', x1: '', x2: '' },
+                paramsExtras: {
+                    constante: { b: '' },
+                    afim: { a: '', b: '' },
+                    linear: { a: '' },
+                    modular: { a: '', h: '', k: '' },
+                    exponencial: { C: '', a: '' },
+                    logaritmica: { a: '' },
+                    trigonometrica: { A: '', B: '', C: '', D: '' },
+                    juros: { C: '', i: '' }
+                }
+            },
 
-        // Módulo 05: Derivadas
-        derivadas: {
-            funcaoExpr: 'x³ · sen(x)',
-            ordem: 1,
-            x0: 1,
-            mostrarFuncao: true,
-            mostrarDerivada: true,
-            mostrarTangente: true,
-            abaAtiva: 'grafico', // 'grafico' | 'regras' | 'passos' | 'tabela' | 'verificacao'
-            modeloPronto: 'produto', // 'potencia' | 'soma' | 'produto' | 'quociente' | 'cadeia'
-            slots: { a: 1, n: 3, b: -3, m: 1 }
-        },
+            // Módulo 04: Limites
+            limites: {
+                exemploAtivo: 'custom', // 'removivel' | 'inexistente' | 'custom'
+                funcaoCustom: '',
+                pontoCustom: '',
+                lado: 'ambos',             // 'ambos' | 'esquerda' | 'direita'
+                abaAtiva: 'grafico',       // 'grafico' | 'tabela'
+                slots: { a: '', b: '', c: '', d: '', ponto: '' }
+            },
 
-        // Módulo 06: Integrais
-        integrais: {
-            tipo: 'definida', // 'definida' | 'indefinida'
-            funcaoExpr: 'x²',
-            a: 0,
-            b: 3,
-            mostrarRiemann: false,
-            nRiemann: 6,
-            abaAtiva: 'area', // 'area' | 'resolucao' | 'metodos' | 'verificacao'
-            modeloPronto: 'potencia', // 'potencia' | 'exponencial' | 'trigonometrica'
-            slots: { coef: 1, n: 2, k: 1 }
-        },
+            // Módulo 05: Derivadas
+            derivadas: {
+                funcaoExpr: '',
+                ordem: 1,
+                x0: '',
+                mostrarFuncao: true,
+                mostrarDerivada: true,
+                mostrarTangente: true,
+                abaAtiva: 'grafico', // 'grafico' | 'regras' | 'passos' | 'tabela' | 'verificacao'
+                modeloPronto: 'produto', // 'potencia' | 'soma' | 'produto' | 'quociente' | 'cadeia'
+                slots: { a: '', n: '', b: '', m: '' }
+            },
 
-        // Módulo 07: Geometria
-        geometria: {
-            categoria: 'plana', // 'plana' | 'espacial'
-            figura: 'circulo',  // Plana: circulo, quadrado, retangulo, triangulo, trapezio, losango | Espacial: cubo, paralelepipedo, esfera, cilindro, cone
-            unidade: 'cm',
-            params: {
-                r: 5, l: 6, b: 8, h: 5, B: 10, D: 8, d: 6, a: 4, c: 3
-            }
-        },
+            // Módulo 06: Integrais
+            integrais: {
+                tipo: 'definida', // 'definida' | 'indefinida'
+                funcaoExpr: '',
+                a: '',
+                b: '',
+                mostrarRiemann: false,
+                nRiemann: 6,
+                abaAtiva: 'area', // 'area' | 'resolucao' | 'metodos' | 'verificacao'
+                modeloPronto: 'potencia', // 'potencia' | 'exponencial' | 'trigonometrica'
+                slots: { coef: '', n: '', k: '' }
+            },
 
-        // Módulo 08: Trigonometria
-        trigonometria: {
-            visualizacao: 'grafico', // 'grafico' | 'circulo' | 'tabela'
-            funcao: 'sen',           // 'sen' | 'cos' | 'tg'
-            amplitude: 1,
-            frequencia: 1,
-            fase: 0,
-            deslocamento: 0,
-            anguloGraus: 30,
-            unidadeAngulo: 'graus'
-        },
+            // Módulo 07: Geometria
+            geometria: {
+                categoria: 'plana', // 'plana' | 'espacial'
+                figura: 'circulo',  // Plana: circulo, quadrado, retangulo, triangulo, trapezio, losango | Espacial: cubo, paralelepipedo, esfera, cilindro, cone
+                unidade: 'cm',
+                params: {
+                    r: '', l: '', b: '', h: '', B: '', D: '', d: '', a: '', c: ''
+                }
+            },
 
-        // Módulo 09: Vetores e Matrizes
-        vetores: {
-            abaPrincipal: 'vetores', // 'vetores' | 'matrizes'
-            operacaoVetor: 'soma',   // 'soma' | 'subtracao' | 'escalar' | 'modulo' | 'angulo'
-            u: { x: 3, y: 4 },
-            v: { x: 1, y: -2 },
-            operacaoMatriz: 'multiplicacao', // 'multiplicacao' | 'soma' | 'subtracao' | 'determinante' | 'transposta' | 'inversa'
-            dimMatriz: 2, // 2 (2x2) ou 3 (3x3)
-            matrizA: [[1, 2], [3, 4]],
-            matrizB: [[2, 0], [1, 3]]
-        },
+            // Módulo 08: Trigonometria
+            trigonometria: {
+                visualizacao: 'grafico', // 'grafico' | 'circulo' | 'tabela'
+                funcao: 'sen',           // 'sen' | 'cos' | 'tg'
+                amplitude: '',
+                frequencia: '',
+                fase: '',
+                deslocamento: '',
+                anguloGraus: '',
+                unidadeAngulo: 'graus'
+            },
 
-        // Módulo 10: Estatística
-        estatistica: {
-            dadosTexto: '4, 6, 6, 8, 10, 12',
-            tipoVariancia: 'populacional', // 'populacional' | 'amostral'
-            tipoGrafico: 'histograma',     // 'histograma' | 'barras' | 'linhas'
-            abaAtiva: 'distribuicao'       // 'distribuicao' | 'dados' | 'medidas' | 'interpretacao'
-        },
+            // Módulo 09: Vetores e Matrizes
+            vetores: {
+                abaPrincipal: 'vetores', // 'vetores' | 'matrizes'
+                operacaoVetor: 'soma',   // 'soma' | 'subtracao' | 'escalar' | 'modulo' | 'angulo'
+                u: { x: '', y: '' },
+                v: { x: '', y: '' },
+                operacaoMatriz: 'multiplicacao', // 'multiplicacao' | 'soma' | 'subtracao' | 'determinante' | 'transposta' | 'inversa'
+                dimMatriz: 2, // 2 (2x2) ou 3 (3x3)
+                matrizA: [['', ''], ['', '']],
+                matrizB: [['', ''], ['', '']]
+            },
 
-        // Módulo 11: Modelagem
-        modelagem: {
-            modelo: 'exponencial_e', // 'exponencial_e' (P0·e^(kt)) | 'populacional_2' (100·2^(t/3)) | 'juros' | 'decaimento' | 'mu' | 'muv'
-            p0: 100,
-            k: 0.2,
-            t: 10
-        },
+            // Módulo 10: Estatística
+            estatistica: {
+                dadosTexto: '',
+                tipoVariancia: 'populacional', // 'populacional' | 'amostral'
+                tipoGrafico: 'histograma',     // 'histograma' | 'barras' | 'linhas'
+                abaAtiva: 'distribuicao'       // 'distribuicao' | 'dados' | 'medidas' | 'interpretacao'
+            },
 
-        // Histórico e Favoritos (persistidos em LocalStorage)
-        historico: [],
-        indiceCmdSelecionado: 0
+            // Módulo 11: Modelagem
+            modelagem: {
+                modelo: 'exponencial_e', // 'exponencial_e' (P0·e^(kt)) | 'populacional_2' (100·2^(t/3)) | 'juros' | 'decaimento' | 'mu' | 'muv'
+                p0: '',
+                k: '',
+                t: ''
+            },
+
+            // Histórico e Favoritos (persistidos em LocalStorage)
+            historico: [],
+            indiceCmdSelecionado: 0
+        };
     },
 
     /* ========================================================================
@@ -207,7 +211,9 @@ const MathLabApp = {
                 this.injetarSistemaDoisModos();
                 const teclado = document.getElementById('teclado-funcao');
                 if (teclado && tecladoAberto) teclado.open = true;
-                this.aprimorarPainelDireitoEmCamadas();
+                if (this.state.activeModule !== 'cientifica' && this.entradaIncompleta()) this.mostrarResultadoVazio();
+                else this.aprimorarPainelDireitoEmCamadas();
+                this.atualizarBotaoGerar();
                 if (foco) {
                     const novo = foco.chave ? document.querySelector(`.formula-slot[data-slot-key="${foco.chave}"]`) : document.getElementById(foco.id);
                     novo?.focus({preventScroll:true});
@@ -222,7 +228,9 @@ const MathLabApp = {
             this[nome] = (...args) => {
                 original(...args);
                 if (!this._emRenderModulo) {
-                    this.aprimorarPainelDireitoEmCamadas();
+                    if (this.state.activeModule === 'funcoes' && this.entradaIncompleta()) this.mostrarResultadoVazio();
+                    else this.aprimorarPainelDireitoEmCamadas();
+                    this.atualizarBotaoGerar();
                 }
             };
         });
@@ -411,6 +419,75 @@ const MathLabApp = {
                 this.renderModuloModelagem();
                 break;
         }
+    },
+
+    entradaIncompleta(mod = this.state.activeModule) {
+        const st = this.state[mod];
+        const falta = (...valores) => valores.some(valor => valor == null || valor === '' || Number.isNaN(valor));
+        switch (mod) {
+            case 'cientifica': return !st.expressao.trim();
+            case 'funcoes': {
+                const tipo = st.tipoAtivo;
+                const chaves = { quadratica: ['a','b','c'], canonica: ['a','h','k'], fatorada: ['a','x1','x2'] };
+                if (tipo === 'custom') return !st.expressaoCustom.trim();
+                if (chaves[tipo]) return falta(...chaves[tipo].map(chave => st.quad[chave]));
+                return falta(...Object.values(st.paramsExtras[tipo] || {}));
+            }
+            case 'algebra': return st.ferramenta === 'eq1' ? falta(...Object.values(st.eq1)) :
+                ['sistema','simplificacao','expansao','notaveis'].includes(st.ferramenta)
+                    ? !st.expressaoCustom.trim() : falta(st.eq2.a, st.eq2.b, st.eq2.c);
+            case 'limites': return st.exemploAtivo === 'custom' && falta(st.funcaoCustom, st.pontoCustom);
+            case 'derivadas': return !st.funcaoExpr.trim();
+            case 'integrais': return falta(st.funcaoExpr) || (st.tipo === 'definida' && falta(st.a, st.b));
+            case 'geometria': {
+                const medidas = { circulo:['r'], quadrado:['l'], retangulo:['b','h'], triangulo:['b','h'],
+                    trapezio:['B','b','h'], losango:['D','d'], cubo:['l'], paralelepipedo:['a','b','c'],
+                    esfera:['r'], cilindro:['r','h'], cone:['r','h'] };
+                return falta(...medidas[st.figura].map(chave => st.params[chave]));
+            }
+            case 'trigonometria': return st.visualizacao === 'circulo' ? falta(st.anguloGraus) :
+                falta(st.amplitude, st.frequencia, st.fase, st.deslocamento);
+            case 'vetores': return st.abaPrincipal === 'vetores'
+                ? falta(st.u.x, st.u.y, st.v.x, st.v.y)
+                : falta(...st.matrizA.flat(), ...(['determinante','transposta','inversa'].includes(st.operacaoMatriz) ? [] : st.matrizB.flat()));
+            case 'estatistica': return !st.dadosTexto.trim();
+            case 'modelagem': return falta(st.p0, st.k, st.t);
+            default: return false;
+        }
+    },
+
+    atualizarBotaoGerar() {
+        const botao = document.getElementById('btn-generate-footer');
+        if (!botao) return;
+        const campo = document.getElementById('normal-mode-input') || document.getElementById('ready-custom-expression') ||
+            document.getElementById('ready-expression-input');
+        const mod = this.state.activeModule;
+        const texto = campo?.value.trim();
+        const invalido = this.entradaIncompleta() || (campo && !texto) ||
+            (texto && ['funcoes','limites','derivadas'].includes(mod) && !MathLabCalc.validarExpressaoNormal(texto).valido) ||
+            (mod === 'funcoes' && this.obterDadosAtuaisFuncoes().invalido) ||
+            (mod === 'integrais' && !this.state.integrais.dados?.valido) ||
+            (mod === 'cientifica' && this.avaliarEntradaCientifica().erro) ||
+            Boolean(document.querySelector('.formula-slot.slot-invalid'));
+        botao.setAttribute('aria-disabled', String(Boolean(invalido)));
+        botao.title = invalido ? 'Preencha os campos com uma entrada válida para gerar' : 'Gerar relatório';
+    },
+
+    mostrarResultadoVazio() {
+        const mensagem = 'Preencha a fórmula e clique em Gerar';
+        this.ativarPalcoCanvas({ janela: { xMin: -10, xMax: 10, yMin: -10, yMax: 10 },
+            curvas: [], marcadores: [], mensagemVazia: mensagem }, 'Laboratório Gráfico', mensagem);
+        document.querySelectorAll('#left-panel-body .result-primary, #left-panel-body .result-secondary, #left-panel-body .result-hero-value')
+            .forEach(elemento => { elemento.textContent = '—'; });
+        document.querySelectorAll('#left-panel-body input[readonly]').forEach(campo => { campo.value = ''; });
+        const painel = document.getElementById('right-panel-body');
+        painel.innerHTML = '<section class="result-hero-card"><p>Aguardando entrada.</p>' +
+            '<button type="button" class="header-btn" id="btn-abrir-exemplos">Exemplos</button></section>';
+        document.getElementById('btn-abrir-exemplos').addEventListener('click', () => {
+            const exemplos = document.querySelector('.exemplos-modulo');
+            exemplos?.scrollIntoView({ block: 'nearest' });
+            exemplos?.querySelector('button')?.focus();
+        });
     },
 
     /* Utilitários de palco visual central (Canvas vs Custom SVG/HTML) */
@@ -1305,8 +1382,8 @@ const MathLabApp = {
 
     obterDadosAtuaisFuncoes() {
         const st = this.state.funcoes;
-        if (st.tipoAtivo === 'custom') {
-            const texto = st.expressaoCustom;
+        if (st.tipoAtivo === 'custom' || this.entradaIncompleta('funcoes')) {
+            const texto = st.tipoAtivo === 'custom' ? st.expressaoCustom : '';
             const valido = texto.trim() && MathLabCalc.validarExpressaoNormal(texto).valido;
             if (!valido) {
                 return {
@@ -1785,7 +1862,7 @@ const MathLabApp = {
         };
 
         const cen = st.exemploAtivo === 'custom'
-            ? MathLabCalc.calcularLimiteGeral(st.funcaoCustom, st.pontoCustom)
+            ? MathLabCalc.calcularLimiteGeral(st.funcaoCustom || '0', st.pontoCustom || '0')
             : (cenarios[st.exemploAtivo] || cenarios.removivel);
         const resultadoMostrado = st.lado === 'esquerda' ? cen.resEsquerda : st.lado === 'direita' ? cen.resDireita : cen.resBilateral;
 
@@ -1797,7 +1874,7 @@ const MathLabApp = {
                     <span>Cálculo de Limites (Editável)</span>
                 </div>
                 <div class="expression-input-row">
-                    <input type="text" class="expression-input" value="${cen.rotulo}" readonly>
+                    <input type="text" class="expression-input" value="${this.entradaIncompleta('limites') ? '' : cen.rotulo}" readonly>
                 </div>
                 <div class="display-result-row">
                     <span class="result-label">Resultado</span>
@@ -1810,11 +1887,11 @@ const MathLabApp = {
             <div class="control-row-2col">
                 <div class="control-group">
                     <label class="field-label" for="lim-fn-inp">Função f(x)</label>
-                    <input type="text" id="lim-fn-inp" class="field-input" value="${cen.funcao}" placeholder="Ex: (x^2-9)/(x-3)">
+                    <input type="text" id="lim-fn-inp" class="field-input" value="${this.escaparHTML(st.exemploAtivo === 'custom' ? st.funcaoCustom : cen.funcao)}" placeholder="Ex: (x^2-9)/(x-3)">
                 </div>
                 <div class="control-group">
                     <label class="field-label" for="lim-pt-inp">Ponto (x → a)</label>
-                    <input type="text" id="lim-pt-inp" class="field-input" value="${cen.ponto}" placeholder="Ex: 3">
+                    <input type="text" id="lim-pt-inp" class="field-input" value="${this.escaparHTML(st.exemploAtivo === 'custom' ? st.pontoCustom : cen.ponto)}" placeholder="Ex: 3">
                 </div>
             </div>
 
@@ -1971,7 +2048,7 @@ const MathLabApp = {
             <button type="button" class="header-btn" id="btn-der-reset" title="Restaurar demonstração x³·sen(x)">Padrão</button>
         `;
 
-        const analise = MathLabCalc.analisarDerivadaExpressao(st.funcaoExpr || 'x³ · sen(x)');
+        const analise = MathLabCalc.analisarDerivadaExpressao(st.funcaoExpr);
         const fnOrig = analise.fn;
         const fnDeriv1 = analise.df1;
         const fnDeriv2 = analise.df2;
@@ -1981,7 +2058,7 @@ const MathLabApp = {
             ? `f′(x) = ${analise.simb1}`
             : `f″(x) = ${analise.simb2}`;
 
-        const x0 = Number(st.x0);
+        const x0 = st.x0 === '' ? NaN : Number(st.x0);
         const y0 = fnOrig(x0);
         const mTangente = fnDeriv1(x0);
         const valorDerivNoPonto = fnDerivAtiva(x0);
@@ -2007,7 +2084,7 @@ const MathLabApp = {
 
             <div class="control-group">
                 <label class="field-label" for="der-fn-input">Função f(x) para Derivar (Digite + Enter)</label>
-                <input type="text" id="der-fn-input" class="field-input" value="${this.escaparHTML(analise.expressaoLimpa)}" placeholder="Ex: x^3 * sen(x), x^3 - 3x, e^x">
+                <input type="text" id="der-fn-input" class="field-input" value="${this.escaparHTML(st.funcaoExpr)}" placeholder="Ex: x^3 * sen(x), x^3 - 3x, e^x">
             </div>
 
             <div class="control-row-2col">
@@ -2020,7 +2097,7 @@ const MathLabApp = {
                 </div>
                 <div class="control-group">
                     <label class="field-label" for="der-x0-input">Ponto de Análise (x₀)</label>
-                    <input type="number" id="der-x0-input" class="field-input" value="${x0}" step="0.5" min="-5" max="5">
+                    <input type="number" id="der-x0-input" class="field-input" value="${st.x0}" placeholder="ex.: 1" step="0.5" min="-5" max="5">
                 </div>
             </div>
 
@@ -2567,7 +2644,7 @@ const MathLabApp = {
             <div class="sliders-box"><span class="field-label">Parâmetros da onda</span>${[
                 ['amplitude','Amplitude A',-4,4,.1,'blue'],['frequencia','Frequência B',-4,4,.1,'amber'],['fase','Fase C',-6.283,6.283,.01,'purple'],['deslocamento','Vertical D',-4,4,.1,'green']
             ].map(([key,label,min,max,step,color])=>`<div class="slider-item slot-${color}"><label class="slider-label" for="trig-${key}">${label}</label><input type="range" class="math-slider" id="trig-${key}" data-trig-param="${key}" min="${min}" max="${max}" step="${step}" value="${st[key]}"><output class="slider-value-badge" data-trig-output="${key}"></output></div>`).join('')}</div>
-            <div class="trig-angle"><label for="trig-theta">Ângulo no ciclo: θ =</label><input id="trig-theta" class="formula-slot slot-green" aria-label="Ângulo no ciclo" value="${this.formatarTrig(st.anguloGraus*(st.unidadeAngulo==='rad'?Math.PI/180:1))}"><select id="trig-unit" aria-label="Unidade do ângulo"><option value="graus">Graus (°)</option><option value="rad">Radianos</option></select><small id="trig-unit-hint"></small></div>`;
+            <div class="trig-angle"><label for="trig-theta">Ângulo no ciclo: θ =</label><input id="trig-theta" class="formula-slot slot-green" aria-label="Ângulo no ciclo" value="${st.anguloGraus === '' ? '' : this.formatarTrig(st.anguloGraus*(st.unidadeAngulo==='rad'?Math.PI/180:1))}"><select id="trig-unit" aria-label="Unidade do ângulo"><option value="graus">Graus (°)</option><option value="rad">Radianos</option></select><small id="trig-unit-hint"></small></div>`;
         document.getElementById('trig-unit').value=st.unidadeAngulo;
         this.renderizarAbasCentro([{id:'grafico',rotulo:'Gráfico trigonométrico'},{id:'circulo',rotulo:'Circunferência trigonométrica'},{id:'tabela',rotulo:'Tabela de ângulos notáveis'}],st.visualizacao,vis=>this.mudarTrigonometria({visualizacao:vis}));
         document.querySelectorAll('[data-trig-fn]').forEach(b=>b.addEventListener('click',()=>{
@@ -2586,7 +2663,7 @@ const MathLabApp = {
         });
         document.getElementById('trig-unit').addEventListener('change',e=>{
             st.unidadeAngulo=e.target.value;
-            document.getElementById('trig-theta').value=this.formatarTrig(st.anguloGraus*(st.unidadeAngulo==='rad'?Math.PI/180:1));
+            document.getElementById('trig-theta').value=st.anguloGraus === '' ? '' : this.formatarTrig(st.anguloGraus*(st.unidadeAngulo==='rad'?Math.PI/180:1));
             this.atualizarTrigonometria();
         });
         this.atualizarTrigonometria();
@@ -2943,8 +3020,9 @@ const MathLabApp = {
         document.getElementById('btn-mat-toggle-dim')?.addEventListener('click', () => {
             st.dimMatriz = (st.dimMatriz || 2) === 2 ? 3 : 2;
             if (st.dimMatriz === 3 && st.matrizA.length < 3) {
-                st.matrizA = [[1, 2, 0], [3, 4, 1], [0, 1, 2]];
-                st.matrizB = [[2, 0, 1], [1, 3, 0], [1, 1, 1]];
+                for (const chave of ['matrizA', 'matrizB']) {
+                    st[chave] = [...st[chave].map(linha => [...linha, '']), ['', '', '']];
+                }
             }
             this.mostrarToast(`Grade de matrizes alterada para ${st.dimMatriz}×${st.dimMatriz}`);
             this.renderModuloVetoresMatrizes();
@@ -3675,7 +3753,11 @@ const MathLabApp = {
             this.copiarTexto(`$$${latex}$$`, 'Fórmula copiada em LaTeX');
         });
         document.getElementById('btn-share-pdf').addEventListener('click', () => window.print());
-        document.getElementById('btn-generate-footer').addEventListener('click', () => {
+        document.getElementById('btn-generate-footer').addEventListener('click', e => {
+            if (e.currentTarget.getAttribute('aria-disabled') === 'true') {
+                this.mostrarToast(e.currentTarget.title);
+                return;
+            }
             const entrada = document.getElementById('normal-mode-input') || document.getElementById('ready-custom-expression') || document.getElementById('ready-expression-input');
             if (entrada?.id === 'normal-mode-input' && document.getElementById('teclado-funcao')) {
                 this.confirmarExpressaoFuncao(entrada);
@@ -3918,6 +4000,7 @@ const MathLabApp = {
     obterExpressaoTextoAtual() {
         const mod = this.state.activeModule;
         if (mod === 'cientifica') return this.state.cientifica.expressao;
+        if (this.entradaIncompleta(mod)) return '';
         if (mod === 'funcoes') {
             const st = this.state.funcoes;
             if (st.tipoAtivo === 'custom') return st.expressaoCustom;
@@ -3973,6 +4056,7 @@ const MathLabApp = {
                            data-slot-uid="${idUnico}"
                            style="width:calc(${Math.max(2, String(valExibido).length)}ch + 20px)"
                            value="${this.escaparHTML(valExibido)}"
+                           placeholder="…"
                            aria-label="Parâmetro ${chave}">
                     <button type="button" class="slot-fx-toggle" data-fx-uid="${idUnico}" title="Alternar modo expressão fx (ex: 2*sen(pi/6) ou 1/2)">fx</button>
                     <span class="slot-tooltip">${dica}</span>
@@ -3992,15 +4076,15 @@ const MathLabApp = {
             if (tipo === 'custom') {
                 formulaMontada = `f(x) = <input type="text" id="ready-custom-expression" class="normal-mono-input" value="${this.escaparHTML(st.expressaoCustom)}" aria-label="Expressão livre da função" placeholder="Digite uma fórmula">`;
             } else if (tipo === 'quadratica') {
-                const aZero = Number(q.a) === 0;
+                const aZero = q.a !== '' && Number(q.a) === 0;
                 if (aZero) msgInvalido = 'a não pode ser 0 em uma quadrática';
                 formulaMontada = `f(x) = ${slotHtml('a', q.a, 'slot-blue', 'a: define a abertura da parábola. Positivo abre para cima, negativo para baixo.', { invalido: aZero })}x² + ${slotHtml('b', q.b, 'slot-amber', 'b: inclinação no eixo y e deslocamento horizontal do vértice.')}x + ${slotHtml('c', q.c, 'slot-green', 'c: termo independente — ponto (0, c) onde corta o eixo y.')}`;
             } else if (tipo === 'canonica') {
-                const aZero = Number(q.a) === 0;
+                const aZero = q.a !== '' && Number(q.a) === 0;
                 if (aZero) msgInvalido = 'a não pode ser 0 em uma quadrática';
                 formulaMontada = `f(x) = ${slotHtml('a', q.a, 'slot-blue', 'a: abertura da parábola.', { invalido: aZero })}(x − ${slotHtml('h', q.h ?? 2, 'slot-amber', 'h: coordenada x do vértice V(h, k).')})² + ${slotHtml('k', q.k ?? -9, 'slot-green', 'k: coordenada y do vértice V(h, k).')}`;
             } else if (tipo === 'fatorada') {
-                const aZero = Number(q.a) === 0;
+                const aZero = q.a !== '' && Number(q.a) === 0;
                 if (aZero) msgInvalido = 'a não pode ser 0 em uma quadrática';
                 formulaMontada = `f(x) = ${slotHtml('a', q.a, 'slot-blue', 'a: abertura da parábola.', { invalido: aZero })}(x − ${slotHtml('x1', q.x1 ?? -1, 'slot-amber', 'x₁: primeira raiz onde a curva corta o eixo x.')})(x − ${slotHtml('x2', q.x2 ?? 5, 'slot-green', 'x₂: segunda raiz onde a curva corta o eixo x.')})`;
             } else if (tipo === 'constante') {
@@ -4013,12 +4097,12 @@ const MathLabApp = {
                 formulaMontada = `f(x) = ${slotHtml('a', pExtra.a ?? 1, 'slot-blue', 'a: abertura do V modular.')}|x − ${slotHtml('h', pExtra.h ?? 0, 'slot-amber', 'h: posição horizontal do bico (quina).')}| + ${slotHtml('k', pExtra.k ?? 0, 'slot-green', 'k: altura vertical do vértice.')}`;
             } else if (tipo === 'exponencial') {
                 const baseVal = Number(pExtra.a ?? 2);
-                const baseInv = baseVal <= 0 || Math.abs(baseVal - 1) < 1e-9;
+                const baseInv = pExtra.a !== '' && (baseVal <= 0 || Math.abs(baseVal - 1) < 1e-9);
                 if (baseInv) msgInvalido = 'A base "a" da exponencial precisa ser positiva e diferente de 1';
                 formulaMontada = `f(x) = ${slotHtml('C', pExtra.C ?? 1, 'slot-blue', 'C: valor inicial em x = 0.')} · ${slotHtml('a', pExtra.a ?? 2, 'slot-amber', 'a: base exponencial (>1 cresce, entre 0 e 1 decresce).', { invalido: baseInv })}ˣ`;
             } else if (tipo === 'logaritmica') {
                 const baseVal = Number(pExtra.a ?? 2);
-                const baseInv = baseVal <= 0 || Math.abs(baseVal - 1) < 1e-9;
+                const baseInv = pExtra.a !== '' && (baseVal <= 0 || Math.abs(baseVal - 1) < 1e-9);
                 if (baseInv) msgInvalido = 'A base "a" do logaritmo precisa ser > 0 e ≠ 1';
                 formulaMontada = `f(x) = log<sub>${slotHtml('a', pExtra.a ?? 2, 'slot-blue', 'a: base do logaritmo (a > 0 e a ≠ 1).', { invalido: baseInv })}</sub>(x)`;
             } else if (tipo === 'trigonometrica') {
@@ -4046,7 +4130,7 @@ const MathLabApp = {
 
         if (mod === 'algebra') {
             const { a, b, c } = this.state.algebra.eq2;
-            const aZero = Math.abs(Number(a)) < 1e-9;
+            const aZero = a !== '' && Math.abs(Number(a)) < 1e-9;
             return {
                 formulaMontada: `${slotHtml('a', a, 'slot-blue', 'a: coeficiente de x² (não pode ser 0 na equação de 2º grau).', { invalido: aZero })}x² + ${slotHtml('b', b, 'slot-amber', 'b: coeficiente linear de x.')}x + ${slotHtml('c', c, 'slot-green', 'c: termo independente.')} = 0`,
                 msgInvalido: aZero ? 'a não pode ser 0 em uma equação do 2º grau' : '',
@@ -4076,7 +4160,7 @@ const MathLabApp = {
         if (mod === 'derivadas') {
             const st = this.state.derivadas;
             const esperado = st.modeloPronto === 'potencia' ? `${st.slots.a === 1 ? '' : st.slots.a}x^${st.slots.n}+(${st.slots.b})x` : `${st.slots.a === 1 ? '' : st.slots.a}x^${st.slots.n}*sen(x)`;
-            const livre = st.integrandoLivre ?? (MathLabCalc.normalizarElementar(st.funcaoExpr) !== MathLabCalc.normalizarElementar(esperado));
+            const livre = st.integrandoLivre ?? Boolean(st.funcaoExpr && MathLabCalc.normalizarElementar(st.funcaoExpr) !== MathLabCalc.normalizarElementar(esperado));
             return {
                 formulaMontada: livre ? `<input id="ready-expression-input" class="normal-mono-input" value="${this.escaparHTML(st.funcaoExpr)}" aria-label="Função para derivar">` : st.modeloPronto === 'potencia' ? `d/dx [ ${slotHtml('a', st.slots.a, 'slot-blue', 'Coeficiente')}x<sup>${slotHtml('n', st.slots.n, 'slot-amber', 'Expoente')}</sup> + ${slotHtml('b', st.slots.b, 'slot-green', 'Termo linear')}x ]` : `d/dx [ ${slotHtml('a', st.slots.a, 'slot-blue', 'a: coeficiente multiplicador.')}x<sup>${slotHtml('n', st.slots.n, 'slot-amber', 'n: expoente da potência.')}</sup> · sen(x) ] &nbsp; em x₀ = ${slotHtml('x0', st.x0, 'slot-green', 'x₀: ponto onde calculamos a inclinação da reta tangente.')}`,
                 msgInvalido: '',
@@ -4091,7 +4175,7 @@ const MathLabApp = {
         if (mod === 'integrais') {
             const st = this.state.integrais;
             const esperado = `${st.slots.coef === 1 ? '' : st.slots.coef}x^${st.slots.n}`;
-            const livre = st.integrandoLivre ?? (MathLabCalc.normalizarElementar(st.funcaoExpr) !== MathLabCalc.normalizarElementar(esperado));
+            const livre = st.integrandoLivre ?? Boolean(st.funcaoExpr && MathLabCalc.normalizarElementar(st.funcaoExpr) !== MathLabCalc.normalizarElementar(esperado));
             return {
                 formulaMontada: `<span class="integral-formula"><span class="integral-symbol">∫</span>${st.tipo === 'definida' ? `<span class="integral-limits"><span>${slotHtml('b', st.b, 'slot-amber', 'b: limite superior')}</span><span>${slotHtml('a', st.a, 'slot-blue', 'a: limite inferior')}</span></span>` : ''}<span class="integral-integrand">${livre ? `<input id="ready-expression-input" class="normal-mono-input" value="${this.escaparHTML(st.funcaoExpr)}" aria-label="Função para integrar">` : `${slotHtml('coef', st.slots.coef, 'slot-green', 'c: coeficiente')}x<sup>${slotHtml('n', st.slots.n, 'slot-purple', 'n: expoente')}</sup>`}</span><span>dx${st.tipo === 'indefinida' ? ' + C' : ''}</span></span>`,
                 msgInvalido: '',
@@ -4280,11 +4364,19 @@ const MathLabApp = {
                 </div>
 
                 ${modo === 'pronta' ? htmlPronta : htmlNormal}
+                <div class="exemplos-modulo ready-formula-toolbar" aria-label="Exemplos">
+                    ${(modoFuncao ? [1,2,3] : [1]).map(numero =>
+                        `<button type="button" class="btn-tiny-tool" data-exemplo-modulo="${numero}">Exemplo ${numero}</button>`).join('')}
+                </div>
             </div>
         `;
 
         leftBody.insertAdjacentHTML('afterbegin', wrapperHtml);
         this.vincularEventosDoisModos(leftBody);
+        leftBody.querySelectorAll('[data-exemplo-modulo]').forEach(botao => {
+            botao.addEventListener('click', () => this.restaurarExemploModulo(Number(botao.dataset.exemploModulo)));
+        });
+        leftBody.oninput = () => this.atualizarBotaoGerar();
 
         // Restaura foco se estava digitando num quadradinho ou no input normal
         if (activeSlotKey && modo === 'pronta') {
@@ -4367,6 +4459,10 @@ const MathLabApp = {
                 this.state.slotTextos[uid] = bruto;
                 this.state.passoFluxo = 2;
 
+                if (!bruto.trim()) {
+                    this.aplicarValorSlot(chave, '');
+                    return;
+                }
                 const av = MathLabCalc.avaliarSlotValor(bruto, 0);
                 if (!av.valido || (['integrais','trigonometria'].includes(this.state.activeModule) && !bruto.trim())) {
                     if(['integrais','trigonometria'].includes(this.state.activeModule)) {
@@ -4595,7 +4691,7 @@ const MathLabApp = {
             }
             const bSinal = s.b >= 0 ? `+ ${s.b}` : `− ${Math.abs(s.b)}`;
             const dSinal = s.d >= 0 ? `+ ${s.d}` : `− ${Math.abs(s.d)}`;
-            this.state.limites.funcaoCustom = `(${s.a}x² ${bSinal})/(${s.c}x ${dSinal})`;
+            if (chave !== 'ponto') this.state.limites.funcaoCustom = [s.a,s.b,s.c,s.d].includes('') ? '' : `(${s.a}x² ${bSinal})/(${s.c}x ${dSinal})`;
             this.state.limites.exemploAtivo = 'custom';
             this.renderModuloLimites();
         } else if (mod === 'derivadas') {
@@ -4603,7 +4699,8 @@ const MathLabApp = {
             if (chave === 'x0') st.x0 = valor;
             else st.slots[chave] = valor;
             const potencia = `${st.slots.a === 1 ? '' : st.slots.a}x^${st.slots.n}`;
-            st.funcaoExpr = st.modeloPronto === 'potencia' ? `${potencia}+(${st.slots.b})x` : `${potencia}*sen(x)`;
+            if (chave !== 'x0') st.funcaoExpr = [st.slots.a,st.slots.n].includes('') ? '' :
+                st.modeloPronto === 'potencia' ? `${potencia}+(${st.slots.b})x` : `${potencia}*sen(x)`;
             this.renderModuloDerivadas();
         } else if (mod === 'integrais') {
             const st = this.state.integrais;
@@ -4613,11 +4710,11 @@ const MathLabApp = {
             else st.slots[chave] = valor;
             if (chave !== 'a' && chave !== 'b') {
                 st.integrandoLivre=false;
-                st.funcaoExpr = `${st.slots.coef === 1 ? '' : st.slots.coef + '*'}x^${st.slots.n}`;
+                st.funcaoExpr = [st.slots.coef,st.slots.n].includes('') ? '' : `${st.slots.coef === 1 ? '' : st.slots.coef + '*'}x^${st.slots.n}`;
             }
             this.renderModuloIntegrais();
         } else if (mod === 'geometria') {
-            this.state.geometria.params[chave] = Math.max(0.1, valor);
+            this.state.geometria.params[chave] = valor === '' ? '' : Math.max(0.1, valor);
             this.renderModuloGeometria();
         } else if (mod === 'trigonometria') {
             this.mudarTrigonometria({[chave]:valor});
@@ -4633,15 +4730,15 @@ const MathLabApp = {
         } else if (mod === 'cientifica') {
             const s = this.state.cientifica.slots;
             s[chave] = valor;
-            this.state.cientifica.expressao = `${s.c1} · sen(π/${s.c2}) + √(${s.c3})`;
+            this.state.cientifica.expressao = Object.values(s).includes('') ? '' : `${s.c1} · sen(π/${s.c2}) + √(${s.c3})`;
             this.renderModuloCientifica();
         }
     },
 
     aplicarExpressaoModoNormal(texto, forcarRender = false) {
         const limpo = String(texto || '').trim();
-        if (!limpo && !['funcoes','trigonometria'].includes(this.state.activeModule)) return;
-        if (limpo && MathLabCalc.validarSintaxeSegura(limpo) && !['funcoes','trigonometria'].includes(this.state.activeModule)) return;
+        if (!limpo && !['cientifica','funcoes','limites','derivadas','integrais','trigonometria'].includes(this.state.activeModule)) return;
+        if (limpo && !['funcoes','trigonometria','integrais'].includes(this.state.activeModule) && MathLabCalc.validarSintaxeSegura(limpo)) return;
         const mod = this.state.activeModule;
 
         if (mod === 'cientifica') {
@@ -4686,40 +4783,47 @@ const MathLabApp = {
         }
     },
 
-    restaurarExemploModulo() {
-        this.state.slotTextos = {};
+    restaurarExemploModulo(numero = 1) {
         const mod = this.state.activeModule;
-        if (mod === 'funcoes') {
-            this.state.funcoes.quad = { a: 1, b: -4, c: -5, h: 2, k: -9, x1: -1, x2: 5 };
-            this.state.funcoes.paramsExtras = {
-                constante: { b: 5 }, afim: { a: 2, b: 1 }, linear: { a: 3 },
-                modular: { a: 1, h: 0, k: 0 }, exponencial: { C: 1, a: 2 },
-                logaritmica: { a: 2 }, trigonometrica: { A: 1, B: 1, C: 0, D: 0 }, juros: { C: 100, i: 0.1 }
-            };
-        } else if (mod === 'algebra') {
-            this.state.algebra.eq2 = { a: 1, b: -5, c: 6 };
-        } else if (mod === 'limites') {
-            this.state.limites.exemploAtivo = 'removivel';
-            this.state.limites.slots = { a: 1, b: -4, c: 1, d: -2, ponto: 2 };
-            this.state.limites.pontoCustom = '2';
-        } else if (mod === 'derivadas') {
-            this.state.derivadas.funcaoExpr = 'x³ · sen(x)';
-            this.state.derivadas.slots = { a: 1, n: 3, b: -3, m: 1 };
-            this.state.derivadas.x0 = 1;
-        } else if (mod === 'integrais') {
-            delete this.state.integrais.textoNormal;
-            this.state.integrais.integrandoLivre=false;
-            this.state.integrais.funcaoExpr = 'x²';
-            this.state.integrais.a = 0;
-            this.state.integrais.b = 3;
-            this.state.integrais.slots = { coef: 1, n: 2, k: 1 };
-        } else if (mod === 'trigonometria') {
-            Object.assign(this.state.trigonometria,{funcao:'sen',amplitude:1,frequencia:1,fase:0,deslocamento:0,anguloGraus:30,unidadeAngulo:'graus'});
-        } else if (mod === 'cientifica') {
-            this.state.cientifica.slots = { c1: 2, c2: 6, c3: 16 };
-            this.state.cientifica.expressao = '2 · sen(π/6) + √16';
+        const st = this.state[mod];
+        for (const chave of Object.keys(this.state.slotTextos)) {
+            if (chave.startsWith(mod + '_')) delete this.state.slotTextos[chave];
         }
-        this.mostrarToast('Exemplo padrão restaurado');
+        if (mod === 'funcoes') {
+            if (numero !== 1) this.definirExpressaoFuncao(numero === 2 ? '2x+3' : '|x−2|+1');
+            else Object.assign(st, { tipoAtivo: 'quadratica', expressaoCustom: 'x² − 4x − 5',
+                quad: { a: 1, b: -4, c: -5, h: 2, k: -9, x1: -1, x2: 5 } });
+        } else if (mod === 'algebra') {
+            Object.assign(st, { ferramenta:'eq2', eq2: { a:1,b:-5,c:6 }, expressaoCustom:'x² − 5x + 6 = 0' });
+        } else if (mod === 'limites') {
+            Object.assign(st, {
+                exemploAtivo: ['removivel','inexistente','custom'][numero - 1],
+                funcaoCustom: ['(x²−4)/(x−2)','1/x','|x|/x'][numero - 1],
+                pontoCustom: numero === 1 ? '2' : '0',
+                slots: numero === 1 ? { a:1,b:-4,c:1,d:-2,ponto:2 } : { a:'',b:'',c:'',d:'',ponto:0 }
+            });
+        } else if (mod === 'derivadas') {
+            Object.assign(st, { funcaoExpr: ['x³ · sen(x)','x^5','(3x+1)^4'][numero - 1], x0: 1,
+                modeloPronto: 'produto', integrandoLivre: numero !== 1, slots: { a:1,n:3,b:-3,m:1 } });
+        } else if (mod === 'integrais') {
+            delete st.textoNormal;
+            Object.assign(st, { tipo:'definida', funcaoExpr: ['x²','sen(x)','1/x'][numero - 1],
+                integrandoLivre: numero !== 1, a: numero === 3 ? 1 : 0, b: [3, Math.PI, Math.E][numero - 1],
+                slots: { coef:1,n:2,k:1 } });
+        } else if (mod === 'trigonometria') {
+            Object.assign(st, { funcao:'sen',amplitude:1,frequencia:1,fase:0,deslocamento:0,anguloGraus:30,unidadeAngulo:'graus' });
+        } else if (mod === 'cientifica') {
+            Object.assign(st, { slots: { c1:2,c2:6,c3:16 }, expressao:'2 · sen(π/6) + √16' });
+        } else if (mod === 'geometria') {
+            Object.assign(st.params, { r:5,l:6,b:8,h:5,B:10,D:8,d:6,a:4,c:3 });
+        } else if (mod === 'vetores') {
+            Object.assign(st, { u:{x:3,y:4},v:{x:1,y:-2},dimMatriz:2,matrizA:[[1,2],[3,4]],matrizB:[[2,0],[1,3]] });
+        } else if (mod === 'estatistica') {
+            st.dadosTexto = '4, 6, 6, 8, 10, 12';
+        } else if (mod === 'modelagem') {
+            Object.assign(st, { p0:100,k:0.2,t:10 });
+        }
+        this.mostrarToast('Exemplo preenchido');
         this.renderizarModuloAtivo();
     },
 
@@ -4816,7 +4920,7 @@ const MathLabApp = {
             valorPrincipal=est.valido ? `Média = ${MathLabCalc.fmt(est.media,2)} • Mediana = ${MathLabCalc.fmt(est.mediana,2)} • Moda = ${est.moda}` : 'Aguardando resultado válido';
         } else if (mod === 'cientifica') {
             const av = this.avaliarEntradaCientifica();
-            valorPrincipal = av.erro ? 'Erro de Domínio' : `Resultado = ${av.resultadoExibido}`;
+            valorPrincipal = av.erro ? 'Erro de Domínio' : `Resultado = ${av.resultadoExibido ?? '0'}`;
         }
 
         // Envolve as seções existentes em camadas colapsáveis (<details class="layered-details">)
@@ -5080,6 +5184,8 @@ const MathLabApp = {
         document.getElementById('btn-tour-next')?.addEventListener('click', () => this.abrirTourGuiado(atual.num + 1));
     }
 };
+
+MathLabApp.state = MathLabApp.criarEstadoInicial();
 
 document.addEventListener('DOMContentLoaded', () => {
     MathLabApp.init();
