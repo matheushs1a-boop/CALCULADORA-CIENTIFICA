@@ -675,7 +675,7 @@ const MathLabApp = {
                 </div>
             </div>
 
-            ${this.htmlTecladoCalculadora()}
+            ${this.htmlTecladoCalculadora(true)}
         `;
 
         this.renderizarPainelDireitoCientifica(avaliacao);
@@ -834,7 +834,8 @@ const MathLabApp = {
         });
     },
 
-    htmlTecladoCalculadora() {
+    htmlTecladoCalculadora(cientifica = false) {
+        const limparTudo = cientifica && this._prontoParaAC;
         return `<!-- Teclado Científico Completo -->
             <div class="scientific-keypad">
                 <div class="keypad-row-memory">
@@ -842,7 +843,7 @@ const MathLabApp = {
                     <button type="button" class="key-btn key-mem" data-key-mem="mr" title="Recuperar memória">MR</button>
                     <button type="button" class="key-btn key-mem" data-key-mem="m+" title="Somar à memória">M+</button>
                     <button type="button" class="key-btn key-mem" data-key-mem="m-" title="Subtrair da memória">M−</button>
-                    <button type="button" class="key-btn key-danger" data-key-act="clear" title="Limpar expressão">C</button>
+                    <button type="button" class="key-btn key-danger" data-key-act="clear" title="${limparTudo ? 'Limpar expressão, memória e Ans' : 'Limpar expressão'}">${limparTudo ? 'AC' : 'C'}</button>
                     <button type="button" class="key-btn key-danger" data-key-act="back" title="Apagar último caractere">⌫</button>
                 </div>
 
@@ -955,6 +956,23 @@ const MathLabApp = {
         });
     },
 
+    atualizarTeclaLimpar(input, pronta) {
+        this._prontoParaAC = pronta;
+        const tecla = input.closest('#left-panel-body')?.querySelector('.scientific-keypad [data-key-act=clear]');
+        if (tecla) {
+            tecla.textContent = pronta ? 'AC' : 'C';
+            tecla.title = pronta ? 'Limpar expressão, memória e Ans' : 'Limpar expressão';
+        }
+    },
+
+    atualizarMemoriaCientifica() {
+        const indicador = document.getElementById('sci-mem') ?? document.querySelector('[data-function-memory]');
+        if (indicador) {
+            indicador.hidden = !this.state.cientifica.memoria;
+            indicador.title = `Memória: ${MathLabCalc.fmt(this.state.cientifica.memoria)}`;
+        }
+    },
+
     executarTeclaCalculadora(input, { keyIns, keyAct, keyMem, keyFn }) {
         const cientifica = input.id === 'sci-expr-input';
         const st = this.state.cientifica;
@@ -980,11 +998,7 @@ const MathLabApp = {
             const numero = numerador ? Number(numerador.replace(',', '.')) / Number(denominador) : NaN;
             if (keyMem === 'mc') st.memoria = 0;
             else if (Number.isFinite(numero)) st.memoria += keyMem === 'm+' ? numero : -numero;
-            const indicador = document.getElementById('sci-mem') ?? document.querySelector('[data-function-memory]');
-            if (indicador) {
-                indicador.hidden = !st.memoria;
-                indicador.title = `Memória: ${MathLabCalc.fmt(st.memoria)}`;
-            }
+            this.atualizarMemoriaCientifica();
             return;
         }
 
@@ -994,8 +1008,17 @@ const MathLabApp = {
             inserir = this._ultimoResultadoCientifico;
             if (/[/−-]/.test(inserir)) inserir = `(${inserir})`;
         }
+        const ac = cientifica && keyAct === 'clear' && this._prontoParaAC && !texto;
         if (keyAct === 'clear') {
-            if (texto.length > 500 && !window.confirm('Limpar toda a expressão?')) return;
+            if (ac) {
+                st.memoria = 0;
+                st.slots = this.criarEstadoInicial().cientifica.slots;
+                for (const chave of Object.keys(st.slots)) delete this.state.slotTextos['cientifica_' + chave];
+                this._ultimoResultadoCientifico = null;
+                this._resultadoNoVisor = null;
+            }
+            if (cientifica) this.atualizarTeclaLimpar(input, !ac);
+            this.atualizarMemoriaCientifica();
             inicio = 0;
             fim = texto.length;
         }
@@ -1072,6 +1095,7 @@ const MathLabApp = {
             campoAtual.focus();
             const posicao = cursor ?? inicio + inserir.length;
             campoAtual.setSelectionRange(posicao, posicao);
+            if (cientifica && keyAct === 'clear') this.atualizarTeclaLimpar(campoAtual, !ac);
         }
     },
 
@@ -1080,6 +1104,7 @@ const MathLabApp = {
         const input = document.getElementById('sci-expr-input');
 
         input.addEventListener('input', () => {
+            this.atualizarTeclaLimpar(input, false);
             st.expressao = input.value;
             this._resultadoNoVisor = null;
             this.atualizarVisorCientifico();
