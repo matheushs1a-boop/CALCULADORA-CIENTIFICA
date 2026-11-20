@@ -188,7 +188,7 @@ button:active:not(:disabled) {
 }
 
 @media (max-width: 480px) {
-    .marca .logo.logo-horizontal { display: none; }
+    :root .marca .logo.logo-horizontal { display: none; }
     :root[data-theme="dark"] .marca .logo-simbolo.para-fundo-escuro,
     :root[data-theme="light"] .marca .logo-simbolo.para-fundo-claro { display: block; }
 }
