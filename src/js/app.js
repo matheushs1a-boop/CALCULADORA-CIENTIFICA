@@ -528,7 +528,8 @@ const MathLabApp = {
                 falta(st.amplitude, st.frequencia, st.fase, st.deslocamento);
             case 'vetores': return st.abaPrincipal === 'vetores'
                 ? falta(st.u.x, st.u.y, st.v.x, st.v.y)
-                : falta(...st.matrizA.flat(), ...(['determinante','transposta','inversa'].includes(st.operacaoMatriz) ? [] : st.matrizB.flat()));
+                : falta(...[st.matrizA, ...(['determinante','transposta','inversa'].includes(st.operacaoMatriz) ? [] : [st.matrizB])]
+                    .flatMap(matriz => matriz.slice(0, st.dimMatriz).flatMap(linha => linha.slice(0, st.dimMatriz))));
             case 'estatistica': return !st.dadosTexto.trim();
             case 'modelagem': return falta(st.p0, st.k, st.t);
             default: return false;
@@ -1016,9 +1017,12 @@ const MathLabApp = {
                 for (const chave of Object.keys(st.slots)) delete this.state.slotTextos['cientifica_' + chave];
                 this._ultimoResultadoCientifico = null;
                 this._resultadoNoVisor = null;
+                this._prontoParaAC = false;
+                this.renderModuloCientifica();
+                this.focarEntradaCientifica();
+                return;
             }
-            if (cientifica) this.atualizarTeclaLimpar(input, !ac);
-            this.atualizarMemoriaCientifica();
+            if (cientifica) this.atualizarTeclaLimpar(input, true);
             inicio = 0;
             fim = texto.length;
         }
@@ -1095,7 +1099,7 @@ const MathLabApp = {
             campoAtual.focus();
             const posicao = cursor ?? inicio + inserir.length;
             campoAtual.setSelectionRange(posicao, posicao);
-            if (cientifica && keyAct === 'clear') this.atualizarTeclaLimpar(campoAtual, !ac);
+            if (cientifica && keyAct === 'clear') this.atualizarTeclaLimpar(campoAtual, true);
         }
     },
 
@@ -1125,6 +1129,7 @@ const MathLabApp = {
         document.querySelectorAll('[data-sci-ang]').forEach(btn => {
             btn.addEventListener('click', () => {
                 st.unidadeAngulo = btn.dataset.sciAng;
+                this.salvarPreferenciasCalculo();
                 this.renderModuloCientifica();
             });
         });
@@ -1132,6 +1137,7 @@ const MathLabApp = {
         document.querySelectorAll('[data-sci-out]').forEach(btn => {
             btn.addEventListener('click', () => {
                 st.modoSaida = btn.dataset.sciOut;
+                this.salvarPreferenciasCalculo();
                 this.renderModuloCientifica();
             });
         });
@@ -2642,7 +2648,8 @@ const MathLabApp = {
     obterDadosTrigonometria() {
         const st = this.state.trigonometria;
         const A = Number(st.amplitude), B = Number(st.frequencia), C = Number(st.fase), D = Number(st.deslocamento ?? 0);
-        const valido = [A, B, C, D, st.anguloGraus].every(Number.isFinite) && Number.isFinite((Math.abs(A)+Math.abs(D))*1.3) && Number.isFinite(B*2*Math.PI+C) && !(st.funcao==='tg' && B===0 && Math.abs(Math.cos(C))<1e-12);
+        const valido = ![st.amplitude, st.frequencia, st.fase, st.deslocamento].includes('') &&
+            [A, B, C, D, st.anguloGraus === '' ? 0 : st.anguloGraus].every(Number.isFinite) && Number.isFinite((Math.abs(A)+Math.abs(D))*1.3) && Number.isFinite(B*2*Math.PI+C) && !(st.funcao==='tg' && B===0 && Math.abs(Math.cos(C))<1e-12);
         const n = v => this.formatarTrig(v);
         const sinal = v => v < 0 ? ` − ${n(-v)}` : v > 0 ? ` + ${n(v)}` : '';
         const expressao = `${A === 1 ? '' : A === -1 ? '−' : n(A) + '·'}${st.funcao}(${B === 1 ? 'x' : B === -1 ? '−x' : n(B) + 'x'}${sinal(C)})${sinal(D)}`;
@@ -2736,6 +2743,12 @@ const MathLabApp = {
         const theta=document.getElementById('trig-theta');
         if(theta && theta!==document.activeElement && 'anguloGraus' in parcial) theta.value=this.formatarTrig(this.state.trigonometria.anguloGraus*(this.state.trigonometria.unidadeAngulo==='rad'?Math.PI/180:1));
         this.atualizarTrigonometria();
+        if (document.getElementById('right-panel-body')) {
+            if (this.entradaIncompleta('trigonometria') && this.state.trigonometria.visualizacao !== 'tabela') {
+                this.mostrarResultadoVazio();
+            }
+            this.atualizarBotaoGerar();
+        }
     },
 
     renderModuloTrigonometria() {
@@ -2780,7 +2793,7 @@ const MathLabApp = {
         document.querySelectorAll('[data-trig-fn]').forEach(b=>b.classList.toggle('active',b.dataset.trigFn===st.funcao));
         document.querySelectorAll('[data-tab-id]').forEach(b=>b.classList.toggle('active',b.dataset.tabId===st.visualizacao));
         document.querySelectorAll('[data-trig-param]').forEach(inp=>{const v=st[inp.dataset.trigParam];if(Number.isFinite(v)&&document.activeElement!==inp){inp.min=Math.min(Number(inp.min),v);inp.max=Math.max(Number(inp.max),v);inp.value=v;}});
-        document.querySelectorAll('[data-trig-output]').forEach(o=>o.textContent=n(st[o.dataset.trigOutput]));
+        document.querySelectorAll('[data-trig-output]').forEach(o=>o.textContent=st[o.dataset.trigOutput] === '' ? '—' : n(st[o.dataset.trigOutput]));
         document.getElementById('trig-unit-hint').textContent=`${n(st.anguloGraus)}° = ${n(st.anguloGraus*Math.PI/180)} rad. O gráfico usa radianos.`;
         if(st.visualizacao==='circulo' && d.valido) this.ativarPalcoCustom(MathLabVisuals.gerarSvgCirculoTrigonometrico(st.anguloGraus),'Circunferência trigonométrica',`${n(st.anguloGraus)}°`);
         else if(st.visualizacao==='tabela') this.ativarPalcoCustom(this.gerarTabelaTrigonometrica(),'Ângulos notáveis','Valores exatos');
@@ -3552,7 +3565,7 @@ const MathLabApp = {
     },
 
     abrirPainelFavoritos() {
-        document.getElementById('generic-drawer-title').textContent = 'Histórico, Favoritos e Fixados (LocalStorage)';
+        document.getElementById('generic-drawer-title').textContent = 'Histórico da sessão, favoritos e fixados';
         const body = document.getElementById('generic-drawer-body');
 
         const renderLista = () => {
@@ -4591,7 +4604,7 @@ const MathLabApp = {
                     return;
                 }
                 const av = MathLabCalc.avaliarSlotValor(bruto, 0);
-                if (!av.valido || (['integrais','trigonometria'].includes(this.state.activeModule) && !bruto.trim())) {
+                if (!av.valido) {
                     if(['integrais','trigonometria'].includes(this.state.activeModule)) {
                         this.aplicarValorSlot(chave, NaN);
                         return;
@@ -4994,6 +5007,7 @@ const MathLabApp = {
     },
 
     executarBotaoGerar(expressao) {
+        if (this.entradaIncompleta()) return;
         this.state.passoFluxo = 3;
         if (this.state.activeModule === 'cientifica') {
             this.confirmarCientifica();
