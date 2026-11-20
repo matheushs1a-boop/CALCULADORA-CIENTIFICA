@@ -1,16 +1,36 @@
-# MathLab — Calculadora Científica e Laboratório de Matemática (CDI • AP2)
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/calclab-horizontal-fundo-escuro.svg">
+    <img src="assets/logo/calclab-horizontal-fundo-claro.svg" alt="CalcLab — Laboratório de Cálculo" width="320">
+  </picture>
+
+  <h1>CalcLab — Laboratório de Cálculo</h1>
+  <p>Calculadora científica e laboratório de Cálculo Diferencial e Integral.</p>
+</div>
+
+![Tela inicial do CalcLab no tema escuro com a Calculadora Científica ativa e visor em zero](docs/assets/capturas/depois/abertura-escuro.png)
 
 Projeto acadêmico do 1º período de **Engenharia de Software** — **UNICATÓLICA RN**.
 
 - **Disciplina:** Cálculo Diferencial e Integral (CDI — AP2)
-- **Integrantes:** *(preencher nomes e matrículas)*
-- **Professora:** *(preencher nome)*
+- **Integrante:** Matheus H. Silva
+- **Professora:** Flaviana Moreira de Souza Amorim
 
 ---
 
+## Primeiros passos
+
+Abra o aplicativo e digite `2+3×4`. A Calculadora Científica começa com o visor em `0`. Pressione Enter para confirmar o resultado `14`. Os demais modos começam sem dados. Use **Exemplo 1** em Funções, Limites, Derivadas ou Integrais para preencher um caso da AP2.
+
+A marca e `Alt+H` voltam à Científica mantendo o trabalho da sessão. Recarregar limpa as entradas e o histórico da sessão, mantendo favoritos e preferências. Um novo acesso a `#limites` abre Limites. **Configurações → Limpar tudo** oferece **Desfazer** por oito segundos.
+
+[Documentação](docs/README.md) · [Identidade visual](docs/identidade-visual.md) · [Imagem de pré-visualização social](assets/logo/social-preview.png)
+
+Para repetir a aceitação em um navegador com Playwright instalado, use `npm run test:aceitacao`. Informe `MATHLAB_URL=http://localhost:8000/index.html` com o servidor local ativo para incluir uma cópia real pela área de transferência. Use `CALCLAB_CAPTURAS` para indicar a pasta onde salvar as capturas.
+
 ## 1. Problema e Objetivos
 
-Uma resposta numérica isolada não explica o comportamento analítico e geométrico de uma função. O **MathLab** integra entrada parametrizada e livre, motor de cálculo, visualização gráfica interativa em Canvas/SVG, tabelas de valores, resolução passo a passo e verificação cruzada por métodos independentes.
+Uma resposta numérica isolada não explica o comportamento analítico e geométrico de uma função. O **CalcLab** integra entrada parametrizada e livre, motor de cálculo, visualização gráfica interativa em Canvas/SVG, tabelas de valores, resolução passo a passo e verificação cruzada por métodos independentes.
 
 O objetivo é relacionar expressões algébricas às suas propriedades analíticas (domínio, imagem, raízes, vértices, limites laterais, derivadas e integrais), mantendo rigor matemático e tratamento explícito de casos especiais e restrições de domínio.
 
@@ -102,7 +122,7 @@ npm run test:ui-integrais
 
 ### 3.3.1. Aceitação em Firefox
 
-Com o MathLab servido na porta 5500 e o geckodriver instalado, execute em terminais separados:
+Com o CalcLab servido na porta 5500 e o geckodriver instalado, execute em terminais separados:
 
 ```bash
 geckodriver --port 4444 --allow-system-access
@@ -191,3 +211,15 @@ Validado em [`tests/calculo-regras.test.js`](tests/calculo-regras.test.js) e [`t
 
 - [Revisão de Trigonometria e alinhamento: causas, capturas e testes](docs/relatorio-trigonometria-interface.md)
 # CALCULADORA-CIENTIFICA
+
+## Teclado da calculadora
+
+Na Científica, o teclado aparece abaixo do visor. Em Funções, Limites, Derivadas e Integrais, escolha **Normal** e abra **Teclado**. Use Tab para navegar e Enter ou Espaço para acionar uma tecla. Depois da ação, o foco volta à expressão.
+
+- **Inverso.** `1/x` usa a seleção, o último resultado confirmado ou a expressão inteira, nessa ordem. Com o campo vazio, insere `1/(` na Científica e `1/x` nos modos de função. O inverso de zero exibe uma mensagem de divisão por zero.
+- **Porcentagem.** `50%` vale `0,5` e `200*15%` vale `30`. Um percentual ao fim de uma soma ou subtração incide sobre a expressão à esquerda. `200+10%` vale `220` e `200−10%` vale `180`. A Científica mostra a interpretação junto à resolução.
+- **Sinal.** `±` troca o sinal da seleção ou do valor inteiro quando o cursor está no fim. Assim, `4` vira `−4` e `2+3` vira `−(2+3)`. Com o cursor no meio e sem seleção, a tecla insere o sinal no cursor.
+- **Potências e constantes.** Uma expressão composta recebe parênteses ao servir de base, como em `(2+3)^2`. Na Científica, `0^0` gera a mensagem de indeterminação. `2π` é interpretado como multiplicação e a tecla de Euler insere `2·e` após um número.
+- **Memória e histórico.** M+ e M− operam sobre uma expressão com resultado numérico. O indicador M aparece quando a memória contém um valor diferente de zero. MR insere a memória no cursor, MC zera a memória e Ans insere o último resultado confirmado na Científica. `=` registra a expressão no histórico. `C` pede confirmação se a expressão passar de 500 caracteres.
+
+Com o geckodriver em execução, rode `npm run test:teclado` para a regressão com Firefox real, ou `npm run test:teclado -- --matriz` para registrar as ações por tecla e cenário.

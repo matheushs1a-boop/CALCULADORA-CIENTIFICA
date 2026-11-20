@@ -1,7 +1,7 @@
 {
-  "name": "mathlab",
+  "name": "calclab",
   "version": "2.0.0",
-  "description": "MathLab — Calculadora Científica e Laboratório de Análise Matemática (CDI - AP2 | Engenharia de Software)",
+  "description": "CalcLab — Laboratório de Cálculo (CDI - AP2 | Engenharia de Software)",
   "main": "src/js/app.js",
   "scripts": {
     "start": "python3 -m http.server 8000",
@@ -14,10 +14,12 @@
     "test:graficos": "node tests/graficos-renderizacao.test.js",
     "test:integrais": "node tests/integrais-modulo.test.js",
     "test:layout": "node tests/graficos-layout.test.js",
+    "test:aceitacao": "node tests/aceitacao-calclab.test.js",
     "test:ui": "node tests/interface-navegador.test.js",
     "test:ui-integrais": "node tests/interface-integrais.test.js",
     "test:trigonometria": "node tests/trigonometria-modulo.test.js",
-    "test:firefox": "python3 tests/interface-firefox.py"
+    "test:firefox": "python3 tests/interface-firefox.py",
+    "test:teclado": "python3 tests/teclado-firefox.py"
   },
   "keywords": [
     "matematica",

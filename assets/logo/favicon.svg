@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img">
+<title>CalcLab</title><rect width="32" height="32" rx="6" fill="#111B2E"/>
+<path d="M5 25 9 8 16 24" stroke="#4F89FE" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M16 24 23 8 27 25" stroke="#06E708" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="9" cy="8" r="2.5" fill="#67B4FF"/><circle cx="23" cy="8" r="2.5" fill="#67B4FF"/><circle cx="16" cy="24" r="2.5" fill="#1EF130"/>
+</svg>

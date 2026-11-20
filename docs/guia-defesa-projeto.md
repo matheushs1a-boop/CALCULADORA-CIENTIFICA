@@ -1,4 +1,4 @@
-# Guia de Defesa e Explicação da Arquitetura — MathLab (CDI • AP2)
+# Guia de Defesa e Explicação da Arquitetura — CalcLab (CDI • AP2)
 
 Este documento resume a organização do código-fonte e responde às principais perguntas técnicas e matemáticas que podem ser feitas durante a apresentação do projeto.
 
@@ -10,7 +10,7 @@ O projeto foi organizado seguindo boas práticas de Engenharia de Software, sepa
 
 - **`index.html`**: Estrutura semântica da interface em três painéis (Entrada, Laboratório Gráfico e Propriedades/Análise), modais e barras de ferramentas.
 - **`src/css/estilos.css`**: Sistema de design (Design Tokens em variáveis CSS), temas escuro (`#0B1220`) e claro, tipografia (`Inter` e `JetBrains Mono`) e responsividade desktop.
-- **`src/js/app.js` (`MathLabApp`)**: Controlador principal que gerencia o estado reativo (`state`), sincronização entre os modos **Fórmula pronta** e **Normal**, histórico/favoritos (`localStorage`), atalhos de teclado e eventos de UI.
+- **`src/js/app.js` (`MathLabApp`)**: Controlador principal que gerencia o estado reativo (`state`), sincronização entre os modos **Fórmula pronta** e **Normal**, histórico de sessão e favoritos persistentes (`localStorage`), atalhos de teclado e eventos de UI.
 - **`src/js/motor-matematico.js` (`MathLabCalc`)**: Motor de cálculo puro e independente da interface. Implementa o compilador seguro de expressões, estudo analítico de 8 tipos de funções, limites laterais/bilaterais, derivação simbólica recursiva e numérica, integração analítica e numérica (Riemann e Simpson), álgebra, geometria, trigonometria, vetores/matrizes e estatística.
 - **`src/js/motor-grafico.js` (`MathLabGraph`)**: Motor de visualização em HTML5 Canvas 2D e SVG com suporte a alto DPI (`devicePixelRatio`), redimensionamento automático (`ResizeObserver`), zoom/pan, detecção de assíntotas verticais, buracos de descontinuidade e sombreamento de integrais por sinal.
 - **`src/python/motor_simbolico.py`**: Motor simbólico complementar escrito em Python com `SymPy` para validação algébrica de referência.
